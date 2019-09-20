@@ -15,6 +15,8 @@ class CreateUserTypePermissionsTable extends Migration
     {
         Schema::create('user_type_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('type_id');
+            $table->integer('permission_id');
             $table->timestamps();
         });
     }

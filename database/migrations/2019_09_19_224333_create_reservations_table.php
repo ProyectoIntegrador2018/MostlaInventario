@@ -15,7 +15,13 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('campus_id');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->enum('status',['pending','reserved','canceled','returned']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
