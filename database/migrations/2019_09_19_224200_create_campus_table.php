@@ -14,7 +14,7 @@ class CreateCampusTable extends Migration
     public function up()
     {
         Schema::create('campus', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

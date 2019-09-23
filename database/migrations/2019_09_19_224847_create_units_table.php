@@ -14,7 +14,7 @@ class CreateUnitsTable extends Migration
     public function up()
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('serial_number');
             $table->enum('status',['available','unavailable','maintenance']);
             $table->integer('product_id');
