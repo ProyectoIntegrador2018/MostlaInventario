@@ -11,4 +11,14 @@ class Permission extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function types()
+    {
+    	return $this->belongsToMany(
+    		'App\Models\UserType', 
+    		'user_type_permissions', 
+    		'permission_id', 
+    		'type_id'
+    	);
+    }
 }

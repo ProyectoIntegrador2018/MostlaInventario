@@ -11,4 +11,19 @@ class Product extends Model
     protected $fillable = [
         'name','category_id','tags'
     ];
+
+    public function reservation_details()
+    {
+        return $this->hasMany('App\Models\ReservationDetail');
+    }
+
+    public function category()
+    {
+    	return $this->belongsToMany('App\Models\Category');
+    }
+
+    public function units()
+    {
+        return $this->hasMany('App\Models\Unit');
+    }
 }

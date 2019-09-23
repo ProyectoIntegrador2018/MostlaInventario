@@ -15,7 +15,7 @@ class CreateUserTypesTable extends Migration
     {
         Schema::create('user_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
+            $table->string('title');
             $table->timestamps();
             $table->softDeletes();
         });
