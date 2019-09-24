@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('brand');
             $table->string('name');
+            $table->integer('category_id');
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();

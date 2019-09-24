@@ -19,11 +19,16 @@ class Product extends Model
 
     public function category()
     {
-    	return $this->belongsToMany('App\Models\Category');
+    	return $this->belongsTo('App\Models\Category');
     }
 
     public function units()
     {
         return $this->hasMany('App\Models\Unit');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tags');
     }
 }
