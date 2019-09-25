@@ -10,7 +10,9 @@
 	<ul>
 		@foreach($reservations as $reservation)
 		<li>
+			@if($reservation->isPending())
 			<a href="/reservations/cancel/{{ $reservation->id }}">Cancel</a>
+			@endif
 			@foreach($reservation->details as $item)
 			<ul>
 				{{ $item->product->brand }} <strong>{{ $item->product->name }}</strong>

@@ -57,4 +57,9 @@ class Reservation extends Model
         $this->update(['status'=>'cancelled']);
         $this->delete();
     }
+
+    public function isPending()
+    {
+        return $this->status == "pending";
+    }
 }

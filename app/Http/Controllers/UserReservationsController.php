@@ -33,6 +33,8 @@ class UserReservationsController extends Controller
 
     public function cancel(Reservation $reservation)
     {
+        $this->authorize($reservation);
+
     	$reservation->cancel();
 
     	return back();
