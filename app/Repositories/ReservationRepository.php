@@ -7,13 +7,22 @@ use App\Models\Reservation;
 
 class ReservationRepository {
 
-	public function activeForUser(App\User $user)
+	public function activeForUser($user)
 	{
-		return Reservation::forUser($user)->active()->get();
+		return Reservation::forUser($user)
+			->active()
+			->with('details.product')
+			->orderBy('created_at', 'desc')
+			->get();
 	}
 
-	public function inactiveForUser(App\User $user)
+	public function inactiveForUser($user)
 	{
-		return Reservation::withTrashed()->forUser($user)->inactive()->get();
+		return Reservation::withTrashed()
+			->forUser($user)
+			->inactive()
+			->with('all_details.product')
+			->orderBy('created_at', 'desc')
+			->get();
 	}
 }

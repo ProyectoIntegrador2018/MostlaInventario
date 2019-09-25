@@ -12,7 +12,7 @@ class ReservationDetail extends Model
     protected $table = 'reservation_details';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'reservation_id','product_id','unit_id'
+        'reservation_id','product_id'
     ];
 
     public function reservation()
