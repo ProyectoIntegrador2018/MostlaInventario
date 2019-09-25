@@ -12,7 +12,7 @@ class Reservation extends Model
     protected $table = 'reservations';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id','campus_id','start_date','end_date', 'status'
+        'user_id', 'campus_id', 'start_date', 'end_date', 'status'
     ];
 
     public function scopeForUser($query, $user)
