@@ -9,7 +9,7 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name','category_id','tags'
+        'brand', 'name', 'category_id','description'
     ];
 
     public function reservation_details()
