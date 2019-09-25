@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->integer('campus_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('status',['pending','reserved','canceled','returned']);
+            $table->enum('status',['pending','in_progress','cancelled','returned'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });
