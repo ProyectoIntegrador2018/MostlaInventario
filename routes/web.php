@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/my_reservations', 'UserReservationsController@index');
+Route::get('/my_reservations/history', 'UserReservationsController@history');
+Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
