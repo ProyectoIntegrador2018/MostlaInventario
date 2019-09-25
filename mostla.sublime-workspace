@@ -1,0 +1,892 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"firew",
+				"firewoodImageHeight"
+			],
+			[
+				"fir",
+				"firewoodImageWidth"
+			],
+			[
+				"fire",
+				"isFireOn"
+			],
+			[
+				"init",
+				"initTreeTexture"
+			],
+			[
+				"glp",
+				"glPopMatrix"
+			],
+			[
+				"push",
+				"glPushMatrix"
+			],
+			[
+				"glEn",
+				"glEnable"
+			],
+			[
+				"Glu",
+				"GLubyte"
+			],
+			[
+				"Gl",
+				"GLubyte"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"fil",
+				"filename"
+			],
+			[
+				"G",
+				"GLubyte"
+			],
+			[
+				"q",
+				"qaPosition"
+			],
+			[
+				"qa",
+				"qaSpecular"
+			],
+			[
+				"glL",
+				"glLightModelfv"
+			],
+			[
+				"GL_L",
+				"GL_LIGHTING"
+			],
+			[
+				"out",
+				"output"
+			],
+			[
+				"sca",
+				"scaleObject"
+			],
+			[
+				"rota",
+				"rotateObject"
+			],
+			[
+				"ro",
+				"rotatePoint"
+			],
+			[
+				"posi",
+				"positive"
+			],
+			[
+				"ax",
+				"axisX"
+			],
+			[
+				"tr",
+				"translateObject"
+			],
+			[
+				"objec",
+				"objects"
+			],
+			[
+				"ip",
+				"input"
+			],
+			[
+				"modules",
+				"modules_roles"
+			],
+			[
+				"module",
+				"modules_roles"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "database/migrations/2019_09_19_224836_create_products_table.php",
+			"settings":
+			{
+				"buffer_size": 788,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php\n\nuse Illuminate\\Support\\Facades\\Schema;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Database\\Migrations\\Migration;\n\nclass CreateCategoriesTable extends Migration\n{\n    /**\n     * Run the migrations.\n     *\n     * @return void\n     */\n    public function up()\n    {\n        Schema::create('categories', function (Blueprint $table) {\n            $table->increments('id');\n            $table->string('name');\n            $table->timestamps();\n        });\n    }\n\n    /**\n     * Reverse the migrations.\n     *\n     * @return void\n     */\n    public function down()\n    {   \n        Schema::dropIfExists('categories');\n    }\n}\n",
+			"file": "database/migrations/2019_09_20_000908_create_categories_table.php",
+			"file_size": 637,
+			"file_write_time": 132138231042700354,
+			"settings":
+			{
+				"buffer_size": 640,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "database/factories/UserFactory.php",
+			"settings":
+			{
+				"buffer_size": 875,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "database/factories/ProductFactory.php",
+			"settings":
+			{
+				"buffer_size": 786,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/Product.php",
+			"settings":
+			{
+				"buffer_size": 662,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"makemo",
+				"Laravel Artisan 5: Make:Model"
+			],
+			[
+				"make",
+				"Laravel Artisan 5: Make:Migration"
+			],
+			[
+				"maks",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"makesni",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"model",
+				"Laravel Artisan 5: Make:Model"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:  ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 499.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+			" import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/jawn/Programas/Laravel/MostlaInventario",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Http",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/factories",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations",
+		"/home/jawn/Programas/Laravel/MostlaInventario/tests",
+		"/home/jawn/Programas/Laravel/MostlaInventario/tests/Feature",
+		"/home/jawn/Programas/Laravel/MostlaInventario/tests/Unit"
+	],
+	"file_history":
+	[
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Tag.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Product.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_24_181824_create_tags_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_23_021325_create_products_tags_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/tests/Feature/ProductTest.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Category.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224836_create_products_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Campus.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Unit.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_23_021325_create_category_products_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/ReservationDetail.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Reservation.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/User.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224137_create_user_types_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/Permission.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/Models/UserType.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/TableMigration.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_21_002600_create_products_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2014_10_12_000000_create_users_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_08_19_000000_create_failed_jobs_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224149_create_permissions_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224200_create_campus_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224333_create_reservations_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224348_create_reservation_details_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224700_create_user_type_permissions_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_19_224847_create_units_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_20_000908_create_categories_table.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/app/DeviceModel.php",
+		"/home/jawn/Programas/Laravel/MostlaInventario/database/migrations/2019_09_17_225228_create_device_models_table.php",
+		"/home/jawn/.config/sublime-text-3/Packages/User/Snippets/migration.sublime-snippet",
+		"/home/jawn/Programas/Laravel/MostlaInventario/.gitignore",
+		"/home/jawn/Programas/Laravel/MostlaInventario/.env",
+		"/home/jawn/.cache/.fr-ZHIZlm/Perceptron/data/data25-Sample.csv",
+		"/home/jawn/Programas/Seguridad/neraul.py",
+		"/home/jawn/Programas/Seguridad/primes.cpp",
+		"/home/jawn/Programas/Seguridad/primes.py",
+		"/home/jawn/Programas/OpenGL/Tarea8/Project6.c",
+		"/home/jawn/Programas/OpenGL/Sprites/treePPM.ppm",
+		"/home/jawn/Programas/OpenGL/Sprites/frontFirewood.ppm",
+		"/home/jawn/Programas/OpenGL/Sprites/main.cpp",
+		"/home/jawn/Programas/OpenGL/Sprites/backFirewood.ppm",
+		"/home/jawn/Programas/OpenGL/Sprites/.gitignore",
+		"/home/jawn/Programas/OpenGL/Sprites/makefile",
+		"/home/jawn/Programas/OpenGL/snowman.c",
+		"/home/jawn/Programas/OpenGL/test.c",
+		"/home/jawn/Programas/OpenGL/dieloco.c",
+		"/home/jawn/Programas/OpenGL/die.c",
+		"/home/jawn/Programas/OpenGL/Sprites/fire.ppm",
+		"/home/jawn/Programas/OpenGL/Sprites/Sprites.h",
+		"/home/jawn/Programas/OpenGL/rotations.c",
+		"/home/jawn/Programas/OpenGL/Tarea9/Project6.c",
+		"/home/jawn/Programas/OpenGL/Tarea8/windmill_rotated.obj",
+		"/home/jawn/Programas/OpenGL/Tarea8/windmill.obj",
+		"/home/jawn/Programas/OpenGL/main.c",
+		"/home/jawn/Programas/OpenGL/Tarea8/plane.obj",
+		"/home/jawn/.cache/.fr-1bgjoi/1prg_Quads.cpp",
+		"/home/jawn/Programas/OpenGL/singleserversimulation.txt",
+		"/home/jawn/Programas/OpenGL/Tarea8/mapa.html",
+		"/home/jawn/Programas/OpenGL/Tarea8/propeller.obj",
+		"/home/jawn/Programas/OpenGL/Tarea8/propeller_out.obj",
+		"/home/jawn/Programas/OpenGL/Tarea8/propeller_next.obj",
+		"/home/jawn/Programas/OpenGL/animation2.c",
+		"/home/jawn/Programas/OpenGL/rotation.c",
+		"/home/jawn/Programas/OpenGL/animation1.c",
+		"/home/jawn/Programas/OpenGL/dado.c",
+		"/home/jawn/Programas/Laravel/global/app/Thumbnail.php",
+		"/home/jawn/Programas/Laravel/global/.env",
+		"/home/jawn/Programas/Laravel/global/app/Master/UserRole.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Role.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Database/migrations/2018_09_07_115208_create_roles_table.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Database/migrations/2018_09_20_181213_create_user_roles_table.php",
+		"/home/jawn/Programas/Laravel/global/app/Http/Middleware/CheckRole.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Database/seeds/UsersTableSeeder.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/routes/web.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/User.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Database/seeds/UserRolesTableSeeder.php",
+		"/home/jawn/Programas/Laravel/global/database/seeds/UserRolesSeeder.php",
+		"/home/jawn/Programas/Laravel/global/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Database/migrations/2014_10_12_000000_create_users_table.php",
+		"/home/jawn/Programas/Laravel/global/app/Master/Database/seeds/ModulesRolesTableSeeder.php",
+		"/home/jawn/Programas/Laravel/global/resources/views/home.blade.php"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 119.0,
+		"where_history":
+		[
+			"/home/jawn/Programas/Laravel/12hrs/public/images"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"bigIncrements",
+			"increments",
+			"inFile >> width;\n    cout << width <<\" \";\n    inFile >> height;\n    cout << height << \"\\n\";\n    inFile >> colours;\n    cout << colours;\n    cout << endl;",
+			"cout << keyword << \" \";",
+			"cout << comment << \" \";",
+			"5",
+			"makefireima",
+			"treeImageWidth",
+			"treeImage",
+			"tree",
+			"camera",
+			"init",
+			"(frame%12)*1/12.0+",
+			"init",
+			"fire",
+			"heart",
+			"texture(",
+			"depth",
+			"for(",
+			"-3",
+			"fireImageH",
+			"array",
+			"fireImage",
+			"-3",
+			"glEnable",
+			"0.8",
+			"angle",
+			"21 8 2 ",
+			"[j][i]",
+			"ELAPSED",
+			"elapsed",
+			"84",
+			"85",
+			"86",
+			"87",
+			"88",
+			"89",
+			"90",
+			"91",
+			"12",
+			"76",
+			"77",
+			"78",
+			"79",
+			"80",
+			"81",
+			"82",
+			"83",
+			"68",
+			"69",
+			"70",
+			"71",
+			"72",
+			"75",
+			"8",
+			"13",
+			"12",
+			"14",
+			"13",
+			"36",
+			"37",
+			"38",
+			"39",
+			"40",
+			"41",
+			"42",
+			"43",
+			"44",
+			"45",
+			"46",
+			"47",
+			"48",
+			"49",
+			"50",
+			"51",
+			"36",
+			"5",
+			"4",
+			"f",
+			"#",
+			"\t\t#",
+			"4",
+			"f",
+			"4",
+			"\t\t\t",
+			"4",
+			"9",
+			"export",
+			"0",
+			"input",
+			"cout",
+			"&",
+			"angle",
+			"rel",
+			"res",
+			"rotateObject",
+			"translateObject",
+			"objects[j].size()",
+			"importFromObj",
+			"quds",
+			"polygons",
+			"poly",
+			"3",
+			"angle",
+			";\n",
+			"init",
+			"init(",
+			"SELF",
+			"NEWW"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"inFile >> width;\n    inFile >> height;\n    inFile >> colours;",
+			"// cout << keyword << \" \";",
+			"// cout << comment << \" \";",
+			"0 0 0 ",
+			"[i][j]",
+			"self",
+			"PENDING"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "database/migrations/2019_09_19_224836_create_products_table.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 788,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "database/migrations/2019_09_20_000908_create_categories_table.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 640,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								578,
+								578
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "database/factories/UserFactory.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								529,
+								529
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "database/factories/ProductFactory.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 786,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								648,
+								648
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/Models/Product.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 662,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								249,
+								249
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 50.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 156.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "mostla.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"produ",
+				"app/Models/Product.php"
+			],
+			[
+				"tag",
+				"app/Models/Tag.php"
+			],
+			[
+				"categ",
+				"app/Models/Category.php"
+			],
+			[
+				"prod",
+				"app/Models/Product.php"
+			],
+			[
+				"camp",
+				"app/Models/Campus.php"
+			],
+			[
+				"unit",
+				"app/Models/Unit.php"
+			],
+			[
+				"catego",
+				"app/Models/Category.php"
+			],
+			[
+				"pro",
+				"app/Models/Product.php"
+			],
+			[
+				"produc",
+				"app/Models/Product.php"
+			],
+			[
+				"reser",
+				"app/Models/Reservation.php"
+			],
+			[
+				"serdeta",
+				"app/Models/ReservationDetail.php"
+			],
+			[
+				"user",
+				"app/User.php"
+			],
+			[
+				"permi",
+				"app/Models/Permission.php"
+			],
+			[
+				"usert",
+				"app/Models/UserType.php"
+			],
+			[
+				".env",
+				".env"
+			],
+			[
+				"make",
+				"Sprites/makefile"
+			],
+			[
+				"die.",
+				"die.c"
+			],
+			[
+				"di",
+				"die.c"
+			],
+			[
+				"THumb",
+				"app/Thumbnail.php"
+			],
+			[
+				"web",
+				"app/Master/routes/web.php"
+			],
+			[
+				"userrole.",
+				"app/Master/UserRole.php"
+			],
+			[
+				"userroless",
+				"database/seeds/UserRolesSeeder.php"
+			],
+			[
+				"userrolesta",
+				"app/Master/Database/migrations/2018_09_20_181213_create_user_roles_table.php"
+			],
+			[
+				"userroleta",
+				"app/Master/Database/migrations/2018_09_20_181213_create_user_roles_table.php"
+			],
+			[
+				"userroletable",
+				"app/Master/Database/migrations/2018_09_20_181213_create_user_roles_table.php"
+			],
+			[
+				"userrolese",
+				"database/seeds/UserRolesSeeder.php"
+			],
+			[
+				"rolesseed",
+				"app/Master/Database/seeds/ModulesRolesTableSeeder.php"
+			],
+			[
+				"userseed",
+				"app/Master/Database/seeds/UsersTableSeeder.php"
+			],
+			[
+				"roleta",
+				"app/Master/Database/migrations/2018_09_07_115208_create_roles_table.php"
+			],
+			[
+				"role.",
+				"app/Master/Role.php"
+			],
+			[
+				"creusrtab",
+				"app/Master/Database/migrations/2014_10_12_000000_create_users_table.php"
+			],
+			[
+				"usrtable",
+				"app/Master/Database/migrations/2018_09_20_181213_create_user_roles_table.php"
+			],
+			[
+				"queryb",
+				"vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php"
+			],
+			[
+				"moduleseed",
+				"app/Master/Database/seeds/ModulesRolesTableSeeder.php"
+			],
+			[
+				"checkr",
+				"app/Http/Middleware/CheckRole.php"
+			],
+			[
+				"we",
+				"app/Master/routes/web.php"
+			],
+			[
+				"web.p",
+				"app/Master/routes/web.php"
+			],
+			[
+				".blade",
+				"resources/views/home.blade.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "g",
+		"selected_items":
+		[
+			[
+				"g",
+				"~/Programas/Laravel/global.sublime-project"
+			],
+			[
+				"",
+				"~/Programas/Laravel/MostlaInventario/mostla.sublime-project"
+			],
+			[
+				"com",
+				"~/Programas/Compiladores/compiladores.sublime-project"
+			],
+			[
+				"gl",
+				"~/Programas/Laravel/global.sublime-project"
+			],
+			[
+				"12",
+				"~/Programas/Laravel/12hrs/12hrs.sublime-project"
+			],
+			[
+				"g\t",
+				"~/Programas/Laravel/global.sublime-project"
+			],
+			[
+				"glo",
+				"~/Programas/Laravel/global.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 443.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
