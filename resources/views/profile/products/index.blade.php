@@ -23,7 +23,7 @@ tr:nth-child(even) {
 <body>
 
 	<h1>Mis Productos</h1>
-
+    <a href="/product/create">Crear</a>
     <table style="width:80%">
         <tr>
             <th>Nombre</th>

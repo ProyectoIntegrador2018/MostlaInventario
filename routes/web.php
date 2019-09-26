@@ -22,6 +22,9 @@ Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@can
 
 //Products
 Route::get('/products', 'ProductsController@index');
+Route::get('/product/create', 'ProductsController@create');
+Route::get('/product/store', 'ProductsController@store');
 Route::get('/product/edit/{id}', 'ProductsController@edit');
+Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');

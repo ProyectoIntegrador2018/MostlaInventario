@@ -22,6 +22,12 @@ class Product extends Model
         return $query;
     }
 
+    public function fillInfo($data)
+    {
+        $this->fill($data);
+        $this->save();
+    }
+
     public function reservation_details()
     {
         return $this->hasMany('App\Models\ReservationDetail');
