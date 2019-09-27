@@ -1,7 +1,5 @@
 # MostlaInventario
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/652dd28aca86a7a315bb/maintainability)](https://codeclimate.com/github/ProyectoIntegrador2018/Inventarios/maintainability)
-
 Aplicación web para llevar el control del inventario de dispositivos de MOSTLA. Donde los alumnos y personal del tec pueden inclusive rentar equipo y licencias de software.
 
 ## Tabla de contenidos
@@ -104,3 +102,4 @@ $ php artisan migrate
 ```
 $ php artisan serve
 ```
+=======
