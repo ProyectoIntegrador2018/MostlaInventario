@@ -39,35 +39,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    /**
-     * Redirect the user to the Google authentication page.
-     *
-     * @return Response
-     */
-    public function redirectToProvider()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    /**
-     * Obtain the user information from Google.
-     *
-     * @return Response
-     */
-    public function handleProviderCallback()
-    {
-        $userLogged = Socialite::driver('google')->user();
-        
-        // Necesita mejora
-        $user = new User;
-        $user->name = $userLogged->name;
-        $user->email = $userLogged->email;
-        $user->password = bcrypt($user->name);
-        $user->save();
-        
-        Auth::login($user, true);
-        
-        return redirect($this->redirectTo);
-    }
 }
