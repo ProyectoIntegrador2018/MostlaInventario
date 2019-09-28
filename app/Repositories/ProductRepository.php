@@ -13,9 +13,9 @@ class ProductRepository
             ->orderBy('created_at', 'desc')
             ->get();
     }
-    public function findId($product_id)
+    public function findId($productId)
     {
         return Product::withTrashed()
-            ->find($product_id);
+            ->find($productId);
     }
 }

@@ -15,7 +15,7 @@ class Product extends Model
         'brand', 'name', 'category_id','description'
     ];
 
-    public function scopeForUser($query, $user)
+    public function scopeForUser($query)//, $user)
     {
         // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
         //  query -> where('campus_id', $user->campus->id)

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    private $product; 
+    private $product;
     const RULE_REQ = 'required';
     const STR_PRODS = 'products';
 
@@ -55,23 +55,23 @@ class ProductsController extends Controller
             return back()->withErrors($validator);
         }
 
-        $product_new = new Product;
-        $product_new->fillInfo($input);
+        $productNew = new Product;
+        $productNew->fillInfo($input);
         
         return redirect($this::STR_PRODS);
     }
 
-    public function edit($product_id)
+    public function edit($productId)
     {
-        $product_edit = $this->product->findId($product_id);
+        $productEdit = $this->product->findId($productId);
         
-        return view('profile.products.edit')->with(compact('product_edit'));
+        return view('profile.products.edit')->with(compact('productEdit'));
     }
 
-    public function update(Request $request, $product_id)
+    public function update(Request $request, $productId)
     {
         $input = $request->all();
-        $product_update = $this->product->findId($product_id);
+        $productUpdate = $this->product->findId($productId);
         
         $rules = array(
             'name'             => $this::RULE_REQ,
@@ -93,24 +93,24 @@ class ProductsController extends Controller
             return back()->withErrors($validator);
         }
 
-        $product_update->fillInfo($input);
+        $productUpdate->fillInfo($input);
         
         return redirect($this::STR_PRODS);
     }
 
-    public function delete($product_id)
+    public function delete($productId)
     {
-        $product_del = $this->product->findId($product_id);
-        $product_del->delete();
+        $productDel = $this->product->findId($productId);
+        $productDel->delete();
 
         return back();
     }
 
-    public function activate($product_id)
+    public function activate($productId)
     {
-        $product_act = $this->product->findId($product_id);
+        $productAct = $this->product->findId($productId);
 
-        $product_act->restore();
+        $productAct->restore();
 
         return back();
     }
