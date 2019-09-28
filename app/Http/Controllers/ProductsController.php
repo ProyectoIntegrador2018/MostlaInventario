@@ -59,17 +59,17 @@ class ProductsController extends Controller
         return redirect('products');
     }
 
-    public function edit($id)
+    public function edit($product_id)
     {
-        $product = $this->product->findId($id);
+        $product = $this->product->findId($product_id);
         
         return view('profile.products.edit')->with(compact('product'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $product_id)
     {
         $input = $request->all();
-        $product = $this->product->findId($id);
+        $product = $this->product->findId($product_id);
         
         $rules = array(
             'name'             => 'required',
@@ -96,17 +96,17 @@ class ProductsController extends Controller
         return redirect('products');
     }
 
-    public function delete($id)
+    public function delete($product_id)
     {
-        $product = $this->product->findId($id);
+        $product = $this->product->findId($product_id);
         $product->delete();
 
         return back();
     }
 
-    public function activate($id)
+    public function activate($product_id)
     {
-        $product = $this->product->findId($id);
+        $product = $this->product->findId($product_id);
 
         $product->restore();
 
