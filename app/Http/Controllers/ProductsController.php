@@ -21,9 +21,9 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = $this->product->allForUser();
+        $productsIndex = $this->product->allForUser();
 
-        return view('profile.products.index')->with(compact($this::STR_PRODS));
+        return view('profile.products.index')->with(compact('productsIndex'));
     }
 
     public function create()
