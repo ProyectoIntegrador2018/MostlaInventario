@@ -6,10 +6,10 @@ use App\Models\Product;
 
 class ProductRepository
 {
-    public function allForUser($user)
+    public function allForUser()//($user)
     {
         return Product::withTrashed()
-            ->forUser($user)
+            ->forUser()//->forUser($user)
             ->orderBy('created_at', 'desc')
             ->get();
     }
