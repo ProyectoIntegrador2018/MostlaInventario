@@ -14,8 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
-=======
 
 //Reservations
 Route::get('/my_reservations', 'UserReservationsController@index');
@@ -30,4 +28,3 @@ Route::get('/product/edit/{id}', 'ProductsController@edit');
 Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
->>>>>>> 1eff203... Vista de crear y editar un producto
