@@ -17,7 +17,7 @@ class CreateReservationDetailsTable extends Migration
             $table->increments('id');
             $table->integer('reservation_id');
             $table->integer('product_id');
-            $table->integer('unit_id');
+            $table->integer('unit_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
