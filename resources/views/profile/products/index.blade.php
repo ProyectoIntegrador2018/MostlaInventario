@@ -34,7 +34,7 @@ tr:nth-child(even) {
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
-        @foreach($products as $product)
+        @foreach($productsIndex as $product)
         <tr>
             <td>{{$product->name}}</td>
             <td>{{$product->description}}</td>

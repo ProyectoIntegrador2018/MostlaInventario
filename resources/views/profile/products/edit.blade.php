@@ -15,15 +15,15 @@
     @endif
     <a href="/products">Regresar</a>
     <br><br>
-    <form action="/product/update/{{$product->id}}">
+    <form action="/product/update/{{$productEdit->id}}">
         Nombre:<br>
-        <input type="text" name="name" value="{{$product->name}}" /><br>
+        <input type="text" name="name" value="{{$productEdit->name}}" /><br>
         Marca:<br>
-        <input type="text" name="brand" value="{{$product->brand}}" /><br>
+        <input type="text" name="brand" value="{{$productEdit->brand}}" /><br>
         Descripción:<br>
-        <input type="textarea" name="description" value="{{$product->description}}" /><br>
+        <input type="textarea" name="description" value="{{$productEdit->description}}" /><br>
         Categoria:<br>
-        <input type="text" name="category_id" value="{{$product->category_id}}" /><br>
+        <input type="text" name="category_id" value="{{$productEdit->category_id}}" /><br>
         <br>
         <input type="submit" value="Submit">
     </form>
