@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
+Auth::routes();
+
 //Reservations
 Route::get('/my_reservations', 'UserReservationsController@index');
 Route::get('/my_reservations/history', 'UserReservationsController@history');
