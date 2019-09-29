@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ReservationDetail extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'reservation_details';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'reservation_id','product_id','unit_id'
+        'reservation_id', 'product_id', 'unit_id'
     ];
 
     public function reservation()

@@ -9,7 +9,7 @@ class UserType extends Model
     protected $table = 'user_types';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'type'
+        'title'
     ];
 
     public function users()
