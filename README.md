@@ -68,7 +68,14 @@ $ git clone https://github.com/ProyectoIntegrador2018/Inventarios.git
 
 2. En caso de ser necesario, crear un nuevo archivo .env para realizar pruebas locales específicas
 ```
-cp .env.example .env
+$ cp .env.example .env
+```
+
+2.1 Agregar las variables de ambiente para identificar la aplicación en el sign-in con google.
+```
+GOOGLE_ID=
+GOOGLE_SECRET=
+GOOGLE_URL=
 ```
 
 3. Instalar y/o actualizar dependencias de ser requerido
