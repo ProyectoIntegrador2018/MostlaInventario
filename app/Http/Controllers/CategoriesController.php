@@ -8,9 +8,9 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categoriesIndex = $this->category->allForUser();
+        //$categoriesIndex = $this->category->allForUser();
 
-        return view('profile.categories.index')->with(compact('categoriesIndex'));
+        return view('profile.categories.index');//->with(compact('categoriesIndex'));
     }
 
     public function create()
@@ -20,8 +20,8 @@ class CategoriesController extends Controller
 
     public function edit($categoryId)
     {
-        $categoriesEdit = $this->category->findId($categoryId);
+        //$categoriesEdit = $this->category->findId($categoryId);
         
-        return view('profile.categories.edit')->with(compact('categoriesEdit'));
+        return view('profile.categories.edit');//->with(compact('categoriesEdit'));
     }
 }
