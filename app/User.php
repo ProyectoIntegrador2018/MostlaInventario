@@ -61,4 +61,14 @@ class User extends Authenticatable
         
         $this->update(['type_id'=>$type]);
     }
+
+    public function role()
+    {
+        return $this->hasOne('App\Models\UserRole', 'email', 'email');
+    }
+
+    public function hasRole()
+    {
+        return !!$this->role;
+    }
 }
