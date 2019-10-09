@@ -37,4 +37,8 @@ Route::get('/product/activate/{id}', 'ProductsController@activate');
 //Categories
 Route::get('/categories', 'CategoriesController@index');
 Route::get('/category/create', 'CategoriesController@create');
+Route::get('/category/store', 'CategoriesController@store');
 Route::get('/category/edit/{id}', 'CategoriesController@edit');
+Route::get('/category/update/{id}', 'CategoriesController@update');
+Route::get('/category/delete/{id}', 'CategoriesController@delete');
+Route::get('/category/activate/{id}', 'CategoriesController@activate');
