@@ -15,11 +15,9 @@
     @endif
     <a href="/categories">Regresar</a>
     <br><br>
-    <!-- <form action="/category/update/{{$categoryEdit->id}}"> -->
-    <form action="/category/update/1">
+    <form action="/category/update/{{$categoryEdit->id}}">
         Nombre:<br>
-        <!-- <input type="text" name="name" value="{{$categoryEdit->name}}" /><br> -->
-        <input type="text" name="name" value="sfasfnalsldfk" /><br>
+        <input type="text" name="name" value="{{$categoryEdit->name}}" /><br>
         <input type="submit" value="Submit">
     </form>
 </body>

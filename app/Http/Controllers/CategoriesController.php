@@ -57,9 +57,9 @@ class CategoriesController extends Controller
 
     public function edit($categoryId)
     {
-        $categoriesEdit = $this->category->findId($categoryId);
+        $categoryEdit = $this->category->findId($categoryId);
         
-        return view('profile.categories.edit')->with(compact('categoriesEdit'));
+        return view('profile.categories.edit')->with(compact('categoryEdit'));
     }
 
     public function update(Request $request, $categoryId)
