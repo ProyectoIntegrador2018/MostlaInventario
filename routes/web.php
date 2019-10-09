@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
-Auth::routes();
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //Reservations
 Route::get('/my_reservations', 'UserReservationsController@index');
@@ -42,3 +42,10 @@ Route::get('/category/edit/{id}', 'CategoriesController@edit');
 Route::get('/category/update/{id}', 'CategoriesController@update');
 Route::get('/category/delete/{id}', 'CategoriesController@delete');
 Route::get('/category/activate/{id}', 'CategoriesController@activate');
+Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
+    //Roles
+    Route::get('/roles', 'UserRoleController@index');
+    Route::post('/roles', 'UserRoleController@store');
+    Route::post('/roles/update/{role}', 'UserRoleController@update');
+    Route::post('/roles/delete/{role}', 'UserRoleController@delete');
+});
