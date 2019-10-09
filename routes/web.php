@@ -33,3 +33,8 @@ Route::get('/product/edit/{id}', 'ProductsController@edit');
 Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
+
+//Categories
+Route::get('/categories', 'CategoriesController@index');
+Route::get('/category/create', 'CategoriesController@create');
+Route::get('/category/edit/{id}', 'CategoriesController@edit');
