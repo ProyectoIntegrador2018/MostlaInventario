@@ -32,19 +32,19 @@ tr:nth-child(even) {
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
-        <!-- @foreach($categoriesIndex as $category)
+        <!-- {{-- @foreach($categoriesIndex as $category) --}}
         <tr>
-            <td>{{$category->id}}</td>
-            <td>{{$category->name}}</td>
-            <td>{{$category->created_at}}</td>
-            <td><a href="/category/edit/{{ $category->id }}">Editar</a></td>
-            @if($category->deleted_at != null)
-              <td><a href="/category/activate/{{ $category->id }}">Activar</a></td>
-            @else
-              <td><a href="/category/delete/{{ $category->id }}">Eliminar</a></td>
-            @endif
+            <td>{{--$category->id--}}</td>
+            <td>{{--$category->name--}}</td>
+            <td>{{--$category->created_at--}}</td>
+            <td><a href="/category/edit/{{-- $category->id --}}">Editar</a></td>
+            {{-- @if($category->deleted_at != null) --}}
+              <td><a href="/category/activate/{{-- $category->id --}}">Activar</a></td>
+            {{-- @else --}}
+              <td><a href="/category/delete/{{-- $category->id --}}">Eliminar</a></td>
+            {{-- @endif --}}
         </tr>
-        @endforeach -->
+        {{-- @endforeach --}} -->
         <tr><td>1</td><td>Hola</td><td>123123</td><td>editar</td><td>accion</td></tr>
     </table>
 
