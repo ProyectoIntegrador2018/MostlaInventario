@@ -34,8 +34,10 @@ Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
 
-//Roles
-Route::get('/roles', 'UserRoleController@index');
-Route::post('/roles', 'UserRoleController@store');
-Route::post('/roles/update/{role}', 'UserRoleController@update');
-Route::post('/roles/delete/{role}', 'UserRoleController@delete');
+Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
+    //Roles
+    Route::get('/roles', 'UserRoleController@index');
+    Route::post('/roles', 'UserRoleController@store');
+    Route::post('/roles/update/{role}', 'UserRoleController@update');
+    Route::post('/roles/delete/{role}', 'UserRoleController@delete');
+});

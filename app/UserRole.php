@@ -11,6 +11,15 @@ class UserRole extends Model
     public $fillable = ['email', 'type_id'];
     const DEFAULT_ROLE = 1;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        UserRole::created(function ($role) {
+            $role->user->update(['type_id'=>$role->type_id]);
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User', 'email', 'email');
