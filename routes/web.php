@@ -33,3 +33,12 @@ Route::get('/product/edit/{id}', 'ProductsController@edit');
 Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
+
+//Units
+Route::get('/units', 'UnitsController@index');
+Route::get('/unit/create', 'UnitsController@create');
+Route::get('/unit/store', 'UnitsController@store');
+Route::get('/unit/edit/{id}', 'UnitsController@edit');
+Route::get('/unit/update/{id}', 'UnitsController@update');
+Route::get('/unit/delete/{id}', 'UnitsController@delete');
+Route::get('/unit/activate/{id}', 'UnitsController@activate');
