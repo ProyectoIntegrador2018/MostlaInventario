@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Repositories\ProductRepository;
+use App\Repositories\CategoryRepository;
 use Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -11,12 +12,14 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     private $product;
+    private $category;
     const RULE_REQ = 'required';
     const STR_PRODS = 'products';
 
-    public function __construct(ProductRepository $product)
+    public function __construct(ProductRepository $product, CategoryRepository $category)
     {
         $this->product = $product;
+        $this->category = $category;
     }
 
     public function index()
@@ -28,7 +31,8 @@ class ProductsController extends Controller
 
     public function create()
     {
-        return view('profile.products.create');
+        $categories = $this->category->allForUser();
+        return view('profile.products.create')->with(compact('categories'));
     }
 
     public function store(Request $request)
@@ -64,8 +68,9 @@ class ProductsController extends Controller
     public function edit($productId)
     {
         $productEdit = $this->product->findId($productId);
-        
-        return view('profile.products.edit')->with(compact('productEdit'));
+        $categories = $this->category->allForUser();
+
+        return view('profile.products.edit')->with(compact('productEdit','categories'));
     }
 
     public function update(Request $request, $productId)

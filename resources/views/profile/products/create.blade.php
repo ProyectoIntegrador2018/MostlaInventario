@@ -23,7 +23,11 @@
         Descripción:<br>
         <input type="textarea" name="description" value="" /><br>
         Categoria:<br>
-        <input type="text" name="category_id" value="" /><br>
+        <select name="category_id">
+            @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option> 
+            @endforeach
+        </select>
         <br>
         <input type="submit" value="Submit">
     </form>

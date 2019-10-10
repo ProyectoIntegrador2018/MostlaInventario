@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Product;
 use App\Repositories\UnitRepository;
+use App\Repositories\ProductRepository;
 use Auth;
 use Validator;
 use Illuminate\Http\Request;
@@ -11,12 +13,14 @@ use Illuminate\Http\Request;
 class UnitsController extends Controller
 {
     private $unit;
+    private $product;
     const RULE_REQ = 'required';
     const STR_UNITS = 'units';
 
-    public function __construct(UnitRepository $unit)
+    public function __construct(UnitRepository $unit, ProductRepository $product)
     {
         $this->unit = $unit;
+        $this->product = $product;
     }
 
     public function index()
@@ -28,7 +32,8 @@ class UnitsController extends Controller
 
     public function create()
     {
-        return view('profile.units.create');
+        $products = $this->product->allForUser();
+        return view('profile.units.create')->with(compact('products'));
     }
 
     public function store(Request $request)
@@ -38,14 +43,14 @@ class UnitsController extends Controller
         $rules = array(
             'product_id'       => $this::RULE_REQ.'|exists:products,id',
             'serial_number'    => $this::RULE_REQ,
-            'campus_id'        => $this::RULE_REQ
+            'status'           => $this::RULE_REQ
         );
 
         $messages = array(
             'product_id.'.$this::RULE_REQ       => 'El producto es requerido',
             'product_id.exists'                 => 'El producto debe existir',
             'serial_number.'.$this::RULE_REQ    => 'El numero serial es requerido',
-            'campus_id.'.$this::RULE_REQ        => 'El campus es requerido'
+            'status.'.$this::RULE_REQ           => 'El estatus es requerido'
         );
 
         $validator = Validator::make($input, $rules, $messages);
@@ -56,6 +61,8 @@ class UnitsController extends Controller
 
         $unitNew = new Unit;
         $unitNew->fillInfo($input);
+        //Cuando tengamos el campus
+        $unitNew->campus_id = 1;//$user->campus_id;
         
         return redirect($this::STR_UNITS);
     }
@@ -63,8 +70,9 @@ class UnitsController extends Controller
     public function edit($unitId)
     {
         $unitEdit = $this->unit->findId($unitId);
+        $products = $this->product->allForUser();
         
-        return view('profile.units.edit')->with(compact('unitEdit'));
+        return view('profile.units.edit')->with(compact('unitEdit','products'));
     }
 
     public function update(Request $request, $unitId)
@@ -75,14 +83,14 @@ class UnitsController extends Controller
         $rules = array(
             'product_id'       => $this::RULE_REQ.'|exists:products,id',
             'serial_number'    => $this::RULE_REQ,
-            'campus_id'        => $this::RULE_REQ
+            'status'           => $this::RULE_REQ
         );
 
         $messages = array(
             'product_id.'.$this::RULE_REQ       => 'El producto es requerido',
             'product_id.exists'                 => 'El producto debe existir',
             'serial_number.'.$this::RULE_REQ    => 'El numero serial es requerido',
-            'campus_id.'.$this::RULE_REQ        => 'El campus es requerido'
+            'status.'.$this::RULE_REQ           => 'El campus es requerido'
         );
 
         $validator = Validator::make($input, $rules, $messages);
