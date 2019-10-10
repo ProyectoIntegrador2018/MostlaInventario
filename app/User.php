@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\UserType;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type_id'
     ];
 
     /**
@@ -50,5 +51,24 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany('App\Models\Reservation');
+    }
+
+    public function setType($type)
+    {
+        if ($type instanceof UserType) {
+            return $this->type()->associate($type);
+        }
+        
+        $this->update(['type_id'=>$type]);
+    }
+
+    public function role()
+    {
+        return $this->hasOne('App\Models\UserRole', 'email', 'email');
+    }
+
+    public function hasRole()
+    {
+        return !!$this->role;
     }
 }
