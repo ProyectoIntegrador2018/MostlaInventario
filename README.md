@@ -109,4 +109,11 @@ $ php artisan migrate
 ```
 $ php artisan serve
 ```
+
+2. Correr en la terminal
+
+```
+$ npm run dev
+```
+
 =======
