@@ -7,6 +7,7 @@ use App\Repositories\ProductRepository;
 use Auth;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductsController extends Controller
 {
@@ -23,6 +24,13 @@ class ProductsController extends Controller
     {
         $productsIndex = $this->product->allForUser();
 
+        return response($productsIndex->jsonSerialize(), Response::HTTP_OK);
+    }
+
+    public function indexAdmin()
+    {
+        $productsIndex = $this->product->allForUser();
+        
         return view('profile.products.index')->with(compact('productsIndex'));
     }
 
