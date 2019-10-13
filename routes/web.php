@@ -34,6 +34,15 @@ Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
 
+//Categories
+Route::get('/categories', 'CategoriesController@index');
+Route::get('/category/create', 'CategoriesController@create');
+Route::get('/category/store', 'CategoriesController@store');
+Route::get('/category/edit/{id}', 'CategoriesController@edit');
+Route::get('/category/update/{id}', 'CategoriesController@update');
+Route::get('/category/delete/{id}', 'CategoriesController@delete');
+Route::get('/category/activate/{id}', 'CategoriesController@activate');
+
 //Catalog
 Route::get('/my_products', function () {
     return view('profile.my_products')->with(compact('my_products'));
