@@ -26,7 +26,7 @@ Route::get('/my_reservations/history', 'UserReservationsController@history');
 Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
 
 //Products
-Route::get('/products', 'ProductsController@index');
+Route::get('/products', 'ProductsController@indexAdmin');
 Route::get('/product/create', 'ProductsController@create');
 Route::get('/product/store', 'ProductsController@store');
 Route::get('/product/edit/{id}', 'ProductsController@edit');
@@ -42,6 +42,12 @@ Route::get('/category/edit/{id}', 'CategoriesController@edit');
 Route::get('/category/update/{id}', 'CategoriesController@update');
 Route::get('/category/delete/{id}', 'CategoriesController@delete');
 Route::get('/category/activate/{id}', 'CategoriesController@activate');
+
+//Catalog
+Route::get('/my_products', function () {
+    return view('profile.my_products')->with(compact('my_products'));
+});
+
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
     //Roles
     Route::get('/roles', 'UserRoleController@index');
