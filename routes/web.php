@@ -16,14 +16,17 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //Reservations
-Route::get('/my_reservations', 'UserReservationsController@index');
-Route::get('/my_reservations/history', 'UserReservationsController@history');
+Route::get('/profile', 'UserReservationsController@index');
+Route::get('/profile/history', 'UserReservationsController@history');
 Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
+
+//Profile
+Route::post('/profile/campus', 'ProfileController@campus');
 
 //Products
 Route::get('/products', 'ProductsController@indexAdmin');
@@ -52,6 +55,7 @@ Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']
     //Roles
     Route::get('/roles', 'UserRoleController@index');
     Route::post('/roles', 'UserRoleController@store');
-    Route::post('/roles/update/{role}', 'UserRoleController@update');
+    Route::post('/roles/update/type/{role}', 'UserRoleController@updateType');
+    Route::post('/roles/update/campus/{role}', 'UserRoleController@updateCampus');
     Route::post('/roles/delete/{role}', 'UserRoleController@delete');
 });

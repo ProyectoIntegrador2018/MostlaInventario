@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use App\UserRole;
+use App\Models\UserRole;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
@@ -61,7 +61,7 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
-            return redirect('/login');
+            return redirect()->to('/');
         }
 
         // only allow people with @itesm.mx or tec.mx to login
@@ -87,7 +87,7 @@ class LoginController extends Controller
             }
 
             $newUser->save();
-            auth()->login($newUser, true);
+            Auth::login($newUser, true);
         }
         
         return redirect($this->redirectTo);
