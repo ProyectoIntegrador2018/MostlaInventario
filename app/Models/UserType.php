@@ -12,8 +12,13 @@ class UserType extends Model
         'title'
     ];
 
+    public function scopeLesserThan($query, $type)
+    {
+        return $query->where('id', '<', $type);
+    }
+
     public function users()
     {
-    	return $this->hasMany('App\User', 'type_id');
+        return $this->hasMany('App\User', 'type_id');
     }
 }

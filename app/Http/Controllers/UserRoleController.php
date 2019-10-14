@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campus;
 use App\Models\UserRole;
 use App\Models\UserType;
 use Illuminate\Http\Request;
@@ -10,10 +11,19 @@ class UserRoleController extends Controller
 {
     public function index()
     {
-        $roles = UserRole::all();
-        $types = UserType::all();
+        $user = auth()->user();
+        $admin_general = $user->type_id == UserRole::ADMIN_GENERAL;
 
-        return view('roles.index')->with(compact('roles', 'types'));
+        $roles = UserRole::when(!$admin_general, function ($query) use ($user) {
+            $query->forCampus($user->campus_id);
+        })->get();
+        $types = UserType::when(!$admin_general, function ($query) {
+            $query->lesserThan(UserRole::ADMIN_GENERAL);
+        })->get();
+        $campus = Campus::all();
+
+
+        return view('roles.index')->with(compact('roles', 'types', 'campus', 'admin_general'));
     }
 
     public function store(Request $request)
@@ -21,6 +31,7 @@ class UserRoleController extends Controller
         $data = $request->validate([
             'email' => 'required|email|unique:user_roles',
             'type_id' => 'required|integer|exists:user_types,id',
+            'campus_id' => 'sometimes|integer|exists:campus,id',
         ]);
 
         UserRole::create($data);
@@ -28,11 +39,20 @@ class UserRoleController extends Controller
         return back();
     }
 
-    public function update(Request $request, UserRole $role)
+    public function updateType(Request $request, UserRole $role)
     {
         $request->validate(['type_id' => 'required|integer|exists:user_types,id']);
 
         $role->setType($request->type_id);
+
+        return back();
+    }
+
+    public function updateCampus(Request $request, UserRole $role)
+    {
+        $request->validate(['campus_id' => 'required|integer|exists:campus,id']);
+
+        $role->setCampus($request->campus_id);
 
         return back();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campus;
 use App\Models\Reservation;
 use App\Models\ReservationDetail;
 use App\Repositories\ReservationRepository;
@@ -10,18 +11,21 @@ use Illuminate\Http\Request;
 
 class UserReservationsController extends Controller
 {
-	private $reservations;
+    private $reservations;
 
-	public function __construct(ReservationRepository $reservations)
-	{
-		$this->reservations = $reservations;
-	}
+    public function __construct(ReservationRepository $reservations)
+    {
+        $this->reservations = $reservations;
+    }
 
     public function index()
     {
-    	$reservations = $this->reservations->activeForUser(Auth::user());
+        $reservations = $this->reservations->activeForUser(Auth::user());
 
-    	return view('profile.my_reservations')->with(compact('reservations'));
+        $campus = Campus::all();
+        $user_campus = auth()->user()->campus;
+
+        return view('profile.my_reservations')->with(compact('reservations', 'campus', 'user_campus'));
     }
 
     public function history()
@@ -35,9 +39,9 @@ class UserReservationsController extends Controller
     {
         $this->authorize($reservation);
 
-    	$reservation->cancel();
+        $reservation->cancel();
 
-    	return back();
+        return back();
     }
 
     public function cancelItem(ReservationDetail $item)
