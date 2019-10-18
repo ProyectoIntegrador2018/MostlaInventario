@@ -12,14 +12,15 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'brand', 'name', 'category_id','description'
+        'brand', 'name', 'category_id','description', 'campus_id'
     ];
 
-    public function scopeForUser($query)//, $user)
+    public function scopeForCampus($query, $campus=null)
     {
-        // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
-        //  query -> where('campus_id', $user->campus->id)
-        return $query;
+        if($campus === null){
+            return $query->where('campus_id', auth()->user()->campus_id);
+        }
+        return $query->where('campus_id', $campus);
     }
 
     public function fillInfo($data)

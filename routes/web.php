@@ -46,11 +46,6 @@ Route::get('/category/update/{id}', 'CategoriesController@update');
 Route::get('/category/delete/{id}', 'CategoriesController@delete');
 Route::get('/category/activate/{id}', 'CategoriesController@activate');
 
-//Catalog
-Route::get('/my_products', function () {
-    return view('profile.my_products')->with(compact('my_products'));
-});
-
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
     //Roles
     Route::get('/roles', 'UserRoleController@index');
