@@ -7,20 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $table = 'categories';
     protected $primaryKey = 'id';
     protected $fillable = [
         'name'
     ];
-
-    public function scopeForUser($query)//, $user)
-    {
-        // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
-        //  query -> where('campus_id', $user->campus->id)
-        return $query;
-    }
 
     public function fillInfo($data)
     {
@@ -30,6 +23,6 @@ class Category extends Model
 
     public function products()
     {
-    	return $this->hasMany('App\Models\Product');
+        return $this->hasMany('App\Models\Product');
     }
 }

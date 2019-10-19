@@ -36,6 +36,7 @@ Route::get('/product/edit/{id}', 'ProductsController@edit');
 Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
+Route::get('/products/attach/{product}', 'ProductsController@attach');
 
 //Categories
 Route::get('/categories', 'CategoriesController@index');
@@ -49,6 +50,11 @@ Route::get('/category/activate/{id}', 'CategoriesController@activate');
 //Catalog
 Route::get('/my_products', function () {
     return view('profile.my_products')->with(compact('my_products'));
+});
+
+Route::group(['middleware'=>['auth']], function () {
+    Route::get('/catalogo', 'CatalogController@index');
+    Route::get('/carrito', 'CartController@index');
 });
 
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {

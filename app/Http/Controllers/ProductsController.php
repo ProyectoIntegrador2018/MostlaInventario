@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Auth;
-use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Validator;
 
 class ProductsController extends Controller
 {
@@ -22,21 +23,24 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $productsIndex = $this->product->allForUser();
+        $productsIndex = $this->product->allForUser(auth()->user());
 
         return response($productsIndex->jsonSerialize(), Response::HTTP_OK);
     }
 
     public function indexAdmin()
     {
-        $productsIndex = $this->product->allForUser();
+        $productsIndex = $this->product->allForUser(auth()->user());
         
         return view('profile.products.index')->with(compact('productsIndex'));
     }
 
     public function create()
     {
-        return view('profile.products.create');
+        $categories = Category::all();
+        $products = $this->product->all();
+
+        return view('profile.products.create')->with(compact('categories', 'products'));
     }
 
     public function store(Request $request)
@@ -65,6 +69,8 @@ class ProductsController extends Controller
 
         $productNew = new Product;
         $productNew->fillInfo($input);
+
+        $productNew->campus()->save(auth()->user()->campus);
         
         return redirect($this::STR_PRODS);
     }
@@ -72,8 +78,9 @@ class ProductsController extends Controller
     public function edit($productId)
     {
         $productEdit = $this->product->findId($productId);
-        
-        return view('profile.products.edit')->with(compact('productEdit'));
+        $categories = Category::all();
+
+        return view('profile.products.edit')->with(compact('productEdit', 'categories'));
     }
 
     public function update(Request $request, $productId)
@@ -121,5 +128,12 @@ class ProductsController extends Controller
         $productAct->restore();
 
         return back();
+    }
+
+    public function attach(Product $product)
+    {
+        $product->addToCampus(auth()->user()->campus_id);
+
+        return redirect('/products');
     }
 }
