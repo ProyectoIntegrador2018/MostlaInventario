@@ -13,7 +13,7 @@ class CreateCampusProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('campus_products', function (Blueprint $table) {
+        Schema::create('campus_product', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('campus_id');
             $table->integer('product_id');
@@ -28,6 +28,6 @@ class CreateCampusProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campus_products');
+        Schema::dropIfExists('campus_product');
     }
 }

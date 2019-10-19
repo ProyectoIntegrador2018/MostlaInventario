@@ -134,6 +134,8 @@ class ProductsController extends Controller
     {
         $product->addToCampus(auth()->user()->campus_id);
 
+        // Activar esto cuando exista vista de detalle de producto!!
+        // return redirect('/products/'.$product->id)
         return redirect('/products');
     }
 }
