@@ -29,7 +29,7 @@ Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@can
 Route::post('/profile/campus', 'ProfileController@campus');
 
 //Products
-Route::get('/products', 'ProductsController@indexAdmin');
+Route::get('/products', 'ProductsController@index');
 Route::get('/product/create', 'ProductsController@create');
 Route::get('/product/store', 'ProductsController@store');
 Route::get('/product/edit/{id}', 'ProductsController@edit');
@@ -45,6 +45,10 @@ Route::get('/category/edit/{id}', 'CategoriesController@edit');
 Route::get('/category/update/{id}', 'CategoriesController@update');
 Route::get('/category/delete/{id}', 'CategoriesController@delete');
 Route::get('/category/activate/{id}', 'CategoriesController@activate');
+
+//Maintenance
+Route::get('/maintenance', 'MaintenanceController@index');
+Route::get('/maintenance/{id}', 'MaintenanceController@indexUnit');
 
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
     //Roles
