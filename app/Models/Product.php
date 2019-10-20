@@ -15,11 +15,19 @@ class Product extends Model
         'brand', 'name', 'category_id','description'
     ];
 
-    public function scopeForUser($query)//, $user)
+    public function scopeForUser($query, $user)
     {
-        // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
-        //  query -> where('campus_id', $user->campus->id)
-        return $query;
+        if ($user === null) {
+            return $query;
+        }
+        
+        if ($user->type->isSuperAdmin()) {
+            return $query;
+        }
+
+        return $query->whereHas('campus', function ($query) use ($user) {
+            $query->where('campus.id', $user->campus_id);
+        });
     }
 
     public function fillInfo($data)
@@ -46,5 +54,15 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Models\Tags');
+    }
+
+    public function campus()
+    {
+        return $this->belongsToMany('App\Models\Campus');
+    }
+
+    public function addToCampus($campus)
+    {
+        $this->campus()->syncWithoutDetaching([$campus]);
     }
 }

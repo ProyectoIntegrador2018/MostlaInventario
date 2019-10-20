@@ -23,7 +23,12 @@
         Descripción:<br>
         <input type="textarea" name="description" value="{{$productEdit->description}}" /><br>
         Categoria:<br>
-        <input type="text" name="category_id" value="{{$productEdit->category_id}}" /><br>
+        <select name="category_id">
+            <option selected hidden disabled>Seleccione una categoría</option>
+            @foreach($categories as $category)
+                <option value={{ $category->id }} {{ $category->id == $productEdit->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+            @endforeach
+        </select>
         <br>
         <input type="submit" value="Submit">
     </form>

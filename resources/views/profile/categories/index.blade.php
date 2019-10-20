@@ -28,7 +28,6 @@ tr:nth-child(even) {
         <tr>
             <th>id</th>
             <th>Nombre</th>
-            <th>Fecha de creación</th>
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
@@ -36,7 +35,6 @@ tr:nth-child(even) {
         <tr>
             <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
-            <td>{{$category->created_at}}</td>
             <td><a href="/category/edit/{{ $category->id }}">Editar</a></td>
             @if($category->deleted_at != null)
               <td><a href="/category/activate/{{ $category->id }}">Activar</a></td>
