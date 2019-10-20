@@ -15,18 +15,28 @@ class Unit extends Model
         'serial_number','status','product_id','campus_id'
     ];
 
-    public function scopeForUser($query)//, $user)
+    public function scopeForUser($query, $user)
     {
-        // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
-        //  query -> where('campus_id', $user->campus->id)
-        return $query;
+        if ($user === null) {
+            return $query;
+        }
+        
+        if ($user->type->isSuperAdmin()) {
+            return $query;
+        }
+
+        return $query->whereHas('campus', function ($query) use ($user) {
+            $query->where('campus.id', $user->campus_id);
+        });
     }
 
-    public function scopeForProduct($query)//, $product)
+    public function scopeForProduct($query, $product)
     {
-        // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
-        //  query -> where('product_id', $product->id)
-        return $query;
+        if ($product === null) {
+            return $query;
+        }
+        
+        return $query->where('product_id', $product->id);
     }
 
     public function fillInfo($data)

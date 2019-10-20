@@ -17,10 +17,8 @@
     <br><br>
     <form action="/unit/update/{{$unitEdit->id}}">
         Producto:<br>
-        <select name="product_id">
-            @foreach($products as $product)
-            <option value="{{$product->id}}">{{$product->name}}</option> 
-            @endforeach
+        <select disabled name="product_id">
+            <option value="{{$unitEdit->product_id}}">{{$unitEdit->product->name}}</option> 
         </select>
         <br>
         Número serial:<br>

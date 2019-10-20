@@ -7,23 +7,24 @@ use App\Models\Unit;
 
 class UnitRepository
 {
-    public function allForUser()//($user)
+    public function allForUser($user)
     {
         return Unit::withTrashed()
-            ->forUser()//->forUser($user)
+            ->forUser($user)
             ->orderBy('created_at', 'desc')
             ->get();
     }
-    public function allForProduct()//($user)
+    public function allForProduct($product)
     {
         return Unit::withTrashed()
-            ->forProduct()//->forUser($user)
+            ->forProduct($product)
             ->orderBy('created_at', 'desc')
             ->get();
     }
     public function findId($unitId)
     {
         return Unit::withTrashed()
+            ->with('product')
             ->find($unitId);
     }
 }

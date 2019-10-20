@@ -25,14 +25,14 @@ class UnitsController extends Controller
 
     public function index()
     {
-        $unitsIndex = $this->unit->allForUser();
+        $unitsIndex = $this->unit->allForUser(auth()->user());
 
         return view('profile.units.index')->with(compact('unitsIndex'));
     }
 
     public function create()
     {
-        $products = $this->product->allForUser();
+        $products = $this->product->allForUser(auth()->user());
         return view('profile.units.create')->with(compact('products'));
     }
 
@@ -60,9 +60,8 @@ class UnitsController extends Controller
         }
 
         $unitNew = new Unit;
+        $unitNew->campus_id = auth()->user()->campus->id;
         $unitNew->fillInfo($input);
-        //Cuando tengamos el campus
-        $unitNew->campus_id = 1;//$user->campus_id;
         
         return redirect($this::STR_UNITS);
     }
@@ -70,7 +69,7 @@ class UnitsController extends Controller
     public function edit($unitId)
     {
         $unitEdit = $this->unit->findId($unitId);
-        $products = $this->product->allForUser();
+        $products = $this->product->allForUser(auth()->user());
         
         return view('profile.units.edit')->with(compact('unitEdit','products'));
     }
@@ -81,14 +80,11 @@ class UnitsController extends Controller
         $unitUpdate = $this->unit->findId($unitId);
         
         $rules = array(
-            'product_id'       => $this::RULE_REQ.'|exists:products,id',
             'serial_number'    => $this::RULE_REQ,
             'status'           => $this::RULE_REQ
         );
 
         $messages = array(
-            'product_id.'.$this::RULE_REQ       => 'El producto es requerido',
-            'product_id.exists'                 => 'El producto debe existir',
             'serial_number.'.$this::RULE_REQ    => 'El numero serial es requerido',
             'status.'.$this::RULE_REQ           => 'El campus es requerido'
         );
