@@ -5,6 +5,17 @@
 </head>
 <body>
 
+	<h1>Mi Campus</h1>
+	<form action="/profile/campus" method="POST">
+		@csrf
+		<select name="campus_id" onchange="this.form.submit()">
+			<option selected required hidden>Seleccione su campus</option>>
+			@foreach($campus as $c)
+				<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
+			@endforeach
+		</select>
+	</form>
+
 	<h1>Mis Reservaciones</h1>
 
 	<ul>

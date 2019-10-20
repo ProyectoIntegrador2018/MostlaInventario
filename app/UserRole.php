@@ -2,27 +2,45 @@
 
 namespace App\Models;
 
+use App\Models\Campus;
 use App\Models\UserType;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class UserRole extends Model
 {
-    public $fillable = ['email', 'type_id'];
+    public $fillable = ['email', 'type_id', 'campus_id'];
     const DEFAULT_ROLE = 1;
+    const ADMIN_GENERAL = 4;
 
     protected static function boot()
     {
         parent::boot();
 
         UserRole::created(function ($role) {
-            $role->user->update(['type_id'=>$role->type_id]);
+            $role->updateUserIfExists();
         });
+
+        UserRole::creating(function ($role) {
+            if ($role->campus_id === null) {
+                $role->campus_id = auth()->user()->campus_id;
+            }
+        });
+    }
+
+    public function scopeForCampus($query, $campus_id)
+    {
+        return $query->where('campus_id', $campus_id);
     }
 
     public function user()
     {
         return $this->belongsTo('App\User', 'email', 'email');
+    }
+
+    public function campus()
+    {
+        return $this->belongsTo('App\Models\Campus');
     }
 
     public function type()
@@ -43,6 +61,13 @@ class UserRole extends Model
         $this->attributes['email'] = strtolower($value);
     }
 
+    public function updateUserIfExists()
+    {
+        if ($this->user) {
+            return $this->user->updateType();
+        }
+    }
+
     public function setType($type)
     {
         if ($type instanceof UserType) {
@@ -50,9 +75,16 @@ class UserRole extends Model
         }
         
         $this->update(['type_id'=>$type]);
+        $this->updateUserIfExists();
+    }
 
-        if ($user = User::where('email', $this->email)->first()) {
-            $user->setType($type);
+    public function setCampus($campus)
+    {
+        if ($campus instanceof Campus) {
+            return $this->campus()->associate($campus);
         }
+        
+        $this->update(['campus_id'=>$campus]);
+        $this->updateUserIfExists();
     }
 }

@@ -24,8 +24,9 @@
         <input type="textarea" name="description" value="{{$productEdit->description}}" /><br>
         Categoria:<br>
         <select name="category_id">
+            <option selected hidden disabled>Seleccione una categoría</option>
             @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option> 
+                <option value={{ $category->id }} {{ $category->id == $productEdit->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
             @endforeach
         </select>
         <br>

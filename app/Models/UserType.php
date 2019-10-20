@@ -12,8 +12,20 @@ class UserType extends Model
         'title'
     ];
 
+    const SUPER_ADMIN = 4;
+
+    public function scopeLesserThan($query, $type)
+    {
+        return $query->where('id', '<', $type);
+    }
+
     public function users()
     {
-    	return $this->hasMany('App\User', 'type_id');
+        return $this->hasMany('App\User', 'type_id');
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->id == self::SUPER_ADMIN;
     }
 }
