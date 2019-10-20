@@ -81,15 +81,9 @@ class ProductsController extends Controller
     public function edit($productId)
     {
         $productEdit = $this->product->findId($productId);
-<<<<<<< HEAD
-        $categories = $this->category->allForUser();
-
-        return view('profile.products.edit')->with(compact('productEdit','categories'));
-=======
         $categories = Category::all();
 
         return view('profile.products.edit')->with(compact('productEdit', 'categories'));
->>>>>>> ee6d42a1e161c2e259de51ee5f178e83f51db404
     }
 
     public function update(Request $request, $productId)
