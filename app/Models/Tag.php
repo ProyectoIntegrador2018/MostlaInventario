@@ -12,8 +12,14 @@ class Tag extends Model
         'name'
     ];
 
+    public function fillInfo($data)
+    {
+        $this->fill($data);
+        $this->save();
+    }
+
     public function products()
     {
-    	return $this->belongsToMany('App\Models\Product');
+    	return $this->hasMany('App\Models\Product');
     }
 }
