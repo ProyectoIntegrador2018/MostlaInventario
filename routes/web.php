@@ -16,28 +16,64 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //Reservations
-Route::get('/my_reservations', 'UserReservationsController@index');
-Route::get('/my_reservations/history', 'UserReservationsController@history');
+Route::get('/profile', 'UserReservationsController@index');
+Route::get('/profile/history', 'UserReservationsController@history');
 Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
 
+//Profile
+Route::post('/profile/campus', 'ProfileController@campus');
+
 //Products
-Route::get('/products', 'ProductsController@index');
+Route::get('/products', 'ProductsController@indexAdmin');
 Route::get('/product/create', 'ProductsController@create');
 Route::get('/product/store', 'ProductsController@store');
 Route::get('/product/edit/{id}', 'ProductsController@edit');
 Route::get('/product/update/{id}', 'ProductsController@update');
 Route::get('/product/delete/{id}', 'ProductsController@delete');
 Route::get('/product/activate/{id}', 'ProductsController@activate');
+Route::get('/products/attach/{product}', 'ProductsController@attach');
+
+//Categories
+Route::get('/categories', 'CategoriesController@index');
+Route::get('/category/create', 'CategoriesController@create');
+Route::get('/category/store', 'CategoriesController@store');
+Route::get('/category/edit/{id}', 'CategoriesController@edit');
+Route::get('/category/update/{id}', 'CategoriesController@update');
+Route::get('/category/delete/{id}', 'CategoriesController@delete');
+Route::get('/category/activate/{id}', 'CategoriesController@activate');
+
+//Tags
+Route::get('/tags', 'TagsController@index');
+
+//Catalog
+Route::get('/my_products', function () {
+    return view('profile.my_products')->with(compact('my_products'));
+});
+
+Route::group(['middleware'=>['auth']], function () {
+    Route::get('/catalogo', 'CatalogController@index');
+    Route::get('/carrito', 'CartController@index');
+});
+
+//Units
+Route::get('/units', 'UnitsController@index');
+Route::get('/unit/create', 'UnitsController@create');
+Route::get('/unit/store', 'UnitsController@store');
+Route::get('/unit/edit/{id}', 'UnitsController@edit');
+Route::get('/unit/update/{id}', 'UnitsController@update');
+Route::get('/unit/delete/{id}', 'UnitsController@delete');
+Route::get('/unit/activate/{id}', 'UnitsController@activate');
 
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
     //Roles
     Route::get('/roles', 'UserRoleController@index');
     Route::post('/roles', 'UserRoleController@store');
-    Route::post('/roles/update/{role}', 'UserRoleController@update');
+    Route::post('/roles/update/type/{role}', 'UserRoleController@updateType');
+    Route::post('/roles/update/campus/{role}', 'UserRoleController@updateCampus');
     Route::post('/roles/delete/{role}', 'UserRoleController@delete');
 });
