@@ -51,12 +51,10 @@ Route::get('/category/activate/{id}', 'CategoriesController@activate');
 Route::get('/tags', 'TagsController@index');
 
 //Catalog
-Route::get('/my_products', function () {
-    return view('profile.my_products')->with(compact('my_products'));
-});
 
 Route::group(['middleware'=>['auth']], function () {
     Route::get('/catalogo', 'CatalogController@index');
+    Route::get('/catalogo/search', 'CatalogController@search');
     Route::get('/carrito', 'CartController@index');
 });
 
