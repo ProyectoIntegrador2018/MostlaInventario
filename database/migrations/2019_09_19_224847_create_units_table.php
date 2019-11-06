@@ -20,6 +20,7 @@ class CreateUnitsTable extends Migration
             $table->integer('product_id');
             $table->integer('campus_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
