@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-	<form action="/roles" method="POST">
+	<style>
+		.clickable{
+			cursor: copy;
+		}
+	</style>
+	<div>
+		<p>Carrito <span id="carrito"></span></p>
+	</div>
+	<form action="/#" method="POST">
 		@csrf
 		<label for="search">Búsqueda</label>
 		<input id="search" type="text" name="search">
@@ -22,9 +30,8 @@
 	<table id="table-product">
         <tr>
             <th>Nombre</th>
-            <th>Descripción</th>
+            <th>Marca</th>
         </tr>
-        <div>
 	        @foreach($products as $product)
 	        <tr>
 	            <td>{{$product->name}}</td>
