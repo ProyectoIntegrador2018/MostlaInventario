@@ -30,6 +30,31 @@ class Product extends Model
         });
     }
 
+    public function scopeForDetail($query, $detail)
+    {
+        return $query->where('name','like', '%'.$detail.'%')->orWhere('description','like', '%'.$detail.'%');
+    }
+
+    public function scopeForCategory($query, $category)
+    {
+        if ($category == []) {
+            return $query;
+        }
+
+        return $query->whereIn('category_id', $category);
+    }
+
+    public function scopeForTag($query, $tag)
+    {
+        if ($tag == []) {
+            return $query;
+        }
+
+        return $query->whereHas('tags', function ($query) use ($tag) {
+            $query->whereIn('id',$tag);
+        });
+    }
+
     public function fillInfo($data)
     {
         $this->fill($data);
@@ -53,7 +78,7 @@ class Product extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('App\Models\Tags');
+        return $this->belongsToMany('App\Models\Tag');
     }
 
     public function campus()
