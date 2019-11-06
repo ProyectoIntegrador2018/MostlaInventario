@@ -32,7 +32,6 @@
         <tr>
             <th>Nombre</th>
             <th>Marca</th>
-            <th>Descripción</th>
         </tr>
         @foreach($products as $product)
         <tr>
