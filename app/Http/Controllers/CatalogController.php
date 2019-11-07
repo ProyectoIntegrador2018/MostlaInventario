@@ -22,7 +22,7 @@ class CatalogController extends Controller
     public function index()
     {
         $products = $this->products->allForUser(auth()->user());
-        $categories = $this->categories->allForUser();
+        $categories = $this->categories->allForUser(auth()->user());
         $tags = $this->tags->allForUser();
         
         return view('profile.catalog')->with(compact('products','categories','tags'));
