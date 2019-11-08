@@ -51,14 +51,20 @@ Route::get('/category/activate/{id}', 'CategoriesController@activate');
 Route::get('/tags', 'TagsController@index');
 
 //Catalog
-Route::get('/my_products', function () {
-    return view('profile.my_products')->with(compact('my_products'));
-});
-
 Route::group(['middleware'=>['auth']], function () {
     Route::get('/catalogo', 'CatalogController@index');
+    Route::get('/catalogo/search', 'CatalogController@search');
     Route::get('/carrito', 'CartController@index');
 });
+
+//Units
+Route::get('/units', 'UnitsController@index');
+Route::get('/unit/create', 'UnitsController@create');
+Route::get('/unit/store', 'UnitsController@store');
+Route::get('/unit/edit/{id}', 'UnitsController@edit');
+Route::get('/unit/update/{id}', 'UnitsController@update');
+Route::get('/unit/delete/{id}', 'UnitsController@delete');
+Route::get('/unit/activate/{id}', 'UnitsController@activate');
 
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
     //Roles

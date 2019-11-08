@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
+use App\Repositories\CategoryRepository;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,12 +14,14 @@ use Validator;
 class ProductsController extends Controller
 {
     private $product;
+    private $category;
     const RULE_REQ = 'required';
     const STR_PRODS = 'products';
 
-    public function __construct(ProductRepository $product)
+    public function __construct(ProductRepository $product, CategoryRepository $category)
     {
         $this->product = $product;
+        $this->category = $category;
     }
 
     public function index()

@@ -13,7 +13,7 @@ class CreateProductTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_tags', function (Blueprint $table) {
+        Schema::create('products_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tag_id');
             $table->integer('product_id');
