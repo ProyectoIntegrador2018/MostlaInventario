@@ -14,12 +14,11 @@ class Reservation extends Model
     protected $fillable = [
         'user_id', 'campus_id', 'start_date', 'end_date', 'status'
     ];
+    protected $dates = ['start_date', 'end_date'];
 
     public function scopeForUser($query, $user)
     {
-        // Reemplazar cuando las reservaciones ya tengan usuarios reales y haya login
-        // return $query->where('user_id', $user->id);
-        return $query;
+        return $query->where('user_id', $user->id);
     }
 
     public function scopeActive($query)
@@ -34,22 +33,17 @@ class Reservation extends Model
 
     public function user()
     {
-    	return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function campus()
     {
-    	return $this->belongsTo('App\Models\Campus');
+        return $this->belongsTo('App\Models\Campus');
     }
 
-    public function details()
+    public function loans()
     {
-        return $this->hasMany('App\Models\ReservationDetail');
-    }
-
-    public function all_details()
-    {
-        return $this->hasMany('App\Models\ReservationDetail')->withTrashed();
+        return $this->hasMany('App\Models\LoanDetail');
     }
 
     public function cancel()

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Campus;
 use App\Models\Reservation;
-use App\Models\ReservationDetail;
 use App\Repositories\ReservationRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -42,12 +41,5 @@ class UserReservationsController extends Controller
         $reservation->cancel();
 
         return back();
-    }
-
-    public function cancelItem(ReservationDetail $item)
-    {
-        $item->delete();
-
-        return true;
     }
 }

@@ -8,9 +8,7 @@ class CategoryRepository
 {
     public function allForUser($user)
     {
-        return Category::forUser($user)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        return Category::orderBy('name')->get();
     }
     public function findId($categoryId)
     {
