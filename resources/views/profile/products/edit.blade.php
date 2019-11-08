@@ -30,6 +30,13 @@
             @endforeach
         </select>
         <br>
+        Tecnologías:<br>
+        <select name="tags[]" multiple>
+            <option selected hidden disabled>Seleccione tecnologías</option>
+            @foreach($tags as $tag)
+                <option value={{ $tag->id }} {{ in_array($tag->id, $ptags) ? 'selected' : '' }}>{{ $tag->name }}</option>
+            @endforeach
+        </select>
         <input type="submit" value="Submit">
     </form>
 </body>

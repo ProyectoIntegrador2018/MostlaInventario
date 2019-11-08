@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use App\Repositories\ProductRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -38,14 +39,16 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         $products = $this->product->all();
 
-        return view('profile.products.create')->with(compact('categories', 'products'));
+        return view('profile.products.create')->with(compact('categories', 'products', 'tags'));
     }
 
     public function store(Request $request)
     {
-        $input = $request->all();
+        $tags = $request->input('tags');
+        $input = $request->except('tags');
 
         $rules = array(
             'name'             => $this::RULE_REQ,
@@ -69,23 +72,30 @@ class ProductsController extends Controller
 
         $productNew = new Product;
         $productNew->fillInfo($input);
-
         $productNew->campus()->save(auth()->user()->campus);
+        $productNew->attach($tags);
         
         return redirect($this::STR_PRODS);
     }
 
     public function edit($productId)
     {
+        $tags = Tag::all();
         $productEdit = $this->product->findId($productId);
+        $ptags = array();
+        $productTags = $productEdit->tags;
+        foreach($productTags as $tag){
+            array_push($ptags, $tag->id);
+        }
         $categories = Category::all();
 
-        return view('profile.products.edit')->with(compact('productEdit', 'categories'));
+        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags','tags'));
     }
 
     public function update(Request $request, $productId)
     {
-        $input = $request->all();
+        $tags = $request->input('tags');
+        $input = $request->except('tags');
         $productUpdate = $this->product->findId($productId);
         
         $rules = array(
@@ -109,6 +119,7 @@ class ProductsController extends Controller
         }
 
         $productUpdate->fillInfo($input);
+        $productUpdate->sync($tags);
         
         return redirect($this::STR_PRODS);
     }
