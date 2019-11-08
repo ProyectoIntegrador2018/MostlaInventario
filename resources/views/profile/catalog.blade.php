@@ -5,6 +5,9 @@
 		.clickable{
 			cursor: copy;
 		}
+    .hideElement{
+    		display: None;
+    	};
 	</style>
 	<div>
 		<p>Carrito <span id="carrito"></span></p>
@@ -25,23 +28,22 @@
 				<option value={{$tag->id}}>{{$tag->name}}</option>
 			@endforeach		
 		</select>
-		<input type="submit" value="Consultar">
+		<button id="consultar">Consultar</button>
 	</form>
-
-	<table id="catalogo">
+    <table id="table-product">
         <tr>
             <th>Nombre</th>
             <th>Marca</th>
-            <th>Descripción</th>
         </tr>
-        @foreach($products as $product)
-        <tr>
-            <td>{{$product->name}}</td>
-            <td>{{$product->brand}}</td>
-            <td>{{$product->description}}</td>
-            <td id={{$product->id}} class="clickable">Agregar</td>
-        </tr>
-        @endforeach
+	        @foreach($products as $product)
+	        <tr>
+	            <td>{{$product->name}}</td>
+	            <td>{{$product->description}}</td>
+	        </tr>
+	        @endforeach
+    	</div>
+    </table>
+    <table id="table-filter" class="hideElement">
     </table>
 @endsection
 
@@ -50,7 +52,7 @@
 		// Initialize label carrito
 		$("#carrito").text("("+sessionStorage.length+")")
 		// Save to label
-		$("#catalogo").on("click", 'td', function(e) {
+		$("#table-product").on("click", 'td', function(e) {
 			e.preventDefault()
 			row = $(e.currentTarget)
 			if(row.hasClass("clickable")){
@@ -65,6 +67,35 @@
 			    // Update label carrito
 			    $("#carrito").text("("+sessionStorage.length+")")
 			}
+		});
+    $("#consultar").on("click", function(event) {
+  			event.preventDefault();
+  			$.ajax({
+			    type: 'GET',
+			    url: '/catalogo/search',
+			    data: {
+	                     name: $('#search').val(),
+	                     category: $("#categories").val(),
+	                     tag: $("#technology").val()
+	                  },
+	          	dataType : 'json',
+			    success: function(data) {
+			    	data = data.getproducts
+			    	var newHTML = "";
+			    	$("#table-filter").html("<tr><th>Nombre</th><th>Descripción</th></tr>");
+			        for(var i=0; i<data.length; i++)
+			        {
+			        	newHTML += `<tr><td>${data[i].name}</td><td>${
+			        		data[i].description}</td></tr>`
+			        }
+			        $("#table-filter").append(newHTML);
+			        $("#table-filter").removeClass("hideElement");
+			        $("#table-product").addClass("hideElement");
+			    },
+			    error: function(error) { 
+			         console.log(error);
+			    }
+			});
 		});
 	</script>
 @endpush

@@ -41,7 +41,7 @@ Aplicación web para llevar el control del inventario de dispositivos de MOSTLA.
 
 * [PHP] - Versión 7.1.23
 * [Laravel] - Versión 5.7.26
-* [PostgreSQL] - Versión 11.1
+* [MySQL] - Versión 5.7
 * [Laravel Excel](https://github.com/Maatwebsite/Laravel-Excel) - Versión 3.1 (Utilizando la herramienta de Composer para instalarlo y actualizarlo)
 * [Ziggy](https://github.com/tightenco/ziggy)
 
@@ -109,4 +109,11 @@ $ php artisan migrate
 ```
 $ php artisan serve
 ```
+
+2. Correr en la terminal
+
+```
+$ npm run dev
+```
+
 =======

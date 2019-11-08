@@ -28,5 +28,12 @@ class CatalogController extends Controller
         return view('profile.catalog')->with(compact('products','categories','tags'));
     }
 
+    // $pCategory $pTag
+    public function search(Request $request)
+    {
+        $getproducts = $this->products->findProduct(auth()->user(), $request->name, $request->category, $request->tag)->get();
+
+        return response()->json(array('success' => true, 'getproducts' => $getproducts));
+    }
 
 }
