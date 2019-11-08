@@ -11,3 +11,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 *.sublime-*
+*.DS_Store
+.php_cs.cache
+public/css/
+public/js/
+public/mix-manifest.json
+resources/views/auth/
