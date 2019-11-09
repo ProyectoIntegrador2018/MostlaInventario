@@ -17,7 +17,7 @@ class EnforceCampus
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->campus_id === null) {
+        if (auth()->user()->campus_id === null && $request->path() != 'profile') {
             return redirect()->guest($this->redirectPath)->with('no_redirect', true);
         }
 

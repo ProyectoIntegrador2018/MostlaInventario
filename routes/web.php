@@ -20,11 +20,6 @@ Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('logi
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-//Reservations
-Route::get('/profile', 'UserReservationsController@index');
-Route::get('/profile/history', 'UserReservationsController@history');
-Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
-
 //Profile
 Route::post('/profile/campus', 'ProfileController@campus');
 
@@ -50,11 +45,16 @@ Route::get('/category/activate/{id}', 'CategoriesController@activate');
 //Tags
 Route::get('/tags', 'TagsController@index');
 
-//Catalog
 Route::group(['middleware'=>['auth']], function () {
+    //Catalog
     Route::get('/catalogo', 'CatalogController@index');
     Route::get('/catalogo/search', 'CatalogController@search');
     Route::get('/carrito', 'CartController@index');
+
+    //Reservations
+    Route::get('/profile', 'UserReservationsController@index');
+    Route::get('/profile/history', 'UserReservationsController@history');
+    Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
 });
 
 //Units

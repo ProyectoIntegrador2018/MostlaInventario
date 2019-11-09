@@ -9,6 +9,7 @@ class Reservation extends Model
 {
     use SoftDeletes;
 
+    // protected $dateFormat = 'm/d/Y';
     protected $table = 'reservations';
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -55,5 +56,15 @@ class Reservation extends Model
     public function isPending()
     {
         return $this->status == "pending";
+    }
+
+    public function getCanCancelAttribute()
+    {
+        return $this->isPending() && $this->start_date > now()->addHours(3);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product');
     }
 }
