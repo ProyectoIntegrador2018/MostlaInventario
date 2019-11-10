@@ -12,8 +12,8 @@
 				<th>Marca</th>
 				<th>Modelo</th>
 				<th>Cant.</th>
-				<th>Inicia</th>
-				<th>Termina</th>
+				<th>Inició</th>
+				<th>Terminó</th>
 				<th>Cancelar</th>
 			</tr>
 

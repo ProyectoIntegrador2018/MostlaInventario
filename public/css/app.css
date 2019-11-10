@@ -7,14 +7,19 @@ html, body{
 }
 
 .navbar {
-    margin-bottom: 0;
-    border-radius: 0;
+    /*margin-bottom: 0;*/
+    /*border-radius: 0;*/
     background-color: #4472C4;
     color: #FFF;
-    padding: 1% 0;
-    font-size: 1.2em;
-    border: 0;
+    /*padding: 1% 0;*/
+    /*font-size: 1.2em;*/
+    /*border: 0;*/
 }
+
+/*
+.navbar a {
+    color: inherit;
+}*/
 
 .navbar-inverse .navbar-nav li a{
     color: white;
@@ -35,9 +40,9 @@ html, body{
 }
 
 .navbar-brand {
-    float: left;
-    min-height: 55px;
-    padding: 0 15px 5px;
+    /*float: left;*/
+    /*min-height: 55px;*/
+    /*padding: 0 15px 5px;*/
 }
 
 .carousel-caption {
@@ -45,6 +50,7 @@ html, body{
     transform: translateY(-50%);
     text-transform: uppercase;
 }
+
 #myCarousel img{
     height: 700px;
     width: 100%;
@@ -61,7 +67,7 @@ html, body{
 }
 
 .container {
-    margin: 4% auto;
+    /*margin: 4% auto;*/
 }
 
 #icon {

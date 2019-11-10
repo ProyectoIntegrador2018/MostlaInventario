@@ -45,7 +45,7 @@
 				</td>
 			</tr>
 			@empty
-				<td>No hay reservaciones para mostrar aquí.</td>
+				<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
 			@endforelse
 		</table>
 		<a href="/profile/history">Ver mis reservaciones pasadas</a>
