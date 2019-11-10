@@ -3,7 +3,7 @@
 @section('content')
 	<section>
 		<h1>Nuevo Rol</h1>
-		<form action="/roles" method="POST">
+		<form action="/roles" method="POST" class="inline-form">
 			@csrf
 			<label for="email">email</label>
 			<input id="email" type="email" name="email">

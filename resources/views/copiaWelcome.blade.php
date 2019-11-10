@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('content')
+@section('site-content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="section-container container">
     <h2 class="text-center"> Tendencias </h2>
     <div class="row justify-content-center">
         <div class="col-sm-2 col-md-2"> </div>
@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<div class= "container">
+<div class= "section-container container">
     <div class = "row">
         <div class="col-md-6">
             <h4> Laboratorios Mostla </h4>

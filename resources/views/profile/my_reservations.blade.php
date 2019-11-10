@@ -10,8 +10,8 @@
 		<form action="/profile/campus" method="POST">
 			@csrf
 			<label for="campus">Mi campus: </label>
-			<select id="campus" name="campus_id" onchange="this.form.submit()">
-				<option selected required hidden>Seleccione su campus</option>>
+			<select id="campus" required name="campus_id" onchange="this.form.submit()">
+				<option selected hidden disabled>Seleccione su campus</option>>
 				@foreach($campus as $c)
 					<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
 				@endforeach

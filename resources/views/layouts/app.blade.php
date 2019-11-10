@@ -1,5 +1,5 @@
 @extends('layouts.site')
-@section('content')
+@section('site-content')
     <main class="py-4">
         @yield('content')
     </main>

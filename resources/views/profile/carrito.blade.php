@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-	<div>
-		<div id="carrito">
-			<h1>Carrito</h1>
+	<section>
+		<h1>Carrito</h1>
+		<a href="/catalogo">Volver</a>
+		<div>
+			<button id="consultar" class="btn btn-primary">Consultar</button>
 		</div>
-		<button id="consultar">Consultar</button>
-	</div>
+	</section>
 @endsection
 
 @push('scripts')

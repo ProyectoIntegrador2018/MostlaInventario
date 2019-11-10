@@ -20,18 +20,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-lg">
+        <nav class="navbar navbar-expand-md navbar-light shadow-lg">
             <div class="container">
-                {{-- <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a> --}}
-                <a class="navbar-brand" href="#"><img src={{ asset('img/logo.png') }}  alt="Mostla Logo"></a>
+                <a class="navbar-brand" href="/"><img src={{ asset('img/logo.png') }}  alt="Mostla Logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -44,74 +42,96 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+
+                        {{-- Para guests --}}
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+
+                        {{-- Para usuarios --}}
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                        {{-- Admins --}}
+                        @if(auth()->user()->type_id > 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">Inventario</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/roles">Roles</a>
+                        </li>
+                        @endif
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/catalogo">Reservar</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" href="/profile">
+                                    Perfil
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    @endguest
+                </ul>
             </div>
         </nav>
 
-        @yield('content')
-
-        <footer class="container-fluid text-center">
-            <div class="row">
-                <div class = "col-sm-4">
-                    <h3>Escribenos</h3>
-                    <br>
-                    <h4>mostla@servicios.itesm.mx</h4>
-                </div>
-                <div class = "col-sm-4">
-                    <h3>Redes Sociales</h3>
-                    <br>
-                    <a href="https://www.facebook.com/mostlatec/" class="fa fa-facebook"></a>
-                    <a href="https://twitter.com/mostlatec?lang=en" class="fa fa-twitter"></a>
-                    <a href="https://www.youtube.com/channel/UC-LVFDiU8L5ymT5CyL7rRAg" class="fa fa-youtube"></a>
-                </div>
-                <div class = "col-sm-4">
-                    <h3>Encuentranos</h3>
-                    <br>
-                    <h4>Tecnológico de Monterrey Campus MTY</h4>
-                </div>
-            </div>
-        </footer>
+        @yield('site-content')
     </div>
 
+    <footer class="container-fluid text-center">
+        <div class="row">
+            <div class = "col-sm-4">
+                <h3>Escribenos</h3>
+                <br>
+                <h4>mostla@servicios.itesm.mx</h4>
+            </div>
+            <div class = "col-sm-4">
+                <h3>Redes Sociales</h3>
+                <br>
+                <a href="https://www.facebook.com/mostlatec/" class="fa fa-facebook"></a>
+                <a href="https://twitter.com/mostlatec?lang=en" class="fa fa-twitter"></a>
+                <a href="https://www.youtube.com/channel/UC-LVFDiU8L5ymT5CyL7rRAg" class="fa fa-youtube"></a>
+            </div>
+            <div class = "col-sm-4">
+                <h3>Encuentranos</h3>
+                <br>
+                <h4>Tecnológico de Monterrey Campus MTY</h4>
+            </div>
+        </div>
+    </footer>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    @stack('scripts')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
-    @if(session('alert'))
-        @include('layouts.alert')
-    @endif
+@stack('scripts')
+
+@if(session('alert'))
+    @include('layouts.alert')
+@endif
 </body>
 </html>
