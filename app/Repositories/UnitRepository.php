@@ -27,4 +27,11 @@ class UnitRepository
             ->with('product')
             ->find($unitId);
     }
+    public function allForProductInCampus($product, $user)
+    {
+        return Unit::withTrashed()
+            ->forProduct($product)
+            ->forUser($user)
+            ->get();
+    }
 }
