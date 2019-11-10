@@ -18,7 +18,9 @@ class EnforceCampus
     public function handle($request, Closure $next)
     {
         if (auth()->user()->campus_id === null && $request->path() != 'profile') {
-            return redirect()->guest($this->redirectPath)->with('no_redirect', true);
+            $request->session()->flash('alert', 'Por favor, actualiza tu campus.');
+            return redirect()->guest($this->redirectPath)
+                ->with('no_redirect', true);
         }
 
         return $next($request);
