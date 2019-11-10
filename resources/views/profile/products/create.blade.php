@@ -43,14 +43,18 @@
     <section>
       <h3>¿Ya existe el producto?</h3>
       <table>
-        @foreach($products as $product)
+        @forelse($products as $product)
           <tr class="clickable_t filterable" data-href="/products/attach/{{$product->id}}">
             <td>
               <span class="subtle">{{$product->brand}}</span> 
               {{$product->name}}
             </td>
           </tr>
-        @endforeach
+        @empty
+          <tr>
+            <td class="empty">No hay productos registrados actualmente.</td>
+          </tr>
+        @endforelse
       </table>
     </section>
 @endsection
