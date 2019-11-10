@@ -1,30 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mis Productos | Mostla</title>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+@extends('layouts.app')
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-</head>
-<body>
-
-	<h1>Mis Productos</h1>
+@section('content')
+  <section> 
+    <h1>Mis Productos</h1>
     <a href="/product/create">Crear</a>
-    <table style="width:80%">
+    <table>
         <tr>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -33,7 +13,7 @@ tr:nth-child(even) {
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
-        @foreach($productsIndex as $product)
+        @forelse($productsIndex as $product)
         <tr>
             <td>{{$product->name}}</td>
             <td>{{$product->description}}</td>
@@ -46,8 +26,9 @@ tr:nth-child(even) {
               <td><a href="/product/delete/{{ $product->id }}">Eliminar</a></td>
             @endif
         </tr>
-        @endforeach
+        @empty
+          <td class="empty" colspan="6">No hay productos en inventario.</td>
+        @endforelse
     </table>
-
-</body>
-</html>
+  </section>
+@endsection

@@ -10,8 +10,8 @@
 		<form action="/profile/campus" method="POST">
 			@csrf
 			<label for="campus">Mi campus: </label>
-			<select id="campus" name="campus_id" onchange="this.form.submit()">
-				<option selected required hidden>Seleccione su campus</option>>
+			<select id="campus" required name="campus_id" onchange="this.form.submit()">
+				<option selected hidden disabled>Seleccione su campus</option>>
 				@foreach($campus as $c)
 					<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
 				@endforeach
@@ -45,7 +45,7 @@
 				</td>
 			</tr>
 			@empty
-				<td>No hay reservaciones para mostrar aquí.</td>
+				<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
 			@endforelse
 		</table>
 		<a href="/profile/history">Ver mis reservaciones pasadas</a>

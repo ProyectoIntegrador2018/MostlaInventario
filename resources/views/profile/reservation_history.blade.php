@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('styles')
-<link rel="stylesheet" type="text/css" href="{{asset('css/profile.css')}}">
-@endpush
-
 @section('content')
 	<section>
 		<h1>Mis Reservaciones Pasadas</h1>
@@ -12,8 +8,8 @@
 				<th>Marca</th>
 				<th>Modelo</th>
 				<th>Cant.</th>
-				<th>Inicia</th>
-				<th>Termina</th>
+				<th>Inició</th>
+				<th>Terminó</th>
 				<th>Cancelar</th>
 			</tr>
 
