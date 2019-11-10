@@ -6,11 +6,9 @@ use App\Models\Category;
 
 class CategoryRepository
 {
-    public function allForUser($user)
+    public function all()
     {
-        return Category::forUser($user)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        return Category::orderBy('name')->get();
     }
     public function findId($categoryId)
     {

@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
-    private $products, $categories, $tags;
+    private $products;
+    private $categories;
+    private $tags;
 
     public function __construct(ProductRepository $products, CategoryRepository $categories, TagRepository $tags)
     {
@@ -22,10 +24,10 @@ class CatalogController extends Controller
     public function index()
     {
         $products = $this->products->allForUser(auth()->user());
-        $categories = $this->categories->allForUser();
+        $categories = $this->categories->all();
         $tags = $this->tags->allForUser();
         
-        return view('profile.catalog')->with(compact('products','categories','tags'));
+        return view('profile.catalog')->with(compact('products', 'categories', 'tags'));
     }
 
     // $pCategory $pTag
@@ -35,5 +37,4 @@ class CatalogController extends Controller
 
         return response()->json(array('success' => true, 'getproducts' => $getproducts));
     }
-
 }

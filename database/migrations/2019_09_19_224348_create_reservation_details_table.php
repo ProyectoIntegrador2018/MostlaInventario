@@ -13,14 +13,7 @@ class CreateReservationDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservation_details', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('reservation_id');
-            $table->integer('product_id');
-            $table->integer('unit_id')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Ya no usaremos esto jeje.
     }
 
     /**
