@@ -20,10 +20,8 @@
             <td>{{$product->brand}}</td>
             <td>{{$product->category->name}}</td>
             <td><a href="/product/edit/{{ $product->id }}">Editar</a></td>
-            @if($product->deleted_at != null)
-              <td><a href="/product/activate/{{ $product->id }}">Activar</a></td>
-            @else
-              <td><a href="/product/delete/{{ $product->id }}">Eliminar</a></td>
+            @if($product->deleted_at == null)
+              <td><a href="/product/detach/{{ $product->id }}">Eliminar</a></td>
             @endif
         </tr>
         @empty
