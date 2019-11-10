@@ -45,18 +45,18 @@ class Unit extends Model
         $this->save();
     }
 
-    public function reservation_details()
+    public function loans()
     {
-        return $this->hasMany('App\Models\ReservationDetail');
+        return $this->hasMany('App\Models\LoanDetail');
     }
 
     public function product()
     {
-    	return $this->belongsTo('App\Models\Product');
+        return $this->belongsTo('App\Models\Product');
     }
 
     public function campus()
     {
-    	return $this->belongsTo('App\Models\Campus');
+        return $this->belongsTo('App\Models\Campus');
     }
 }

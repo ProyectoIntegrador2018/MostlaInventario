@@ -1,40 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mis Reservaciones | Mostla</title>
-</head>
-<body>
+@extends('layouts.app')
 
-	<h1>Mi Campus</h1>
-	<form action="/profile/campus" method="POST">
-		@csrf
-		<select name="campus_id" onchange="this.form.submit()">
-			<option selected required hidden>Seleccione su campus</option>>
-			@foreach($campus as $c)
-				<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
-			@endforeach
-		</select>
-	</form>
+@push('styles')
+<link rel="stylesheet" type="text/css" href="{{asset('css/profile.css')}}">
+@endpush
 
-	<h1>Mis Reservaciones</h1>
+@section('content')
+	<section>
+		<h1>Mi Perfil</h1>
+		<form action="/profile/campus" method="POST">
+			@csrf
+			<label for="campus">Mi campus: </label>
+			<select id="campus" name="campus_id" onchange="this.form.submit()">
+				<option selected required hidden>Seleccione su campus</option>>
+				@foreach($campus as $c)
+					<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
+				@endforeach
+			</select>
+		</form>
+	</section>
 
-	<ul>
-		@foreach($reservations as $reservation)
-		<li>
-			@if($reservation->isPending())
-			<a href="/reservations/cancel/{{ $reservation->id }}">Cancel</a>
-			@endif
-			@foreach($reservation->details as $item)
-			<ul>
-				{{ $item->product->brand }} <strong>{{ $item->product->name }}</strong>
-			</ul>
-			@endforeach
-		</li>
-		<hr>
-		@endforeach
-	</ul>
+	<section>
+		<h1>Mis Reservaciones</h1>
+		<table>
+			<tr>
+				<th>Marca</th>
+				<th>Modelo</th>
+				<th>Cant.</th>
+				<th>Inicia</th>
+				<th>Termina</th>
+				<th>Cancelar</th>
+			</tr>
 
-	<a href="/my_reservations/history">Ver mis reservaciones pasadas</a>
+			@forelse($reservations as $reservation)
+			<tr>
+				<td>{{$reservation->product->brand}}</td>
+				<td>{{$reservation->product->name}}</td>
+				<td>{{$reservation->quantity}}</td>
+				<td>{{$reservation->start_date->format('d/M/Y - h:i')}}</td>
+				<td>{{$reservation->end_date->format('d/M/Y - h:i')}}</td>
+				<td>
+					@if($reservation->can_cancel)
+					<a href="/reservations/cancel/{{ $reservation->id }}">x</a>
+					@endif
+				</td>
+			</tr>
+			@empty
+				<td>No hay reservaciones para mostrar aquí.</td>
+			@endforelse
+		</table>
+		<a href="/profile/history">Ver mis reservaciones pasadas</a>
+	</section>
 
-</body>
-</html>
+@endsection
+
+@push('scripts')
+<script type="text/javascript">
+	$('#campus').select2();
+</script>
+@endpush

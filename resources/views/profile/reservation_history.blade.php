@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mis Reservaciones | Mostla</title>
-</head>
-<body>
+@extends('layouts.app')
 
-	<h1>Mis Reservaciones Pasadas</h1>
+@push('styles')
+<link rel="stylesheet" type="text/css" href="{{asset('css/profile.css')}}">
+@endpush
 
-	<ul>
-		@foreach($reservations as $reservation)
-		<li>
-			@foreach($reservation->details as $item)
-			<ul>
-				{{ $item->product->brand }} <strong>{{ $item->product->name }}</strong>
-			</ul>
-			@endforeach
-		</li>
-		<hr>
-		@endforeach
-	</ul>
+@section('content')
+	<section>
+		<h1>Mis Reservaciones Pasadas</h1>
+		<table>
+			<tr>
+				<th>Marca</th>
+				<th>Modelo</th>
+				<th>Cant.</th>
+				<th>Inicia</th>
+				<th>Termina</th>
+				<th>Cancelar</th>
+			</tr>
 
-	<a href="/my_reservations">Regresar a Mis Reservaciones</a>
+			@forelse($reservations as $reservation)
+			<tr>
+				<td>{{$reservation->product->brand}}</td>
+				<td>{{$reservation->product->name}}</td>
+				<td>{{$reservation->quantity}}</td>
+				<td>{{$reservation->start_date->format('d/M/Y - h:i')}}</td>
+				<td>{{$reservation->end_date->format('d/M/Y - h:i')}}</td>
+				<td>
+					@if($reservation->can_cancel)
+					<a href="/reservations/cancel/{{ $reservation->id }}">x</a>
+					@endif
+				</td>
+			</tr>
+			@empty
+				<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
+			@endforelse
+		</table>
+		<a href="/profile">Regresar a Mis Reservaciones</a>
+	</section>
 
-</body>
-</html>
+@endsection
