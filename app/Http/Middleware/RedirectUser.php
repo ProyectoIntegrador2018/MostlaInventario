@@ -15,7 +15,6 @@ class RedirectUser
      */
     public function handle($request, Closure $next)
     {
-        info($request->path());
         if ($request->session()->has('no_redirect')
             || !$request->session()->has('url.intended')
             || $request->path() == 'auth/google'

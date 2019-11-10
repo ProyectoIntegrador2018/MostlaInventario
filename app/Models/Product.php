@@ -32,7 +32,7 @@ class Product extends Model
 
     public function scopeForDetail($query, $detail)
     {
-        return $query->where('name','like', '%'.$detail.'%')->orWhere('description','like', '%'.$detail.'%');
+        return $query->where('name', 'like', '%'.$detail.'%')->orWhere('description', 'like', '%'.$detail.'%');
     }
 
     public function scopeForCategory($query, $category)
@@ -51,7 +51,7 @@ class Product extends Model
         }
 
         return $query->whereHas('tags', function ($query) use ($tag) {
-            $query->whereIn('id',$tag);
+            $query->whereIn('id', $tag);
         });
     }
 
@@ -61,9 +61,9 @@ class Product extends Model
         $this->save();
     }
 
-    public function reservation_details()
+    public function reservations()
     {
-        return $this->hasMany('App\Models\ReservationDetail');
+        return $this->hasMany('App\Models\Reservation');
     }
 
     public function category()
