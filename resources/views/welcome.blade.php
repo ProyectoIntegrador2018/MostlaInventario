@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <title>Mostla | Reservaciones</title>
+@extends('layouts.app')
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- JQuery -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-                crossorigin="anonymous"></script>
-        <!-- Bootstrap CSS -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!-- Font-Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- Project CSS -->
-        <link rel="stylesheet" type="text/css" href={{ asset('css/app.css') }} />
-
-    </head>
-
-    <body>
+@section('content')
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class ="navbar-header"
@@ -135,32 +114,8 @@
                 </div>
             </div>
         </div>
+@endsection
 
 
+        
 
-        <footer class="container-fluid text-center">
-            <div class="row">
-                <div class = "col-sm-4">
-                    <h3>Escribenos</h3>
-                    <br>
-                    <h4>mostla@servicios.itesm.mx</h4>
-                </div>
-                <div class = "col-sm-4">
-                    <h3>Redes Sociales</h3>
-                    <br>
-                    <a href="https://www.facebook.com/mostlatec/" class="fa fa-facebook"></a>
-                    <a href="https://twitter.com/mostlatec?lang=en" class="fa fa-twitter"></a>
-                    <a href="https://www.youtube.com/channel/UC-LVFDiU8L5ymT5CyL7rRAg" class="fa fa-youtube"></a>
-                </div>
-                <div class = "col-sm-4">
-                    <h3>Encuentranos</h3>
-                    <br>
-                    <h4>Tecnológico de Monterrey Campus MTY</h4>
-                </div>
-            </div>
-        </footer>
-
-
-
-    </body>
-</html>
