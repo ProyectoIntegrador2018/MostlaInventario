@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" rel="stylesheet">
     <!-- Font-Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -27,6 +27,7 @@
 </head>
 <body>
     <div id="app">
+        
         <nav class="navbar navbar-expand-md navbar-light shadow-lg">
             <div class="container">
                 <a class="navbar-brand" href="/"><img src={{ asset('img/logo.png') }}  alt="Mostla Logo"></a>
