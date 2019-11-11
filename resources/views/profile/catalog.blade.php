@@ -16,7 +16,7 @@
 					<option hidden disabled value="">Categorías</option>
 					@foreach($categories as $category)
 					<option value={{$category->id}}>{{$category->name}}</option>
-					@endforeach			
+					@endforeach
 				</select>
 			</div>
 			<div class="col">
@@ -24,7 +24,7 @@
 					<option hidden disabled value="">Tags</option>
 						@foreach($tags as $tag)
 						<option value={{$tag->id}}>{{$tag->name}}</option>
-						@endforeach			
+						@endforeach
 				</select>
 			</div>
 			<div class="col">
@@ -33,23 +33,42 @@
 		</div>
 	</form>
 
-	<table id="table-product">
-		<tr>
-			<th>Nombre</th>
-			<th>Marca</th>
-		</tr>
-		@forelse($products as $product)
-		<tr>
-			<td>{{$product->name}}</td>
-			<td>{{$product->description}}</td>
-		</tr>
-		@empty
-			<td class="empty" colspan="2">Actualmente no hay productos disponibles.</td>
-		@endforelse
+	<div class= "container">
+	<div class = "row">
+	<div class= "col">
+		<div class="card-deck classWithPad">
+			<div class="card-body">
+	    		<h5 class="card-title">Nombre del Producto</h5>
+	    		<p class="card-text">Descripcion corta del producto</p>
+				<h6 class="card-subtitle mb-2 text-muted">tags X </h6>
+				<a href="#" class="btn-sm btn-primary float-right">agregar</a>
+			</div>
+		</div>
 	</div>
-</table>
-<table id="table-filter" class="hideElement">
-</table>
+	<div class= "col">
+		<div class="card-deck classWithPad">
+			<div class="card-body">
+	    		<h5 class="card-title">Nombre del Producto</h5>
+	    		<p class="card-text">Descripcion corta del producto</p>
+				<h6 class="card-subtitle mb-2 text-muted">tags X </h6>
+				<a href="#" class="btn-sm btn-primary float-right">agregar</a>
+			</div>
+		</div>
+	</div>
+	<div class= "col">
+		<div class="card-deck classWithPad">
+			<div class="card-body">
+				<h5 class="card-title">Nombre del Producto</h5>
+				<p class="card-text">Descripcion corta del producto</p>
+				<h6 class="card-subtitle mb-2 text-muted">tags X </h6>
+				<a href="#" class="btn-sm btn-primary float-right">agregar</a>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+
+
 </section>
 @endsection
 
@@ -80,7 +99,7 @@
 					$("#table-filter").removeClass("hideElement");
 					$("#table-product").addClass("hideElement");
 				},
-				error: function(error) { 
+				error: function(error) {
 					console.log(error);
 				}
 			});

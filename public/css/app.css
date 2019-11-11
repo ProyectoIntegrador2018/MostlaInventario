@@ -79,6 +79,7 @@ footer {
 }
 
 .card-deck{
+    width: 100%;
     background: #e4e7f5;
     border-radius: 18px 18px 18px 18px;
     padding: 5px 5px 5px 5px;
