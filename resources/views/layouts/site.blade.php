@@ -54,6 +54,26 @@
                         @else
                         {{-- Admins --}}
                         @if(auth()->user()->type_id > 1)
+
+                        <li class="nav-item dropdown">
+                            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" v-pre>
+                                <i class="fa fa-cog fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" href="/categories">
+                                    Categorías
+                                </a>
+                                <a class="dropdown-item" href="/#">
+                                    Tags
+                                </a>
+                                <a class="dropdown-item" href="/#">
+                                    Mantenimientos
+                                </a>
+
+                            </div>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="/products">Inventario</a>
                         </li>
