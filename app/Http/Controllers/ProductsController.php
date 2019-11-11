@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Repositories\ProductRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\UnitRepository;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,10 +20,11 @@ class ProductsController extends Controller
     const RULE_REQ = 'required';
     const STR_PRODS = 'products';
 
-    public function __construct(ProductRepository $product, CategoryRepository $category)
+    public function __construct(ProductRepository $product, CategoryRepository $category, UnitRepository $unit)
     {
         $this->product = $product;
         $this->category = $category;
+        $this->unit = $unit;
     }
 
     public function index()
@@ -75,8 +78,9 @@ class ProductsController extends Controller
     {
         $productEdit = $this->product->findId($productId);
         $categories = Category::all();
+        $units = $this->unit->allForProductInCampus($productEdit, auth()->user());
 
-        return view('profile.products.edit')->with(compact('productEdit', 'categories'));
+        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'units'));
     }
 
     public function update(Request $request, $productId)
