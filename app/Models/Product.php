@@ -94,11 +94,6 @@ class Product extends Model
     public function deleteFromCampus($campus)
     {
         $this->campus()->detach($campus);
-        //Delete units of product for specific campus
-        foreach($this->units as $unit) {
-            if($unit->campus_id == $campus) {
-                $unit->delete();
-            }
-        }
+        $this->units()->where('campus_id', $campus)->delete();
     }
 }
