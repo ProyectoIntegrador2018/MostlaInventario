@@ -12,7 +12,7 @@ class Unit extends Model
     protected $table = 'units';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'serial_number','status','product_id','campus_id'
+        'serial_number','comments','status','product_id','campus_id'
     ];
 
     public function scopeForUser($query, $user)

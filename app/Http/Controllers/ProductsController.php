@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Repositories\ProductRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\UnitRepository;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,20 +21,14 @@ class ProductsController extends Controller
     const RULE_REQ = 'required';
     const STR_PRODS = 'products';
 
-    public function __construct(ProductRepository $product, CategoryRepository $category)
+    public function __construct(ProductRepository $product, CategoryRepository $category, UnitRepository $unit)
     {
         $this->product = $product;
         $this->category = $category;
+        $this->unit = $unit;
     }
 
     public function index()
-    {
-        $productsIndex = $this->product->allForUser(auth()->user());
-
-        return response($productsIndex->jsonSerialize(), Response::HTTP_OK);
-    }
-
-    public function indexAdmin()
     {
         $productsIndex = $this->product->allForUser(auth()->user());
         
@@ -86,14 +82,10 @@ class ProductsController extends Controller
         $productEdit = $this->product->findId($productId);
         $categories = Category::all();
         $tags = Tag::all();
+        $units = $this->unit->allForProductInCampus($productEdit, auth()->user());
+        $ptags = $productEdit->tags->map(function ($t) {return $t->id;});
 
-        $ptags = array();
-        $productTags = $productEdit->tags;
-        foreach($productTags as $tag){
-            array_push($ptags, $tag->id);
-        }
-
-        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags'));
+        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags', 'units'));
     }
 
     public function update(Request $request, $productId)
@@ -136,18 +128,18 @@ class ProductsController extends Controller
         return back();
     }
 
-    public function activate($productId)
-    {
-        $productAct = $this->product->findId($productId);
-
-        $productAct->restore();
-
-        return back();
-    }
-
     public function attach(Product $product)
     {
         $product->addToCampus(auth()->user()->campus_id);
+
+        // Activar esto cuando exista vista de detalle de producto!!
+        // return redirect('/products/'.$product->id)
+        return redirect('/products');
+    }
+
+    public function detach(Product $product)
+    {
+        $product->deleteFromCampus(auth()->user()->campus_id);
 
         // Activar esto cuando exista vista de detalle de producto!!
         // return redirect('/products/'.$product->id)

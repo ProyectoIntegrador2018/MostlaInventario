@@ -90,4 +90,10 @@ class Product extends Model
     {
         $this->campus()->syncWithoutDetaching([$campus]);
     }
+
+    public function deleteFromCampus($campus)
+    {
+        $this->campus()->detach($campus);
+        $this->units()->where('campus_id', $campus)->delete();
+    }
 }
