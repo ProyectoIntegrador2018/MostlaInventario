@@ -13,9 +13,8 @@
 
 Route::get('/', function () {
     return view('copiaWelcome');
-});
+})->name('home');;
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');

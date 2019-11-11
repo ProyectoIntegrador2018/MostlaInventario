@@ -17,7 +17,7 @@ class TagsController extends Controller
 
     public function index()
     {
-        $tags = $this->tag->allForUser();
+        $tags = $this->tag->all();
 
         return view('profile.tags.index')->with(compact('tags'));
     }

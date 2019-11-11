@@ -12,8 +12,14 @@ class ReservationPolicy
 
     public function cancel(User $user, Reservation $reservation)
     {
-        if ($reservation->status != Reservation::PENDING)
+        if ($reservation->status != Reservation::PENDING) {
             $this->deny("Solo se pueden cancelar reservaciones pendientes.");
+        }
+
+        if ($reservation->start_date < now()->addHours(3)) {
+            $this->deny("No se puede cancelar reservaciones con menos de 3 horas de anticipación. 
+            	Por favor comunícate con Mostla.");
+        }
 
         return true;
     }

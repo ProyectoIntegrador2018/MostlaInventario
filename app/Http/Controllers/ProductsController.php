@@ -37,7 +37,7 @@ class ProductsController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = $this->category->all();
         $tags = Tag::all();
         $products = $this->product->all();
 
@@ -57,10 +57,10 @@ class ProductsController extends Controller
         );
 
         $messages = array(
-            'name.'.$this::RULE_REQ              => 'El nombre es requerido',
-            'brand.'.$this::RULE_REQ                 => 'La marca es requerida',
-            'description.'.$this::RULE_REQ           => 'La descripción es requerida',
-            'category_id.'.$this::RULE_REQ      => 'La categoria es requerida'
+            'name.'.$this::RULE_REQ              => 'El nombre es requerido.',
+            'brand.'.$this::RULE_REQ                 => 'La marca es requerida.',
+            'description.'.$this::RULE_REQ           => 'La descripción es requerida.',
+            'category_id.'.$this::RULE_REQ      => 'La categoría es requerida.'
         );
 
         $validator = Validator::make($input, $rules, $messages);
@@ -83,7 +83,9 @@ class ProductsController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $units = $this->unit->allForProductInCampus($productEdit, auth()->user());
-        $ptags = $productEdit->tags->map(function ($t) {return $t->id;});
+        $ptags = $productEdit->tags->map(function ($t) {
+            return $t->id;
+        });
 
         return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags', 'units'));
     }
@@ -141,8 +143,6 @@ class ProductsController extends Controller
     {
         $product->deleteFromCampus(auth()->user()->campus_id);
 
-        // Activar esto cuando exista vista de detalle de producto!!
-        // return redirect('/products/'.$product->id)
         return redirect('/products');
     }
 }
