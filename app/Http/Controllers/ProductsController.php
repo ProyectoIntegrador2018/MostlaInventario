@@ -27,13 +27,6 @@ class ProductsController extends Controller
     public function index()
     {
         $productsIndex = $this->product->allForUser(auth()->user());
-
-        return response($productsIndex->jsonSerialize(), Response::HTTP_OK);
-    }
-
-    public function indexAdmin()
-    {
-        $productsIndex = $this->product->allForUser(auth()->user());
         
         return view('profile.products.index')->with(compact('productsIndex'));
     }
@@ -124,18 +117,18 @@ class ProductsController extends Controller
         return back();
     }
 
-    public function activate($productId)
-    {
-        $productAct = $this->product->findId($productId);
-
-        $productAct->restore();
-
-        return back();
-    }
-
     public function attach(Product $product)
     {
         $product->addToCampus(auth()->user()->campus_id);
+
+        // Activar esto cuando exista vista de detalle de producto!!
+        // return redirect('/products/'.$product->id)
+        return redirect('/products');
+    }
+
+    public function detach(Product $product)
+    {
+        $product->deleteFromCampus(auth()->user()->campus_id);
 
         // Activar esto cuando exista vista de detalle de producto!!
         // return redirect('/products/'.$product->id)

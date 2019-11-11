@@ -65,12 +65,11 @@ Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']
     Route::get('/category/activate/{id}', 'CategoriesController@activate');
 
     //Products
-    Route::get('/products', 'ProductsController@indexAdmin');
+    Route::get('/products', 'ProductsController@index');
     Route::get('/product/create', 'ProductsController@create');
     Route::post('/product/store', 'ProductsController@store');
     Route::get('/product/edit/{id}', 'ProductsController@edit');
     Route::post('/product/update/{id}', 'ProductsController@update');
-    Route::get('/product/delete/{id}', 'ProductsController@delete');
-    Route::get('/product/activate/{id}', 'ProductsController@activate');
-    Route::get('/products/attach/{product}', 'ProductsController@attach');
+    Route::get('/product/attach/{product}', 'ProductsController@attach');
+    Route::get('/product/detach/{product}', 'ProductsController@detach');
 });
