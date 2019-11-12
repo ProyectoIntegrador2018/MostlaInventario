@@ -10,7 +10,7 @@
               @endforeach
           </ul>
       @endif
-      <a href="/products">Regresar</a>
+      <a href="{{ url()->previous() }}"> < Regresar</a>
 
       <form action="/product/update/{{$productEdit->id}}" class="inline-form" method="POST">
         @csrf

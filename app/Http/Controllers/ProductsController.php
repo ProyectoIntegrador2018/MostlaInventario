@@ -27,7 +27,7 @@ class ProductsController extends Controller
     public function index()
     {
         $productsIndex = $this->product->allForUser(auth()->user());
-        
+
         return view('profile.products.index')->with(compact('productsIndex'));
     }
 
@@ -67,7 +67,7 @@ class ProductsController extends Controller
         $productNew->fillInfo($input);
 
         $productNew->campus()->save(auth()->user()->campus);
-        
+
         return redirect($this::STR_PRODS);
     }
 
@@ -83,7 +83,7 @@ class ProductsController extends Controller
     {
         $input = $request->all();
         $productUpdate = $this->product->findId($productId);
-        
+
         $rules = array(
             'name'             => $this::RULE_REQ,
             'brand'            => $this::RULE_REQ,
@@ -105,7 +105,7 @@ class ProductsController extends Controller
         }
 
         $productUpdate->fillInfo($input);
-        
+
         return redirect($this::STR_PRODS);
     }
 
@@ -133,5 +133,15 @@ class ProductsController extends Controller
         // Activar esto cuando exista vista de detalle de producto!!
         // return redirect('/products/'.$product->id)
         return redirect('/products');
+    }
+
+    public function show(Product $product) {
+
+        $categories = Category::all();
+        $product->load('units');
+        
+
+        return view('profile.products.show')->with(compact('product','categories'));
+
     }
 }

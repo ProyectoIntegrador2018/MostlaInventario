@@ -27,7 +27,7 @@
 </head>
 <body>
     <div id="app">
-        
+
         <nav class="navbar navbar-expand-md navbar-light shadow-lg">
             <div class="container">
                 <a class="navbar-brand" href="/"><img src={{ asset('img/logo.png') }}  alt="Mostla Logo"></a>
