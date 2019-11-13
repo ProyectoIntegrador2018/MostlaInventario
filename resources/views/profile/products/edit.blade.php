@@ -35,7 +35,45 @@
               @endforeach
           </select>
         </div>
+        <div class="form-group">
+          <label for="tags">Tecnologías</label>
+          <select id="tags" name="tags[]" class="form-control" multiple>
+              <option selected hidden disabled>Seleccione una tecnología</option>
+              @foreach($tags as $tag)
+                <option value={{ $tag->id }} {{ in_array($tag->id, $ptags) ? 'selected' : '' }}>{{ $tag->name }}</option>
+            @endforeach
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
+    </section>
+
+    <section>
+      <h1>Agregar unidad</h1>
+      <a href="/unit/create">Crear</a>
+      <table>
+          <tr>
+              <th>Número serial</th>
+              <th>Comentarios</th>
+              <th>Status</th>
+              <th>Fecha de creación</th>
+              <th>Edición</th>
+              <th>Disponible</th>
+          </tr>
+          @foreach($units as $unit)
+          <tr>
+              <td>{{$unit->serial_number}}</td>
+              <td>{{$unit->comments}}</td>
+              <td>{{$unit->status}}</td>
+              <td>{{$unit->created_at}}</td>
+              <td><a href="/unit/edit/{{ $unit->id }}">Editar</a></td>
+              @if($unit->deleted_at != null)
+                <td><a href="/unit/activate/{{ $unit->id }}">Activar</a></td>
+              @else
+                <td><a href="/unit/delete/{{ $unit->id }}">Eliminar</a></td>
+              @endif
+          </tr>
+          @endforeach
+      </table>
     </section>
 @endsection

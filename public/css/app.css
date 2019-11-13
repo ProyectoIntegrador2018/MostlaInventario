@@ -19,7 +19,7 @@ html, body{
     background-size: 100% 100%;
 }
 
-.btn {
+.btn-primary {
     font-size: 18px;
     color: #FFF;
     padding: 12px 22px;
@@ -51,6 +51,16 @@ footer {
 .fa: hover{
     color: #D5D5D5;
     text-decoration: none;
+}
+
+.fa-cog {
+    padding: 4px;
+    font-size: 25px;
+    color: #D5D5D5;
+}
+
+.fa-cog:hover {
+    color: #6c757d;
 }
 
 @media (max-width 600px){
@@ -187,4 +197,9 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
 
 #catalog-consultar {
     padding: .375rem .75rem;
+}
+
+.small-button {
+    font-size: 16px;
+    padding: 4.8px;
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTagsTable extends Migration
+class AddCommentsToUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateProductsTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_tag', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('tag_id');
-            $table->integer('product_id');
-            $table->timestamps();
+        Schema::table('units', function (Blueprint $table) {
+            $table->text('comments');           
         });
     }
 
@@ -28,6 +25,8 @@ class CreateProductsTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_tag');
+        Schema::table('units', function (Blueprint $table) {
+            $table->dropColumn('comments');                       
+        });
     }
 }
