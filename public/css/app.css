@@ -100,6 +100,7 @@ footer {
     background: #d1d3e0;
 
 }
+
 .card-deck{
     left-right: 100px;
 }
@@ -169,9 +170,15 @@ section {
     border-radius: 3px;
     margin-bottom: 15px;
 }
+.box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    width: 100%;
 
 tr.clickable_t:hover > td, td.clickable_t:hover {
-    background-color: beige;
+    background-color: #d1d3e0;
     cursor: pointer;
 }
 

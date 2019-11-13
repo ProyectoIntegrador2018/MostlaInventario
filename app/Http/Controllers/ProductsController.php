@@ -31,7 +31,7 @@ class ProductsController extends Controller
     public function index()
     {
         $productsIndex = $this->product->allForUser(auth()->user());
-        
+
         return view('profile.products.index')->with(compact('productsIndex'));
     }
 
@@ -73,7 +73,7 @@ class ProductsController extends Controller
         $productNew->fillInfo($input);
         $productNew->tags()->attach($tags);
         $productNew->campus()->save(auth()->user()->campus);
-        
+
         return redirect($this::STR_PRODS);
     }
 
@@ -95,7 +95,7 @@ class ProductsController extends Controller
         $input = $request->except('tags');
         $tags = $request->input('tags');
         $productUpdate = $this->product->findId($productId);
-        
+
         $rules = array(
             'name'             => $this::RULE_REQ,
             'brand'            => $this::RULE_REQ,
@@ -142,5 +142,15 @@ class ProductsController extends Controller
         $product->deleteFromCampus(auth()->user()->campus_id);
 
         return redirect('/products');
+    }
+
+    public function show(Product $product) {
+
+        $categories = Category::all();
+        $product->load('units');
+        
+
+        return view('profile.products.show')->with(compact('product','categories'));
+
     }
 }
