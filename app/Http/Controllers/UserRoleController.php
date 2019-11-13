@@ -15,13 +15,12 @@ class UserRoleController extends Controller
         $admin_general = $user->type_id == UserRole::ADMIN_GENERAL;
 
         $roles = UserRole::when(!$admin_general, function ($query) use ($user) {
-            $query->forCampus($user->campus_id);
+            $query->forCampus($user->campus_id)->lessThan($user->type_id);
         })->get();
-        $types = UserType::when(!$admin_general, function ($query) {
-            $query->lesserThan(UserRole::ADMIN_GENERAL);
+        $types = UserType::when(!$admin_general, function ($query) use ($user) {
+            $query->lesserThan($user->type_id);
         })->get();
         $campus = Campus::all();
-
 
         return view('roles.index')->with(compact('roles', 'types', 'campus', 'admin_general'));
     }
@@ -29,7 +28,7 @@ class UserRoleController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'email' => 'required|email|unique:user_roles',
+            'email' => 'required|email',
             'type_id' => 'required|integer|exists:user_types,id',
             'campus_id' => 'sometimes|integer|exists:campus,id',
         ]);
