@@ -13,9 +13,8 @@
 
 Route::get('/', function () {
     return view('copiaWelcome');
-});
+})->name('home');;
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('auth/google', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -35,14 +34,7 @@ Route::group(['middleware'=>['auth']], function () {
 });
 
 
-Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
-    //Roles
-    Route::get('/roles', 'UserRoleController@index');
-    Route::post('/roles', 'UserRoleController@store');
-    Route::post('/roles/update/type/{role}', 'UserRoleController@updateType');
-    Route::post('/roles/update/campus/{role}', 'UserRoleController@updateCampus');
-    Route::post('/roles/delete/{role}', 'UserRoleController@delete');
-
+Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrador General']], function () {
     //Tags
     Route::get('/tags', 'TagsController@index');
 
@@ -73,4 +65,13 @@ Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']
     Route::post('/product/update/{id}', 'ProductsController@update');
     Route::get('/product/attach/{product}', 'ProductsController@attach');
     Route::get('/product/detach/{product}', 'ProductsController@detach');
+});
+
+Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
+    //Roles
+    Route::get('/roles', 'UserRoleController@index');
+    Route::post('/roles', 'UserRoleController@store');
+    Route::post('/roles/update/type/{role}', 'UserRoleController@updateType');
+    Route::post('/roles/update/campus/{role}', 'UserRoleController@updateCampus');
+    Route::post('/roles/delete/{role}', 'UserRoleController@delete');
 });

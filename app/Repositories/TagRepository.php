@@ -5,7 +5,7 @@ use App\Models\Tag;
 
 class TagRepository
 {
-    public function allForUser()//($user)
+    public function all()
     {
         return Tag::orderBy('created_at', 'desc')->get();
     }

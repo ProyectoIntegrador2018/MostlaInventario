@@ -25,7 +25,7 @@ class CatalogController extends Controller
     {
         $products = $this->products->allForUser(auth()->user());
         $categories = $this->categories->all();
-        $tags = $this->tags->allForUser();
+        $tags = $this->tags->all();
         
         return view('profile.catalog')->with(compact('products', 'categories', 'tags'));
     }
