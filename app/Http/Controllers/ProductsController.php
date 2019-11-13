@@ -118,7 +118,11 @@ class ProductsController extends Controller
 
         $productUpdate->fillInfo($input);
         $productUpdate->tags()->sync($tags);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 355cd3846cbae3ebc6bc4f01c3a474e76d1a232e
         return redirect($this::STR_PRODS);
     }
 
