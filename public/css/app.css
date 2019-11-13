@@ -176,6 +176,7 @@ section {
     border-radius: 3px;
     margin-bottom: 15px;
     width: 100%;
+}
 
 tr.clickable_t:hover > td, td.clickable_t:hover {
     background-color: #d1d3e0;
@@ -202,4 +203,9 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
 .small-button {
     font-size: 16px;
     padding: 4.8px;
+}
+
+.table-container {
+    overflow: auto;
+    width: 100%;
 }

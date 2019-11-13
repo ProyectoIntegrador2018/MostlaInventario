@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ProductRepository;
+use App\Models\Product;
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use App\Repositories\TagRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -23,7 +24,12 @@ class CatalogController extends Controller
 
     public function index()
     {
-        $products = $this->products->allForUser(auth()->user());
+        $products = Product::forCampus(auth()->user()->campus_id)
+            ->orderBy('created_at', 'desc')
+            ->with('category')
+            ->withCount('units')
+            ->having('units_count', '>', 0)
+            ->get();
         $categories = $this->categories->all();
         $tags = $this->tags->all();
         

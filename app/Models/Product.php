@@ -30,6 +30,13 @@ class Product extends Model
         });
     }
 
+    public function scopeForCampus($query, $campus_id)
+    {
+        return $query->whereHas('campus', function ($query) use ($campus_id) {
+            return $query->where('campus.id', $campus_id);
+        });
+    }
+
     public function scopeForDetail($query, $detail)
     {
         return $query->where('name', 'like', '%'.$detail.'%')->orWhere('description', 'like', '%'.$detail.'%');
