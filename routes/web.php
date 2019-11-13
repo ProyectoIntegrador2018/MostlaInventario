@@ -65,6 +65,10 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
     Route::post('/product/update/{id}', 'ProductsController@update');
     Route::get('/product/attach/{product}', 'ProductsController@attach');
     Route::get('/product/detach/{product}', 'ProductsController@detach');
+
+    //Maintenances
+    Route::get('/maintenances', 'MaintenancesController@index');
+    Route::post('/maintenances/update/status/{unit}', 'MaintenancesController@updateStatus');
 });
 
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {

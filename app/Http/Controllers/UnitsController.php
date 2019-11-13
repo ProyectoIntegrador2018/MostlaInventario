@@ -116,4 +116,15 @@ class UnitsController extends Controller
 
         return back();
     }
+
+    public function updateStatus($status)
+    {
+        if($status == '4'){
+            $this->delete();
+        }
+        else{
+            $this->setStatus($status);
+        }
+        return back();
+    }
 }
