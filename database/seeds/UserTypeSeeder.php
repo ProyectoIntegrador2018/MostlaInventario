@@ -7,7 +7,7 @@ class UserTypeSeeder extends Seeder
 {
     protected $types = [
         "Usuario",
-        "Cooperador",
+        "Coordinador",
         "Administrador",
         "Administrador General",
     ];

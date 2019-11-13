@@ -36,6 +36,15 @@
               @endforeach
           </select>
         </div>
+        <div class="form-group">
+          <label for="tags">Tags</label>
+          <select id="tags" name="tags[]" class="selectpicker form-control" multiple>
+              <option selected hidden disabled>Seleccione tags</option>
+              @foreach($tags as $tag)
+                  <option value={{ $tag->id }}>{{ $tag->name }}</option>
+              @endforeach
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary">Crear</button>
       </form>
     </section>

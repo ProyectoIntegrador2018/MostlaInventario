@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Repositories\ProductRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\UnitRepository;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,10 +21,11 @@ class ProductsController extends Controller
     const RULE_REQ = 'required';
     const STR_PRODS = 'products';
 
-    public function __construct(ProductRepository $product, CategoryRepository $category)
+    public function __construct(ProductRepository $product, CategoryRepository $category, UnitRepository $unit)
     {
         $this->product = $product;
         $this->category = $category;
+        $this->unit = $unit;
     }
 
     public function index()
@@ -33,15 +37,17 @@ class ProductsController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = $this->category->all();
+        $tags = Tag::all();
         $products = $this->product->all();
 
-        return view('profile.products.create')->with(compact('categories', 'products'));
+        return view('profile.products.create')->with(compact('categories', 'products', 'tags'));
     }
 
     public function store(Request $request)
     {
-        $input = $request->all();
+        $input = $request->except('tags');
+        $tags = $request->input('tags');
 
         $rules = array(
             'name'             => $this::RULE_REQ,
@@ -51,10 +57,10 @@ class ProductsController extends Controller
         );
 
         $messages = array(
-            'name.'.$this::RULE_REQ              => 'El nombre es requerido',
-            'brand.'.$this::RULE_REQ                 => 'La marca es requerida',
-            'description.'.$this::RULE_REQ           => 'La descripción es requerida',
-            'category_id.'.$this::RULE_REQ      => 'La categoria es requerida'
+            'name.'.$this::RULE_REQ              => 'El nombre es requerido.',
+            'brand.'.$this::RULE_REQ                 => 'La marca es requerida.',
+            'description.'.$this::RULE_REQ           => 'La descripción es requerida.',
+            'category_id.'.$this::RULE_REQ      => 'La categoría es requerida.'
         );
 
         $validator = Validator::make($input, $rules, $messages);
@@ -65,7 +71,7 @@ class ProductsController extends Controller
 
         $productNew = new Product;
         $productNew->fillInfo($input);
-
+        $productNew->tags()->attach($tags);
         $productNew->campus()->save(auth()->user()->campus);
 
         return redirect($this::STR_PRODS);
@@ -75,13 +81,19 @@ class ProductsController extends Controller
     {
         $productEdit = $this->product->findId($productId);
         $categories = Category::all();
+        $tags = Tag::all();
+        $units = $this->unit->allForProductInCampus($productEdit, auth()->user());
+        $ptags = $productEdit->tags->map(function ($t) {
+            return $t->id;
+        });
 
-        return view('profile.products.edit')->with(compact('productEdit', 'categories'));
+        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags', 'units'));
     }
 
     public function update(Request $request, $productId)
     {
-        $input = $request->all();
+        $input = $request->except('tags');
+        $tags = $request->input('tags');
         $productUpdate = $this->product->findId($productId);
 
         $rules = array(
@@ -105,6 +117,7 @@ class ProductsController extends Controller
         }
 
         $productUpdate->fillInfo($input);
+        $productUpdate->tags()->sync($tags);
 
         return redirect($this::STR_PRODS);
     }
@@ -121,17 +134,13 @@ class ProductsController extends Controller
     {
         $product->addToCampus(auth()->user()->campus_id);
 
-        // Activar esto cuando exista vista de detalle de producto!!
-        // return redirect('/products/'.$product->id)
-        return redirect('/products');
+        return redirect('/products/'.$product->id);
     }
 
     public function detach(Product $product)
     {
         $product->deleteFromCampus(auth()->user()->campus_id);
 
-        // Activar esto cuando exista vista de detalle de producto!!
-        // return redirect('/products/'.$product->id)
         return redirect('/products');
     }
 
@@ -139,7 +148,7 @@ class ProductsController extends Controller
 
         $categories = Category::all();
         $product->load('units');
-        
+
 
         return view('profile.products.show')->with(compact('product','categories'));
 

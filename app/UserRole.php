@@ -33,6 +33,11 @@ class UserRole extends Model
         return $query->where('campus_id', $campus_id);
     }
 
+    public function scopeLessThan($query, $role)
+    {
+        return $query->where('type_id', '<', $role);
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User', 'email', 'email');
