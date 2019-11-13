@@ -117,13 +117,13 @@ class UnitsController extends Controller
         return back();
     }
 
-    public function setStatus($status)
+    public function updateStatus($status)
     {
-        if($status == '3'){
+        if($status == '4'){
             $this->delete();
         }
         else{
-            $this->status($status);
+            $this->setStatus($status);
         }
         return back();
     }

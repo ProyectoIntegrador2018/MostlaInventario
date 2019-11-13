@@ -18,6 +18,7 @@ class CreateMaintenancesTable extends Migration
             $table->integer('unit_id');
             $table->string('comment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

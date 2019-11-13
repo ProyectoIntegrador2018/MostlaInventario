@@ -59,4 +59,14 @@ class Unit extends Model
     {
         return $this->belongsTo('App\Models\Campus');
     }
+
+    public function maintenances()
+    {
+        return $this->hasMany('App\Models\Maintenance');
+    }
+
+    public function setStatus($status)
+    {
+        return $this->update(['status'=>$status]);
+    }
 }

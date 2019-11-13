@@ -25,10 +25,11 @@ class MaintenancesController extends Controller
     public function index()
     {
         $maintenances = $this->maintenance->allForUser(auth()->user());
-        $status = array('1' => 'Available',
-               '2' => 'Unavailable',
-               '3' => 'Delete');
-        return view('profile.maintenances.index')->with(compact('maintenances','status'));
+        $st = array(array('id' => '1', 'name' => 'Available'),
+                    array('id' => '2', 'name' => 'Unavailable'),
+                    array('id' => '3', 'name' => 'Maintenance'),
+                    array('id' => '4', 'name' => 'Delete'));
+        return view('profile.maintenances.index')->with(compact('maintenances'))->with('status', json_encode($st));
     }
 
     /**
