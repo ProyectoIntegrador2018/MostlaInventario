@@ -21,7 +21,7 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $categoriesIndex = $this->category->allForUser(auth()->user());
+        $categoriesIndex = $this->category->all(auth()->user());
 
         return view('profile.categories.index')->with(compact('categoriesIndex'));
     }

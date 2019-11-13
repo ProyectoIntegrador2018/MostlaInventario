@@ -37,9 +37,9 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="tags">Tecnologías</label>
-          <select id="tags" name="tags[]" class="form-control" multiple>
-              <option selected hidden disabled>Seleccione una tecnología </option>
+          <label for="tags">Tags</label>
+          <select id="tags" name="tags[]" class="selectpicker form-control" multiple>
+              <option selected hidden disabled>Seleccione tags</option>
               @foreach($tags as $tag)
                   <option value={{ $tag->id }}>{{ $tag->name }}</option>
               @endforeach

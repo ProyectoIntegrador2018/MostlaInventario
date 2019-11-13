@@ -15,7 +15,7 @@ class CheckRole
     public function handle($request, Closure $next, $roles)
     {
         if (!in_array($request->user()->type->title, explode('|', $roles))) {
-            $request->session()->flash('alert', 'No tienes permisos para realizar la acción.');
+            $request->session()->flash('alert', 'No tienes permisos para acceder a /'.$request->path().'.');
             return redirect()->route('home');
         }
 
