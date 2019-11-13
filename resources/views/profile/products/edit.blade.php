@@ -10,7 +10,7 @@
               @endforeach
           </ul>
       @endif
-      <a href="/products">Regresar</a>
+      <a href="{{ url()->previous() }}"> < Regresar</a>
 
       <form action="/product/update/{{$productEdit->id}}" class="inline-form" method="POST">
         @csrf
@@ -47,8 +47,9 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
     </section>
-    <h1>Agregar unidad</h1>
+
     <section>
+      <h1>Agregar unidad</h1>
       <a href="/unit/create">Crear</a>
       <table>
           <tr>

@@ -1,32 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class ="navbar-header"
-
-                <!-- Button for our movil version -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <!-- 3 lines standar for the movil version of the toggle -->
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- link to the landing page -->
-                <!-- update href & broken src -->
-                <a class="navbar-brand" href="#"><img src={{ asset('img/logo.png') }}  alt="Mostla Logo"></a>
-            </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- this is the page in which we are right now -->
-                        <li class="active"><a href="#"> Catalogo</a></li>
-                        <li class="nav-list"><a href="#">Mis Reservaciones</a></li>
-                        <li ><a href="#">Carrito</a></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
         <div class="container">
             <h2 class="text-left"> Catalogo </h2>
@@ -114,8 +88,5 @@
                 </div>
             </div>
         </div>
-@endsection
-
-
         
-
+@endsection

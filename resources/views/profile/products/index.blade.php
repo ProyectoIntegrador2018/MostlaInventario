@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-  <section> 
+  <section>
     <h1>Mis Productos</h1>
-    <a href="/product/create">Crear</a>
+    <a class="float-right" href="/product/create">Crear +</a>
     <table>
         <tr>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Marca</th>
             <th>Categoría</th>
+            <th>Información</th>
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
@@ -19,6 +20,7 @@
             <td>{{$product->description}}</td>
             <td>{{$product->brand}}</td>
             <td>{{$product->category->name}}</td>
+            <td><a href="/products/{{ $product->id }}">Detalle</a></td>
             <td><a href="/product/edit/{{ $product->id }}">Editar</a></td>
             @if($product->deleted_at == null)
               <td><a href="/product/detach/{{ $product->id }}">Eliminar</a></td>
@@ -29,4 +31,5 @@
         @endforelse
     </table>
   </section>
+
 @endsection

@@ -65,6 +65,7 @@ Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']
     Route::get('/category/activate/{id}', 'CategoriesController@activate');
 
     //Products
+    Route::get('/products/{product}', 'ProductsController@show');
     Route::get('/products', 'ProductsController@index');
     Route::get('/product/create', 'ProductsController@create');
     Route::post('/product/store', 'ProductsController@store');

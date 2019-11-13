@@ -17,6 +17,7 @@ class EnforceCampus
      */
     public function handle($request, Closure $next)
     {
+        info("."); 
         if (auth()->user()->campus_id === null
             && $request->path() != 'profile'
             && $request->path() != 'profile/campus') {
