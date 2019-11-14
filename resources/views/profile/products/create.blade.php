@@ -48,14 +48,14 @@
         <button type="submit" class="btn btn-primary">Crear</button>
       </form>
     </section>
-        
+
     <section>
       <h3>¿Ya existe el producto?</h3>
       <table>
         @forelse($products as $product)
           <tr class="clickable_t filterable" data-href="/product/attach/{{$product->id}}">
             <td>
-              <span class="subtle">{{$product->brand}}</span> 
+              <span class="subtle">{{$product->brand}}</span>
               {{$product->name}}
             </td>
           </tr>

@@ -51,8 +51,8 @@
     </section>
 
     <section>
-      <h1>Agregar unidad</h1>
-      <a href="/unit/create">Crear</a>
+      <h1>Unidades</h1>
+      <a class="float-right" href="/unit/create">Agregar Unidad +</a>
       <table>
           <tr>
               <th>Número serial</th>

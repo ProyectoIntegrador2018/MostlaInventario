@@ -18,7 +18,7 @@
     <form action="/unit/update/{{$unitEdit->id}}">
         Producto:<br>
         <select disabled name="product_id">
-            <option value="{{$unitEdit->product_id}}">{{$unitEdit->product->name}}</option> 
+            <option value="{{$unitEdit->product_id}}">{{$unitEdit->product->name}}</option>
         </select>
         <br>
         Número serial:<br>

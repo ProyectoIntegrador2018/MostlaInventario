@@ -62,7 +62,7 @@ class UnitsController extends Controller
         $unitNew = new Unit;
         $unitNew->campus_id = auth()->user()->campus->id;
         $unitNew->fillInfo($input);
-        
+
         return redirect($this::STR_UNITS);
     }
 
@@ -70,7 +70,7 @@ class UnitsController extends Controller
     {
         $unitEdit = $this->unit->findId($unitId);
         $products = $this->product->allForUser(auth()->user());
-        
+
         return view('profile.units.edit')->with(compact('unitEdit','products'));
     }
 
@@ -78,7 +78,7 @@ class UnitsController extends Controller
     {
         $input = $request->all();
         $unitUpdate = $this->unit->findId($unitId);
-        
+
         $rules = array(
             'serial_number'    => $this::RULE_REQ,
             'status'           => $this::RULE_REQ
@@ -96,7 +96,7 @@ class UnitsController extends Controller
         }
 
         $unitUpdate->fillInfo($input);
-        
+
         return redirect($this::STR_UNITS);
     }
 
