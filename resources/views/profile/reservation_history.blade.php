@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-	<section>
-		<h1>Mis Reservaciones Pasadas</h1>
+<section>
+	<h1>Mis Reservaciones Pasadas</h1>
+	<div class="table-container">
 		<table>
 			<tr>
 				<th>Marca</th>
@@ -27,10 +28,11 @@
 				</td>
 			</tr>
 			@empty
-				<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
+			<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
 			@endforelse
 		</table>
-		<a href="/profile">Regresar a Mis Reservaciones</a>
-	</section>
+	</div>
+	<a href="/profile">Regresar a Mis Reservaciones</a>
+</section>
 
 @endsection
