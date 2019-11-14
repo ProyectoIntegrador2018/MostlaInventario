@@ -2,14 +2,15 @@
 
 @section('content')
 <section>
-    <h1>Mis Productos</h1>
-    <a class="float-right" href="/product/create">Crear +</a>
+    <div class="title-bar">
+        <h1>Mis Productos</h1>
+        <a class="float-right" href="/product/create">Crear +</a>
+    </div>
     <div class="table-container">
         <table>
             <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Marca</th>
                 <th>Categoría</th>
                 <th>Información</th>
                 <th>Edición</th>
@@ -17,9 +18,11 @@
             </tr>
             @forelse($productsIndex as $product)
             <tr>
-                <td>{{$product->name}}</td>
+                <td>
+                    <span class="subtle">{{$product->brand}}</span>
+                    {{$product->name}}
+                </td>
                 <td>{{$product->description}}</td>
-                <td>{{$product->brand}}</td>
                 <td>{{$product->category->name}}</td>
                 <td><a href="/products/{{ $product->id }}">Detalle</a></td>
                 <td><a href="/product/edit/{{ $product->id }}">Editar</a></td>

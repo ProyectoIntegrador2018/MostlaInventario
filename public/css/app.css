@@ -209,3 +209,17 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
     overflow: auto;
     width: 100%;
 }
+
+section > .title-bar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+section > .title-bar > * {
+    margin-left: 10px;
+}
+
+section > .title-bar > h1 {
+    margin-left: initial;
+}
