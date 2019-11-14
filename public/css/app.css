@@ -223,3 +223,10 @@ section > .title-bar > * {
 section > .title-bar > h1 {
     margin-left: initial;
 }
+/*
+@media (min-width: 768px){
+    .nav-item i {
+        position: relative;
+        bottom: -7px;
+    }
+}*/

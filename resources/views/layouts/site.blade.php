@@ -55,9 +55,25 @@
                         {{-- Admins --}}
                         @if(auth()->user()->type_id > 1)
 
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">Inventario</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+
+                        @endif
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/catalogo">Reservar</a>
+                        </li>
+
+                        @if(auth()->user() && auth()->user()->type_id > 1)
                         <li class="nav-item dropdown">
-                            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" v-pre>
-                                <i class="fa fa-cog fa-fw"></i>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <i class="fa fa-cog fa-fw"></i> <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -70,26 +86,13 @@
                                 <a class="dropdown-item" href="/#">
                                     Mantenimientos
                                 </a>
-
+                                <a class="dropdown-item" href="/roles">
+                                    Roles
+                                </a>
                             </div>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/products">Inventario</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">Dashboard</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/roles">Roles</a>
-                        </li>
                         @endif
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/catalogo">Reservar</a>
-                        </li>
+                        
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -152,7 +155,7 @@
 @stack('scripts')
 
 @if(session('alert'))
-    @include('layouts.alert')
+@include('layouts.alert')
 @endif
 </body>
 </html>
