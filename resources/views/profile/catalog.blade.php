@@ -3,7 +3,11 @@
 @section('content')
 <section>
 	<h1>Catálogo de Productos</h1>
-	<a href="/carrito">Carrito</a>
+
+	<div>
+	<a class="float-right" href="/carrito">Carrito</a>
+</div>
+<br>
 
 	<form action="/catalogo" class="inline-form">
 		@csrf
