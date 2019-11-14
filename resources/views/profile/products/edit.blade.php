@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <section>
-      <h1>Editar Producto</h1>
-      @if ($errors->any())
-          <ul>
-              @foreach($errors->all() as $error)
-              <li>{{$error}}</li>
-              @endforeach
-          </ul>
-      @endif
-      <a href="{{ url()->previous() }}"> < Regresar</a>
+<section>
+  <h1>Editar Producto</h1>
+  @if ($errors->any())
+  <ul>
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+    @endforeach
+  </ul>
+  @endif
+  <a href="{{ url()->previous() }}"> < Regresar</a>
 
       <form action="/product/update/{{$productEdit->id}}" class="inline-form" method="POST">
         @csrf

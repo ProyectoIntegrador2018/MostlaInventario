@@ -19,8 +19,9 @@
 		</form>
 	</section>
 
-	<section>
-		<h1>Mis Reservaciones</h1>
+<section>
+	<h1>Mis Reservaciones</h1>
+	<div class="table-container">
 		<table>
 			<tr>
 				<th>Marca</th>
@@ -45,11 +46,12 @@
 				</td>
 			</tr>
 			@empty
-				<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
+			<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>
 			@endforelse
 		</table>
-		<a href="/profile/history">Ver mis reservaciones pasadas</a>
-	</section>
+	</div>
+	<a href="/profile/history">Ver mis reservaciones pasadas</a>
+</section>
 
 @endsection
 

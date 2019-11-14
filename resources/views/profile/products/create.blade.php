@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <section>
-      <h1>Crear Producto</h1>
-      @if ($errors->any())
-          <ul>
-              @foreach($errors->all() as $error)
-              <li>{{$error}}</li>
-              @endforeach
-          </ul>
-      @endif
-      <a href="/products">Regresar</a>
+<section>
+  <h1>Crear Producto</h1>
+  <a href="/products">Regresar</a>
+  @if ($errors->any())
+  <ul>
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+    @endforeach
+  </ul>
+  @endif
 
       <form action="/product/store" class="inline-form" method="POST">
         @csrf
@@ -69,22 +69,22 @@
 @endsection
 
 @push('scripts')
-    <script type="text/javascript">
+<script type="text/javascript">
         // Filter list of existing products based on user's input
         $('#name').on('change paste keyup', function(event){
-            let newValue = $('#name').val().toLowerCase();
-            $('.filterable').each(function(index, item){
-                let productName = $(item).text().toLowerCase();
-                if (productName.indexOf(newValue) >= 0) {
-                    $(item).show();
-                } else {
-                    $(item).hide();
-                }
-            });
+          let newValue = $('#name').val().toLowerCase();
+          $('.filterable').each(function(index, item){
+            let productName = $(item).text().toLowerCase();
+            if (productName.indexOf(newValue) >= 0) {
+              $(item).show();
+            } else {
+              $(item).hide();
+            }
+          });
         });
 
         $(".clickable_t").click(function () {
-            window.location = $(this).data('href');
+          window.location = $(this).data('href');
         });
     </script>
 @endpush

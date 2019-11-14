@@ -144,13 +144,12 @@ class ProductsController extends Controller
         return redirect('/products');
     }
 
-    public function show(Product $product) {
-
+    public function show(Product $product)
+    {
         $categories = Category::all();
         $product->load('units');
 
 
-        return view('profile.products.show')->with(compact('product','categories'));
-
+        return view('profile.products.show')->with(compact('product', 'categories'));
     }
 }

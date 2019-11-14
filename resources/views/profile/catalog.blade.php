@@ -2,12 +2,10 @@
 
 @section('content')
 <section>
-	<h1>Catálogo de Productos</h1>
-
-	<div>
-	<a class="float-right" href="/carrito">Carrito</a>
-</div>
-<br>
+    <div class="title-bar">
+		<h1>Catálogo de Productos</h1>
+		<a href="/carrito">Carrito</a>
+    </div>
 
 	<form action="/catalogo" class="inline-form">
 		@csrf
@@ -26,9 +24,9 @@
 			<div class="col">
 				<select name="technology" multiple title="Tags" class="selectpicker form-control" data-selected-text-format="count > 1">
 					<option hidden disabled value="">Tags</option>
-						@foreach($tags as $tag)
-						<option value={{$tag->id}}>{{$tag->name}}</option>
-						@endforeach
+					@foreach($tags as $tag)
+					<option value={{$tag->id}}>{{$tag->name}}</option>
+					@endforeach
 				</select>
 			</div>
 			<div class="col">
@@ -38,42 +36,57 @@
 	</form>
 
 	<div class= "container">
-	<div class = "row">
-	<div class= "col">
-		<div class="card-deck classWithPad">
-			<div class="card-body">
-	    		<h5 class="card-title">Nombre del Producto</h5>
-	    		<p class="card-text">Descripcion corta del producto</p>
-				<h6 class="card-subtitle mb-2 text-muted">tags X </h6>
-				<a href="#" class="btn-sm btn-primary float-right">agregar</a>
-			</div>
+		<div class = "row">
+			@forelse($products as $product)
+				<div class= "col">
+					<div class="card-deck classWithPad">
+						<div class="card-body">
+							<h5 class="card-title">
+								<span class="subtle">{{ $product->brand }}</span>
+								{{ $product->name }}
+							</h5>
+							<p class="card-text">
+								<span class="subtle">{{ $product->units_count }} disponibles</span>
+							</p>
+							<p class="card-text">{{ $product->description }}</p>
+							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
+							<a href="#" class="btn-sm btn-primary float-right">agregar</a>
+						</div>
+					</div>
+				</div>
+				@if(!$loop->iteration % 3 && !$loop->last)
+					</div>
+					<div class="row">
+				@endif
+			@empty
+				<div class="table-container">
+					<table>
+						<td class="empty">No hay productos disponibles por el momento.</tr>
+					</table>
+				</div>
+			@endforelse
 		</div>
 	</div>
-	<div class= "col">
-		<div class="card-deck classWithPad">
-			<div class="card-body">
-	    		<h5 class="card-title">Nombre del Producto</h5>
-	    		<p class="card-text">Descripcion corta del producto</p>
-				<h6 class="card-subtitle mb-2 text-muted">tags X </h6>
-				<a href="#" class="btn-sm btn-primary float-right">agregar</a>
-			</div>
-		</div>
-	</div>
-	<div class= "col">
-		<div class="card-deck classWithPad">
-			<div class="card-body">
-				<h5 class="card-title">Nombre del Producto</h5>
-				<p class="card-text">Descripcion corta del producto</p>
-				<h6 class="card-subtitle mb-2 text-muted">tags X </h6>
-				<a href="#" class="btn-sm btn-primary float-right">agregar</a>
-			</div>
-		</div>
-	</div>
-	</div>
-	</div>
-
 
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="detalles" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-title">Detalles</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+			</div>
+		</div>
+	</div>
+</div>
+
 @endsection
 
 
@@ -108,5 +121,11 @@
 				}
 			});
 	});
+</script>
+
+<script type="text/javascript">
+	// $(window).on('load',function(){        
+	// 	$('#detalles').modal('show');
+	// }); 
 </script>
 @endpush
