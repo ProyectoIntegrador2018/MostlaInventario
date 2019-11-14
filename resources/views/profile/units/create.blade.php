@@ -13,7 +13,7 @@
 		@endforeach
 	</ul>
 	@endif
-	<a href="/units">< Regresar</a>
+	<a href="{{ url()->previous() }}">< Regresar</a>
 	<br>
 	<form class="inline-form" action="/unit/store">
 		Producto:<br>
