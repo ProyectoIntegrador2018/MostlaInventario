@@ -50,10 +50,11 @@
 				<h5>Tags</h5>
 			</div>
 			<div class="col">
-				@foreach($product->units as $unit)
-				<li>{{ $unit->serial_number }}</li>
+			<ul>
+				@foreach($product->tags as $tag)
+					<li>{{ $tag->name }}</li>
 				@endforeach
-
+			</ul>
 			</div>
 		</div>
 		<br>
@@ -62,9 +63,11 @@
 				<h5>Numeros de serie</h5>
 			</div>
 			<div class="col">
-				@foreach($product->tags as $tag)
-					<li>{{ $tag->name }}</li>
+				<ul>
+				@foreach($product->units as $unit)
+				<li>{{ $unit->serial_number }}</li>
 				@endforeach
+			</ul>
 			</div>
 		</div>
 
