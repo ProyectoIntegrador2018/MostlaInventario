@@ -118,7 +118,7 @@ class ProductsController extends Controller
 
         $productUpdate->fillInfo($input);
         $productUpdate->tags()->sync($tags);
-        
+
         return redirect($this::STR_PRODS);
     }
 
@@ -134,7 +134,7 @@ class ProductsController extends Controller
     {
         $product->addToCampus(auth()->user()->campus_id);
 
-        return redirect('/products/'.$product->id)
+        return redirect('/products/'.$product->id);
     }
 
     public function detach(Product $product)
@@ -148,7 +148,7 @@ class ProductsController extends Controller
 
         $categories = Category::all();
         $product->load('units');
-        
+
 
         return view('profile.products.show')->with(compact('product','categories'));
 

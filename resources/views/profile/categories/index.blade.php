@@ -1,30 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mis Categorías | Mostla</title>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+@extends('layouts.app')
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
+@section('content')
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-</head>
-<body>
-
+<section>
 	<h1>Mis Categorías</h1>
-    <a href="/category/create">Crear</a>
-    <table style="width:80%">
+    <a class="float-right" href="/category/create">Crear +</a>
+    <table >
         <tr>
             <th>id</th>
             <th>Nombre</th>
@@ -44,6 +25,5 @@ tr:nth-child(even) {
         </tr>
         @endforeach
     </table>
-
-</body>
-</html>
+</section>
+@endsection
