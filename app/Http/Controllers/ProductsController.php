@@ -85,7 +85,7 @@ class ProductsController extends Controller
         $units = $this->unit->allForProductInCampus($productEdit, auth()->user());
         $ptags = $productEdit->tags->map(function ($t) {
             return $t->id;
-        });
+        })->toArray();
 
         return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags', 'units'));
     }

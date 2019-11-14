@@ -5,19 +5,19 @@
 @endpush
 
 @section('content')
-<section>
-	<h1>Mi Perfil</h1>
-	<form action="/profile/campus" method="POST">
-		@csrf
-		<label for="campus">Mi campus: </label>
-		<select id="campus" class="selectpicker" required name="campus_id" onchange="this.form.submit()">
-			<option selected hidden disabled>Seleccione su campus</option>>
-			@foreach($campus as $c)
-			<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
-			@endforeach
-		</select>
-	</form>
-</section>
+	<section>
+		<h1>Mi Perfil</h1>
+		<form action="/profile/campus" method="POST">
+			@csrf
+			<label for="campus">Mi campus: </label>
+			<select  class="selectpicker form-control" id="campus" required name="campus_id" onchange="this.form.submit()">
+				<option selected hidden disabled>Seleccione su campus</option>>
+				@foreach($campus as $c)
+					<option value={{$c->id}} {{$c->id === ($user_campus->id ?? null) ? "selected" : ""}}>{{$c->name}}</option>
+				@endforeach
+			</select>
+		</form>
+	</section>
 
 <section>
 	<h1>Mis Reservaciones</h1>
