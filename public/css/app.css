@@ -91,9 +91,9 @@ footer {
 .card-deck{
     width: 100%;
     background: #e4e7f5;
-    border-radius: 18px 18px 18px 18px;
+    border-radius: 10px;
     padding: 5px 5px 5px 5px;
-
+    border: 1px solid #dddddd;
 }
 
 .card-deck:hover{
@@ -223,10 +223,3 @@ section > .title-bar > * {
 section > .title-bar > h1 {
     margin-left: initial;
 }
-/*
-@media (min-width: 768px){
-    .nav-item i {
-        position: relative;
-        bottom: -7px;
-    }
-}*/

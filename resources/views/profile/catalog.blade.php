@@ -2,8 +2,10 @@
 
 @section('content')
 <section>
-	<h1>Catálogo de Productos</h1>
-	<a href="/carrito">Carrito</a>
+    <div class="title-bar">
+		<h1>Catálogo de Productos</h1>
+		<a href="/carrito">Carrito</a>
+    </div>
 
 	<form action="/catalogo" class="inline-form">
 		@csrf
