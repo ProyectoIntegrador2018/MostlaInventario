@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Editar Categoría | Mostla</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+<section>
 
 	<h1>Editar Categoría</h1>
     @if ($errors->any())
@@ -13,12 +11,15 @@
             @endforeach
         </ul>
     @endif
-    <a href="/categories">Regresar</a>
-    <br><br>
-    <form action="/category/update/{{$categoryEdit->id}}">
-        Nombre:<br>
-        <input type="text" name="name" value="{{$categoryEdit->name}}" /><br>
-        <input type="submit" value="Submit">
+    <a href="/categories">< Regresar</a>
+    <br>
+    <form class="box" action="/category/update/{{$categoryEdit->id}}">
+         <b>Nombre:</b><br>
+        <input class="form-control" type="text" name="name" value="{{$categoryEdit->name}}" />
+		<br>
+        <input  class="btn  btn-primary" type="submit" value="Guardar">
     </form>
-</body>
-</html>
+
+</section>
+
+@endsection
