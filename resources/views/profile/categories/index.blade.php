@@ -7,14 +7,12 @@
     <a class="float-right" href="/category/create">Crear +</a>
     <table >
         <tr>
-            <th>id</th>
             <th>Nombre</th>
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
         @foreach($categoriesIndex as $category)
         <tr>
-            <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
             <td><a href="/category/edit/{{ $category->id }}">Editar</a></td>
             @if($category->deleted_at != null)
