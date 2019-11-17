@@ -78,4 +78,7 @@ Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']
     Route::post('/roles/update/type/{role}', 'UserRoleController@updateType');
     Route::post('/roles/update/campus/{role}', 'UserRoleController@updateCampus');
     Route::post('/roles/delete/{role}', 'UserRoleController@delete');
+
+    //Reportes
+    Route::get('/reports', 'ReportController@index');
 });

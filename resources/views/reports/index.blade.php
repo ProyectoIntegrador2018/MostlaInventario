@@ -1,0 +1,65 @@
+@extends('layouts.app')
+
+@section('content')
+	@component('layouts.frame', [
+		'title' => 'Reportes',
+	])
+
+	<form action="/reports" class="inline-form">
+		<div class="row">
+			<div class="col">
+				<select name="type" title="Tipo de Reporte" class="selectpicker form-control" required>
+					@foreach($types as $index => $type)
+						<option value={{ $index }} {{ $index == ($filters['type'] ?? -1) ? 'selected' : '' }}>{{ $type }}</option>
+					@endforeach
+				</select>
+			</div>
+			<div class="col">
+				<input class="form-control" type="date" name="start" value="{{ $filters['start'] ?? '' }}">
+			</div>
+			<div class="col">
+				<input class="form-control" type="date" name="end" value="{{ $filters['end'] ?? '' }}">
+			</div>
+			@superadmin
+			<div class="col">
+				<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" name="all" id="allCheck">
+				  <label class="form-check-label" for="allCheck">
+				    Todos los campus
+				  </label>
+				</div>
+			</div>
+			@endsuperadmin
+			<div class="col">
+				<button id="catalog-consultar" type="submit" class="btn btn-primary">Buscar</button>
+			</div>
+			<div class="col">
+				<button id="descargar" type="button" class="btn btn-primary">Exportar</button>
+			</div>
+		</div>
+	</form>
+
+	<table>
+		<tr>
+			@foreach($headings as $heading => $path)
+				<th>{{ $heading }}</th>
+			@endforeach
+		</tr>
+		@forelse($results as $result)
+		<tr>
+			@foreach($headings as $heading => $path)
+			@endforeach
+		</tr>
+		@empty
+			@if(empty($filters))
+				<td class="empty">Seleccione un reporte.</tr>
+			@else
+				<td class="empty" colspan="{{sizeof($headings)}}">No hay resultados.</tr>
+			@endif
+		@endforelse
+	</table>
+	@endcomponent
+@endsection
+
+@push('scripts')
+@endpush
