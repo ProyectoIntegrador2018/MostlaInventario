@@ -37,6 +37,12 @@ Route::group(['middleware'=>['auth']], function () {
 Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrador General']], function () {
     //Tags
     Route::get('/tags', 'TagsController@index');
+    Route::get('/tag/create', 'TagsController@create');
+    Route::get('/tag/store', 'TagsController@store');
+    Route::get('/tag/edit/{id}', 'TagsController@edit');
+    Route::get('/tag/update/{id}', 'TagsController@update');
+    Route::get('/tag/delete/{id}', 'TagsController@delete');
+    Route::get('/tag/activate/{id}', 'TagsController@activate');
 
     //Units
     Route::get('/units', 'UnitsController@index');

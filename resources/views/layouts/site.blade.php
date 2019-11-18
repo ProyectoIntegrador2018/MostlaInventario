@@ -80,10 +80,10 @@
                                 <a class="dropdown-item" href="/categories">
                                     Categorías
                                 </a>
-                                <a class="dropdown-item" href="/#">
+                                <a class="dropdown-item" href="/tags">
                                     Tags
                                 </a>
-                                <a class="dropdown-item" href="/#">
+                                <a class="dropdown-item" href="/maintenances">
                                     Mantenimientos
                                 </a>
                                 <a class="dropdown-item" href="/roles">
