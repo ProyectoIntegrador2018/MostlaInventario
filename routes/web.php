@@ -81,4 +81,5 @@ Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']
 
     //Reportes
     Route::get('/reports', 'ReportController@index');
+    Route::get('/reports/export', 'ReportController@export');
 });

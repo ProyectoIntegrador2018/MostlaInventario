@@ -23,11 +23,14 @@ class ReportGenerator
     public function ofType($type)
     {
         switch ($type) {
-            case 0:
-                return new ReservationsPerProductReport;
             case 1:
+                return new ReservationsPerProductReport;
             case 2:
+                return new ReservationsPerCategoryReport;
             case 3:
+                return new ReservationsPerUserReport;
+            case 4:
+                return new MaintenancesPerProductReport;
         }
     }
 }

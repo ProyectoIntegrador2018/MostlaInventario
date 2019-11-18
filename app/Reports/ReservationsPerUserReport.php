@@ -4,14 +4,13 @@ namespace App\Reports;
 
 use App\Models\Reservation;
 
-class ReservationsPerProductReport extends Report
+class ReservationsPerUserReport extends Report
 {
     protected function query()
     {
-        return Reservation::selectRaw('products.brand, products.name, categories.name as category, count(reservations.id) as reservations_count')
-            ->join('products', 'products.id', '=', 'reservations.product_id')
-            ->join('categories', 'products.category_id', 'categories.id')
-            ->groupBy('products.id');
+        return Reservation::selectRaw('users.name, count(reservations.id) as reservations_count')
+            ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->groupBy('users.id');
     }
 
     public function forCampus($campus, $all = false, $permission_all = false)
@@ -40,9 +39,7 @@ class ReservationsPerProductReport extends Report
     public function mapValues($row)
     {
         return [
-            'Marca' => $row->brand,
             'Nombre' => $row->name,
-            'Categoría' => $row->category,
             'Reservaciones' => $row->reservations_count,
         ];
     }
@@ -55,9 +52,7 @@ class ReservationsPerProductReport extends Report
     public function getHeadings()
     {
         return [
-            'Marca',
             'Nombre',
-            'Categoría',
             'Reservaciones',
         ];
     }

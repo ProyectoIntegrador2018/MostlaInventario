@@ -9,8 +9,8 @@
 		<div class="row">
 			<div class="col">
 				<select name="type" title="Tipo de Reporte" class="selectpicker form-control" required>
-					@foreach($types as $index => $type)
-						<option value={{ $index }} {{ $index == ($filters['type'] ?? -1) ? 'selected' : '' }}>{{ $type }}</option>
+					@foreach($types as $type)
+						<option value="{{ $loop->iteration }}" {{ $loop->iteration == ($filters['type'] ?? -1) ? 'selected' : '' }}>{{ $type }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -23,7 +23,7 @@
 			@superadmin
 			<div class="col">
 				<div class="form-check">
-				  <input class="form-check-input" type="checkbox" value="" name="all" id="allCheck">
+				  <input class="form-check-input" type="checkbox" name="all_campus" id="allCheck">
 				  <label class="form-check-label" for="allCheck">
 				    Todos los campus
 				  </label>
@@ -34,20 +34,21 @@
 				<button id="catalog-consultar" type="submit" class="btn btn-primary">Buscar</button>
 			</div>
 			<div class="col">
-				<button id="descargar" type="button" class="btn btn-primary">Exportar</button>
+				<button id="descargar" formaction="/reports/export" type="submit" class="btn btn-primary">Exportar</button>
 			</div>
 		</div>
 	</form>
 
 	<table>
 		<tr>
-			@foreach($headings as $heading => $path)
+			@foreach($headings as $heading)
 				<th>{{ $heading }}</th>
 			@endforeach
 		</tr>
 		@forelse($results as $result)
 		<tr>
-			@foreach($headings as $heading => $path)
+			@foreach($result as $value)
+				<td>{{ $value }}</td>
 			@endforeach
 		</tr>
 		@empty

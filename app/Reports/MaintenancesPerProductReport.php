@@ -2,29 +2,28 @@
 
 namespace App\Reports;
 
-use App\Models\Reservation;
+use App\Models\Maintenance;
 
-class ReservationsPerProductReport extends Report
+class MaintenancesPerProductReport extends Report
 {
     protected function query()
     {
-        return Reservation::selectRaw('products.brand, products.name, categories.name as category, count(reservations.id) as reservations_count')
-            ->join('products', 'products.id', '=', 'reservations.product_id')
-            ->join('categories', 'products.category_id', 'categories.id')
+        return Maintenance::selectRaw('products.brand, products.name, count(maintenances.id) as maintenance_count')
+            ->join('products', 'products.id', '=', 'maintenances.product_id')
             ->groupBy('products.id');
     }
 
     public function forCampus($campus, $all = false, $permission_all = false)
     {
         if (!($all && $permission_all)) {
-            $this->query = $this->query->where('reservations.campus_id', $campus);
+            $this->query = $this->query->where('maintenances.campus_id', $campus);
         }
         return $this;
     }
     public function fromDate($value)
     {
         $this->query = $this->query->when($value, function ($query, $date) {
-            return $query->where('reservations.created_at', '>=', $date);
+            return $query->where('maintenances.created_at', '>=', $date);
         });
         return $this;
     }
@@ -32,7 +31,7 @@ class ReservationsPerProductReport extends Report
     public function toDate($value)
     {
         $this->query = $this->query->when($value, function ($query, $date) {
-            return $query->where('reservations.created_at', '<=', $date);
+            return $query->where('maintenances.created_at', '<=', $date);
         });
         return $this;
     }
@@ -42,8 +41,7 @@ class ReservationsPerProductReport extends Report
         return [
             'Marca' => $row->brand,
             'Nombre' => $row->name,
-            'Categoría' => $row->category,
-            'Reservaciones' => $row->reservations_count,
+            'Reservaciones' => $row->maintenance_count,
         ];
     }
 
@@ -57,8 +55,7 @@ class ReservationsPerProductReport extends Report
         return [
             'Marca',
             'Nombre',
-            'Categoría',
-            'Reservaciones',
+            'Mantenimientos',
         ];
     }
 }
