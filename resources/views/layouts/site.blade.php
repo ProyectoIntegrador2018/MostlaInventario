@@ -64,6 +64,10 @@
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reports">Reportes</a>
+                        </li>
+
                         @endif
 
                         <li class="nav-item">
@@ -80,10 +84,10 @@
                                 <a class="dropdown-item" href="/categories">
                                     Categorías
                                 </a>
-                                <a class="dropdown-item" href="/#">
+                                <a class="dropdown-item" href="/tags">
                                     Tags
                                 </a>
-                                <a class="dropdown-item" href="/#">
+                                <a class="dropdown-item" href="/maintenances">
                                     Mantenimientos
                                 </a>
                                 <a class="dropdown-item" href="/roles">

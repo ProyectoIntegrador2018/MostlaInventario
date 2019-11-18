@@ -170,6 +170,12 @@ section {
     border-radius: 3px;
     margin-bottom: 15px;
 }
+
+.inline-form .col {
+    display: flex;
+    align-items: center;
+}
+
 .box {
     padding: 20px;
     border: 1px solid #ddd;
@@ -196,7 +202,7 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
     border: 1px solid #ced4da;
 }
 
-#catalog-consultar {
+.inline-form button {
     padding: .375rem .75rem;
 }
 
@@ -210,16 +216,22 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
     width: 100%;
 }
 
-section > .title-bar {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+section {
+    overflow-x: hidden;
 }
 
-section > .title-bar > * {
-    margin-left: 10px;
+section > .title-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+section > .title-bar > .link-list > * {
+    margin-left: 15px;
 }
 
 section > .title-bar > h1 {
     margin-left: initial;
+    margin-right: auto;
 }

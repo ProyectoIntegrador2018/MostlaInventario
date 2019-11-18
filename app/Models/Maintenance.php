@@ -12,7 +12,7 @@ class Maintenance extends Model
     protected $table = 'maintenances';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'unit_id', 'comment', 'status'
+        'unit_id', 'comment', 'status', 'campus_id', 'product_id'
     ];
 
     public function scopeForUser($query, $user)
@@ -32,6 +32,6 @@ class Maintenance extends Model
 
     public function unit()
     {
-    	return $this->belongsTo('App\Models\Unit');
+        return $this->belongsTo('App\Models\Unit');
     }
 }

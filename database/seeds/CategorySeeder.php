@@ -6,13 +6,14 @@ use Illuminate\Database\Seeder;
 class CategorySeeder extends Seeder
 {
     protected $categories = [
-        "Computadoras",
-        "Consolas",
-        "Móviles",
-        "Accesorios",
-        "Cámaras",
-        "Periféricos",
-        "Pantallas",
+        "Impresión 3D",
+        "Telepresencia",
+        "Drones",
+        "Realidad Virtual",
+        "Internet de las cosas",
+        "Inteligencia Artificial",
+        "Asistentes Virtuales",
+        "Blockchain"
     ];
 
     /**
