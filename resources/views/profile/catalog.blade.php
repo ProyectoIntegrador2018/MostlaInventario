@@ -124,8 +124,8 @@
 </script>
 
 <script type="text/javascript">
-	// $(window).on('load',function(){        
+	// $(window).on('load',function(){
 	// 	$('#detalles').modal('show');
-	// }); 
+	// });
 </script>
 @endpush

@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Crear Categoría | Mostla</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+<section>
 
 	<h1>Crear Categoría</h1>
     @if ($errors->any())
@@ -13,12 +11,11 @@
             @endforeach
         </ul>
     @endif
-    <a href="/categories">Regresar</a>
-    <br><br>
-    <form action="/category/store">
+    <a href="/categories">< Regresar</a>
+    <br>
+    <form class="box" action="/category/store">
         Nombre:<br>
-        <input type="text" name="name" value="" /><br>
-        <input type="submit" value="Submit">
+        <input class="form-control" type="text" name="name" value="" /><br>
+        <input class="btn  btn-primary" type="submit" value="Guardar">
     </form>
-</body>
-</html>
+@endsection
