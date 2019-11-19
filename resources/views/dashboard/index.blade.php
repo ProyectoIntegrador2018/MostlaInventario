@@ -28,6 +28,31 @@
 
 	@forelse($reservations as $reservation)
 	<div class="long-card filterable">
+		@switch($reservation->indicator)
+			@case('waiting')
+				<i title="Esperando inicio" class="far fa-circle fa-2x"></i>
+			@break
+	
+			@case('ready')
+				<i title="Lista para recoger" class="fas fa-bullseye fa-2x"></i>
+			@break
+	
+			@case('current')
+				<i title="En Progreso" class="far fa-check-circle fa-2x"></i>
+			@break
+	
+			@case('late')
+				<i title="Entrega tardía" class="fas fa-exclamation-circle fa-2x"></i>
+			@break
+	
+			@case('done')
+				<i title="Terminada" class="fas fa-check-circle fa-2x"></i>
+			@break
+	
+			@case('cancelled')
+				<i title="Cancelada" class="fas fa-circle fa-2x"></i>
+			@break
+		@endswitch
 		<div>
 			<h5>{{ $reservation->user->name }}</h5>
 			<div>

@@ -104,4 +104,18 @@ class Reservation extends Model
             'cancelled' => 'Cancelada',
         ];
     }
+
+    public function getIndicatorAttribute()
+    {
+        switch ($this->status) {
+            case 'cancelled':
+                return 'cancelled';
+            case 'returned':
+                return 'done';
+            case 'in_progress':
+                return $this->end_date < now() ? 'late' : 'current';
+            default:
+                return $this->start_date < now() ? 'ready' : 'waiting';
+        }
+    }
 }
