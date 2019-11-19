@@ -3,9 +3,38 @@
 @section('content')
 <section>
     <div class="title-bar">
-        <h1>Mis Productos</h1>
-        <a class="float-right" href="/product/create">Crear +</a>
+        <h1>Productos</h1>
+
     </div>
+    <form action="/products" class="inline-form">
+        @csrf
+        <div class="row">
+            <div class="col">
+                <input id="search" class="form-control" type="text" name="search" placeholder="Buscar">
+            </div>
+            <div class="col">
+                <select name="categories" multiple title="Categorías" class="selectpicker form-control" data-selected-text-format="count > 1">
+                    <option hidden disabled value="">Categorías</option>
+                    @foreach($categories as $category)
+                    <option value={{$category->id}}>{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                <select name="technology" multiple title="Tags" class="selectpicker form-control" data-selected-text-format="count > 1">
+                    <option hidden disabled value="">Tags</option>
+                    @foreach($tags as $tag)
+                    <option value={{$tag->id}}>{{$tag->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                <button id="catalog-consultar" type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </form>
+
+    <a class="float-right" href="/product/create">Crear +</a>
     <div class="table-container">
         <table>
             <tr>

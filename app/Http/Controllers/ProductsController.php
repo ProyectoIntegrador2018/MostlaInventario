@@ -32,7 +32,10 @@ class ProductsController extends Controller
     {
         $productsIndex = $this->product->allForUser(auth()->user());
 
-        return view('profile.products.index')->with(compact('productsIndex'));
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('profile.products.index')->with(compact('productsIndex', 'categories', 'tags'));
     }
 
     public function create()
@@ -151,5 +154,12 @@ class ProductsController extends Controller
 
 
         return view('profile.products.show')->with(compact('product', 'categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $getproducts = $this->products->findProduct(auth()->user(), $request->name, $request->category, $request->tag)->get();
+
+        return response()->json(array('success' => true, 'getproducts' => $getproducts));
     }
 }
