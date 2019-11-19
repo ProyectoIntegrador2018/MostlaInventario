@@ -47,7 +47,7 @@ class ReservationsPerCategoryReport extends Report
 
     protected function filename()
     {
-        return 'hola.xlsx';
+        return 'reservaciones_por_tendencia_'.now()->format('Y_m_d').'.xlsx';
     }
 
     public function getHeadings()

@@ -42,4 +42,11 @@ class UserReservationsController extends Controller
 
         return back();
     }
+
+    public function status(Request $request, Reservation $reservation)
+    {
+        $reservation->setStatus($request->status);
+
+        return back();
+    }
 }

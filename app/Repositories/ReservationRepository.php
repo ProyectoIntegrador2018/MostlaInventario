@@ -7,6 +7,13 @@ use App\Models\Reservation;
 
 class ReservationRepository
 {
+    public function forCampus($campus)
+    {
+        return Reservation::forCampus($campus)
+            ->with('product', 'user')
+            ->get();
+    }
+
     public function activeForUser($user)
     {
         return Reservation::forUser($user)

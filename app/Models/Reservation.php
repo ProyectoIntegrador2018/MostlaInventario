@@ -17,6 +17,11 @@ class Reservation extends Model
     ];
     protected $dates = ['start_date', 'end_date'];
 
+    public function scopeForCampus($query, $campus_id)
+    {
+        return $query->where('campus_id', $campus_id);
+    }
+
     public function scopeForUser($query, $user)
     {
         return $query->where('user_id', $user->id);
@@ -53,6 +58,12 @@ class Reservation extends Model
         $this->delete();
     }
 
+    public function return()
+    {
+        $this->update(['status'=>'returned']);
+        $this->delete();
+    }
+
     public function isPending()
     {
         return $this->status == "pending";
@@ -66,5 +77,30 @@ class Reservation extends Model
     public function product()
     {
         return $this->belongsTo('App\Models\Product');
+    }
+
+    public function setStatus($value)
+    {
+        if ($value == 'cancelled') {
+            return $this->cancel();
+        }
+
+        if ($value == 'returned') {
+            return $this->return();
+        }
+
+        if ($value == 'pending' || $value == 'in_progress') {
+            $this->update(['status'=>$value]);
+        }
+    }
+
+    public static function statuses()
+    {
+        return [
+            'pending' => 'Pendiente',
+            'in_progress' => 'En Progreso',
+            'returned' => 'Terminada',
+            'cancelled' => 'Cancelada',
+        ];
     }
 }
