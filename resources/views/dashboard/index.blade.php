@@ -56,7 +56,6 @@
 					@endforeach
 				</select>
 			</form>
-			<a href="/reservations/{{ $reservation->id }}/cancel" class="btn btn-danger small-button cancel-btn">Cancelar</a>
 		</div>
 	</div>
 	@empty

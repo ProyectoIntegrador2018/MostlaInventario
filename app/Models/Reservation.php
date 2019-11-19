@@ -91,6 +91,7 @@ class Reservation extends Model
 
         if ($value == 'pending' || $value == 'in_progress') {
             $this->update(['status'=>$value]);
+            $this->restore();
         }
     }
 
