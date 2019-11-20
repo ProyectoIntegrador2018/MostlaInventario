@@ -23,7 +23,6 @@ $factory->define(Reservation::class, function (Faker $faker) {
         'campus_id' => 1,
         'start_date' => now()->addDay(),
         'end_date' => now()->addDay()->addHours(4),
-        'product_id' => factory(Product::class, 1)->create()->first()->id,
-        'quantity' => $faker->numberBetween(2, 6)
+        'product_id' => factory(Product::class, 1)->create()->first()->id
     ];
 });

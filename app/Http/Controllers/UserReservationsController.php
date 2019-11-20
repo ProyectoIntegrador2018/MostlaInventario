@@ -27,6 +27,59 @@ class UserReservationsController extends Controller
         return view('profile.my_reservations')->with(compact('reservations', 'campus', 'user_campus'));
     }
 
+    public function store(Request $request)
+    {
+        $input = $request->all();
+
+        $user = auth()->user();
+
+        $rules = array(
+            'product_id'                      => 'required|exits:products,id',
+            'start_date'                      => 'required',
+            'end_date'                        => 'required'
+        );
+
+        $messages = array(
+            'product_id.required'              => 'El producto es requerido',
+            'product_id.exits'                 => 'El producto debe existir',
+            'start_date.required'              => 'La fecha de inicio es requerida',
+            'end_date.required'                => 'La fecha de fin es requerida'
+        );
+
+        foreach ($input['reservation'] as $res) {
+            $validator = Validator::make($input, $rules, $messages);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $product = Product::find($res['product_id']);
+
+            $unitsCount = $product->units()->where('campus_id',$user->campus->id)->count();
+
+            //Validate reservation dates
+            $start = new DateTime($res['start_date']);
+            $end = new DateTime($res['end_date']);
+
+            for ($day = $start; $day <= $end; $day->modify('+1 day')){
+                if ($this->reservations->sameDay($day, $product->id)->count() >= $unitsCount) {
+                    return back()->withErrors(['message', 'El dia '.$day.' no esta disponible']);
+                }
+            }
+        }
+
+        foreach ($input['reservation'] as $res) {
+            $reservation = new Reservation;
+            $reservation->fill($res);
+            $reservation->user_id = $user->id;
+            $reservation->campus_id = $user->campus->id;
+            $reservation->status = 'pending';
+            $reservation->save();
+        }
+        
+        return redirect('profile');
+    }
+
     public function history()
     {
         $reservations = $this->reservations->inactiveForUser(Auth::user());
