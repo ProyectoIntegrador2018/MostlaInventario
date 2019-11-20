@@ -24,7 +24,7 @@ Route::group(['middleware'=>['auth']], function () {
     //Catalog
     Route::get('/catalogo', 'CatalogController@index');
     Route::get('/catalogo/search', 'CatalogController@search');
-    Route::get('/carrito', 'CartController@index');
+    Route::get('/canasta', 'CartController@index');
 
     //Profile
     Route::get('/profile', 'UserReservationsController@index');
