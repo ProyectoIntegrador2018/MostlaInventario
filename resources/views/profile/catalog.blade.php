@@ -50,7 +50,7 @@
 							</p>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
-							<button class="add-to-cart btn-sm btn-primary float-right" product="{{$product}}">agregar</button>
+							<button class="add-to-cart btn-sm btn-primary float-right" product="{{$product}}">Agregar a canasta</button>
 						</div>
 					</div>
 				</div>
@@ -125,7 +125,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		//Count of cart items
+		//Count of cart items to set span
 		var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
 		$("#product-count").html("(" + products.length + ")");
 
