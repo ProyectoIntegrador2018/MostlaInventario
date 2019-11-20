@@ -4,7 +4,7 @@
 <section>
     <div class="title-bar">
 		<h1>Catálogo de Productos</h1>
-		<a href="/canasta">Canasta</a>
+		<a href="/canasta">Canasta <span id="product-count"></span></a>
     </div>
 
 	<form action="/catalogo" class="inline-form">
@@ -125,8 +125,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		//Count of cart items
+		var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
+		$("#product-count").html("(" + products.length + ")");
+
 		$(".add-to-cart").on("click", function() {
-			console.log($(this).attr('product_id'));
+			var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
+			var product_id = $(this).attr('product_id');
+			for (id of products) {
+				if (id == product_id) {
+					alert('El producto ya está en el carrito');
+					return;
+				}
+			}
+			products.push(product_id);
+			localStorage.setItem('products', JSON.stringify(products));
+			$("#product-count").html("(" + products.length + ")");
+			alert("Producto agregado correctamente");
 		});
 	})
 </script>
