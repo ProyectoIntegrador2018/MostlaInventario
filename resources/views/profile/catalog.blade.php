@@ -4,7 +4,7 @@
 <section>
     <div class="title-bar">
 		<h1>Catálogo de Productos</h1>
-		<a href="/carrito">Carrito</a>
+		<a href="/canasta">Canasta</a>
     </div>
 
 	<form action="/catalogo" class="inline-form">
@@ -50,7 +50,7 @@
 							</p>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
-							<a href="#" class="btn-sm btn-primary float-right">agregar</a>
+							<button class="add-to-cart btn-sm btn-primary float-right" product_id="{{$product->id}}">agregar</button>
 						</div>
 					</div>
 				</div>
@@ -124,8 +124,10 @@
 </script>
 
 <script type="text/javascript">
-	// $(window).on('load',function(){
-	// 	$('#detalles').modal('show');
-	// });
+	$(document).ready(function(){
+		$(".add-to-cart").on("click", function() {
+			console.log($(this).attr('product_id'));
+		});
+	})
 </script>
 @endpush
