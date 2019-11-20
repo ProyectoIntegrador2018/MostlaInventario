@@ -55,14 +55,14 @@ class UserReservationsController extends Controller
 
             $product = Product::find($res['product_id']);
 
-            $units_count = $product->units()->where('campus_id',$user->campus->id)->count();
+            $unitsCount = $product->units()->where('campus_id',$user->campus->id)->count();
 
             //Validate reservation dates
             $start = new DateTime($res['start_date']);
             $end = new DateTime($res['end_date']);
 
-            for($day = $start; $day <= $end; $day->modify('+1 day')){
-                if($this->reservations->sameDay($day, $product_id)->count() >= $units_count) {
+            for ($day = $start; $day <= $end; $day->modify('+1 day')){
+                if ($this->reservations->sameDay($day, $product->id)->count() >= $unitsCount) {
                     return back()->withErrors(['message', 'El dia '.$day.' no esta disponible']);
                 }
             }

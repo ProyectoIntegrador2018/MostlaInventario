@@ -26,12 +26,12 @@ class ReservationRepository
             ->get();
     }
 
-    public function sameDate($reservation)//, $user)
+    public function sameDate($reservation, $user)
     {
         return Reservation::where('product_id', $reservation['product_id'])
-            //->where('campus_id', $user->campus->id)
+            ->where('campus_id', $user->campus->id)
             ->whereIn('status', ['pending','in_progress'])
-            ->where(function ($query) use($day) {
+            ->where(function ($query) use ($day) {
                 $query->where(function ($query) use ($reservation) {
                     $query
                         ->where('start_date', '>=', $reservation['start_date'])
@@ -42,8 +42,8 @@ class ReservationRepository
                         ->where('end_date', '<=', $reservation['end_date']);
                 })->orWhere(function ($query) use ($reservation) {
                     $query
-                        ->where('start_date','<=',$reservation['start_date'])
-                        ->where('end_date','>=',$reservation['end_date']);
+                        ->where('start_date', '<=', $reservation['start_date'])
+                        ->where('end_date', '>=', $reservation['end_date']);
                 })->orWhere(function ($query) use ($reservation) {
                     $query
                         ->where('start_date', '<=', $reservation['start_date'])
@@ -53,20 +53,20 @@ class ReservationRepository
             ->get();
     }
 
-    public function sameDay($day, $product_id)//, $user)
+    public function sameDay($day, $productId, $user)
     {
-        return Reservation::where('product_id', $product_id)
-            //->where('campus_id', $user->campus->id)
+        return Reservation::where('product_id', $productId)
+            ->where('campus_id', $user->campus->id)
             ->whereIn('status', ['pending','in_progress'])
-            ->where(function ($query) use($day) {
+            ->where(function ($query) use ($day) {
                 $query->where(function ($query) use ($day) {
                     $query->where('start_date', '=', $day);
                 })->orWhere(function ($query) use ($day) {
                     $query->where('end_date', '=', $day);
                 })->orWhere(function ($query) use ($day) {
                     $query
-                        ->where('start_date','<',$day)
-                        ->where('end_date','>',$day);
+                        ->where('start_date', '<', $day)
+                        ->where('end_date', '>', $day);
                 });
             })
             ->get();
