@@ -42,4 +42,12 @@ class UserReservationsController extends Controller
 
         return back();
     }
+
+    public function status(Request $request, $reservation)
+    {
+        $reservation = Reservation::withTrashed()->findOrFail($reservation);
+        $reservation->setStatus($request->status);
+
+        return back();
+    }
 }

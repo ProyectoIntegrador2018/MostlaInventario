@@ -29,7 +29,7 @@ Route::group(['middleware'=>['auth']], function () {
     //Profile
     Route::get('/profile', 'UserReservationsController@index');
     Route::get('/profile/history', 'UserReservationsController@history');
-    Route::get('/reservations/cancel/{reservation}', 'UserReservationsController@cancel');
+    Route::get('/reservations/{reservation}/cancel', 'UserReservationsController@cancel');
     Route::post('/profile/campus', 'ProfileController@campus');
 });
 
@@ -69,6 +69,13 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
     //Maintenances
     Route::get('/maintenances', 'MaintenancesController@index');
     Route::post('/maintenances/update/status/{unit}', 'MaintenancesController@updateStatus');
+
+    //Dashboard
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::post('/reservations/{reservation}/status', 'UserReservationsController@status');
+
+    //Notificaciones
+    Route::get('/reminders/send', 'DashboardController@remind');
 });
 
 Route::group(['middleware'=>['auth', 'role:Administrador|Administrador General']], function () {
