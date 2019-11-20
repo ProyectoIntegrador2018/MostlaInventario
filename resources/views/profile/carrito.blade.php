@@ -13,19 +13,20 @@
 @push('scripts')
 	<script type="text/javascript">
 		function showCarrito(){
+			var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
 			var innerCarrito = ""
-			for(let i=0; i<sessionStorage.length; i++) {
-			  let key = sessionStorage.key(i)
-			  let product = JSON.parse(sessionStorage.getItem(key))
-			  innerCarrito += `<div id='${product.p_id}' class='card'><div class='card-title'>${product.p_name}<p><a href='#'>Eliminar</a></p></div><div class='card-body'><div> Inicio: <input type='date'> Fin: <input type='date'> </div> Cantidad: <input type='number' min='1'> </div> </div>`
+			for(product of products) {
+			  innerCarrito += `<div product_id='${product.id}' class='card'><div class='card-title'>${product.name}<p><a href='#'>Eliminar</a></p></div><div class='card-body'><div> Inicio: <input type='date'> Fin: <input type='date'> </div> </div> </div>`
 			}
 			$("#carrito").append(innerCarrito)	
 		}
 		showCarrito()
 		$("#carrito").on("click", 'a', function(e) {
 			e.preventDefault()
-			let productId = $(e.currentTarget).closest('[id]').attr('id')
-			sessionStorage.removeItem(productId)
+			let productId = $(e.currentTarget).closest('[id]').attr('product_id')
+			var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
+			products.filter(el => el.id !== productId)
+			localStorage.setItem('products', JSON.stringify(products));
 			$("#carrito").html("")
 			showCarrito()
 		});
