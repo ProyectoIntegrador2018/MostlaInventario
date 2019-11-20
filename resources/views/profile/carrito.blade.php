@@ -33,41 +33,43 @@
 			$("#carrito").html("")
 			showCarrito()
 		});
+		function apiCallReserve(reservations){
+			$.ajax({
+				type: 'POST',
+				url: '/reservation',
+				data: {
+					reservation: reservations
+				},
+				dataType : 'json',
+				success: function(data) {
+					alert("Reservacion con éxito");
+					localStorage.clear();
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		}
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#reserve").on("click", function() {
-				var reservations = [];
-				$('.card-product').each(function(){
-					console.log($(this))
-					var res = {};
-					res.product_id = $(this).attr('product_id');
-					res.start_date = $(this).find('#start_date')[0].value;
-					res.end_date = $(this).find('#end_date')[0].value;
+		$("#reserve").on("click", function() {
+			var reservations = [];
+			$('.card-product').each(function(){
+				console.log($(this))
+				var res = {};
+				res.product_id = $(this).attr('product_id');
+				res.start_date = $(this).find('#start_date')[0].value;
+				res.end_date = $(this).find('#end_date')[0].value;
 
-					if (res.start_date == "" || res.end_date == "" || new Date(res.start_date) > new Date(res.end_date)) {
-						alert("Fechas no válidas");
-						return;
-					}
+				if (res.start_date == "" || res.end_date == "" || new Date(res.start_date) > new Date(res.end_date)) {
+					alert("Fechas no válidas");
+					return;
+				}
 
-					reservations.push(res);
-				})
-				$.ajax({
-					type: "POST",
-					url: '/reservation',
-					data: {
-						reservation: reservations
-					},
-					dataType : 'json',
-					success: function(data) {
-						alert("Reservacion con éxito")
-						localStorage.clear();
-					},
-					error: function(error) {
-						console.log(error);
-					}
-				})
+				reservations.push(res);
 			});
-		})
+
+			apiCallReserve(reservations);
+		});
 	</script>
 @endpush
