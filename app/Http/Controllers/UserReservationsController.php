@@ -50,7 +50,7 @@ class UserReservationsController extends Controller
             $validator = Validator::make($input, $rules, $messages);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator);
+                return response()->json($validator->messages(), 400);
             }
 
             $product = Product::find($res['product_id']);
@@ -63,7 +63,7 @@ class UserReservationsController extends Controller
 
             for ($day = $start; $day <= $end; $day->modify('+1 day')){
                 if ($this->reservations->sameDay($day, $product->id)->count() >= $unitsCount) {
-                    return back()->withErrors(['message', 'El dia '.$day.' no esta disponible']);
+                    return response()->json(['message', 'El dia '.$day.' no esta disponible'], 400);
                 }
             }
         }
@@ -77,7 +77,7 @@ class UserReservationsController extends Controller
             $reservation->save();
         }
         
-        return redirect('profile');
+        return response()->json(['message', 'Reservación con éxito.'], 200);;
     }
 
     public function history()
