@@ -50,7 +50,7 @@
 							</p>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
-							<button class="add-to-cart btn-sm btn-primary float-right" product_id="{{$product->id}}">agregar</button>
+							<button class="add-to-cart btn-sm btn-primary float-right" product="{{$product}}">agregar</button>
 						</div>
 					</div>
 				</div>
@@ -131,14 +131,14 @@
 
 		$(".add-to-cart").on("click", function() {
 			var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
-			var product_id = $(this).attr('product_id');
-			for (id of products) {
-				if (id == product_id) {
+			var product = JSON.parse($(this).attr('product'));
+			for (p of products) {
+				if (p.id == product.id) {
 					alert('El producto ya está en el carrito');
 					return;
 				}
 			}
-			products.push(product_id);
+			products.push(product);
 			localStorage.setItem('products', JSON.stringify(products));
 			$("#product-count").html("(" + products.length + ")");
 			alert("Producto agregado correctamente");
