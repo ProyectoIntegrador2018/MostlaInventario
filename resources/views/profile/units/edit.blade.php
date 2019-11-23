@@ -23,7 +23,7 @@
         Status:<br>
         <input type="text" name="status" value="{{$unitEdit->status}}" /><br>
         <br>
-        <input class = "btn btn-primary" type="submit" value="Submit">
+        <input class = "btn btn-primary" type="submit" value="Guardar">
     </form>
 </div>
 </section>
