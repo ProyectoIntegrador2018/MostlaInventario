@@ -3,7 +3,7 @@
 @section('content')
 <section>
   <h1>Crear Producto</h1>
-  <a href="/products">Regresar</a>
+  <a href="/products">< Regresar</a>
   @if ($errors->any())
   <ul>
     @foreach($errors->all() as $error)
