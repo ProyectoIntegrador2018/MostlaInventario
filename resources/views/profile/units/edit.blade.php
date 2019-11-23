@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Editar Unit | Mostla</title>
-</head>
-<body>
+@extends('layouts.app')
 
+@section('content')
+<section>
 	<h1>Editar Unit</h1>
     @if ($errors->any())
         <ul>
@@ -13,11 +10,11 @@
             @endforeach
         </ul>
     @endif
-    <a href="/units">Regresar</a>
-    <br><br>
+    <a href="{{ url()->previous() }}">< Regresar</a>
+	<div class="box">
     <form action="/unit/update/{{$unitEdit->id}}">
         Producto:<br>
-        <select disabled name="product_id">
+        <select class="selectpicker form-control" disabled name="product_id">
             <option value="{{$unitEdit->product_id}}">{{$unitEdit->product->name}}</option>
         </select>
         <br>
@@ -26,7 +23,8 @@
         Status:<br>
         <input type="text" name="status" value="{{$unitEdit->status}}" /><br>
         <br>
-        <input type="submit" value="Submit">
+        <input class = "btn btn-primary" type="submit" value="Submit">
     </form>
-</body>
-</html>
+</div>
+</section>
+@endsection
