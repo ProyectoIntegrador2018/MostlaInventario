@@ -47,7 +47,7 @@ class MaintenancesPerProductReport extends Report
 
     protected function filename()
     {
-        return 'hola.xlsx';
+        return 'mantenimientos_por_producto_'.now()->format('Y_m_d').'.xlsx';
     }
 
     public function getHeadings()

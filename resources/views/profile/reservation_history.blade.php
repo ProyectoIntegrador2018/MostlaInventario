@@ -23,7 +23,7 @@
 				<td>{{$reservation->end_date->format('d/M/Y - h:i')}}</td>
 				<td>
 					@if($reservation->can_cancel)
-					<a href="/reservations/cancel/{{ $reservation->id }}">x</a>
+					<a href="/reservations/{{ $reservation->id }}/cancel">x</a>
 					@endif
 				</td>
 			</tr>

@@ -19,7 +19,7 @@
 			for(product of products) {
 			  innerCarrito += `<div product_id='${product.id}' class='card card-product'><div class='card-title'>${product.name}<p><a href='#'>Eliminar</a></p></div><div class='card-body'><div> Inicio: <input id="start_date" type='date'> Fin: <input id="end_date" type='date'> </div> </div> </div>`
 			}
-			$("#carrito").append(innerCarrito)	
+			$("#carrito").append(innerCarrito)
 		}
 		showCarrito()
 		$("#carrito").on("click", 'a', function(e) {

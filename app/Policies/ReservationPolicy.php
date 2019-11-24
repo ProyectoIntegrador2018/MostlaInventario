@@ -12,7 +12,11 @@ class ReservationPolicy
 
     public function cancel(User $user, Reservation $reservation)
     {
-        if ($reservation->status != Reservation::PENDING) {
+        if ($user->type_id > 1) {
+            return true;
+        }
+
+        if ($reservation->status != 1) {
             $this->deny("Solo se pueden cancelar reservaciones pendientes.");
         }
 

@@ -46,7 +46,7 @@ class ReservationsPerUserReport extends Report
 
     protected function filename()
     {
-        return 'hola.xlsx';
+        return 'reservaciones_por_usuario_'.now()->format('Y_m_d').'.xlsx';
     }
 
     public function getHeadings()

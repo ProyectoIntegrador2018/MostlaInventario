@@ -20,6 +20,10 @@
 			<div class="col">
 				<input class="form-control" type="date" name="end" value="{{ $filters['end'] ?? '' }}">
 			</div>
+
+			<div class="col">
+				<button id="catalog-consultar" type="submit" class="btn btn-primary btn-sm ">Buscar</button>
+			</div>
 			@superadmin
 			<div class="col">
 				<div class="form-check">
@@ -31,34 +35,33 @@
 			</div>
 			@endsuperadmin
 			<div class="col">
-				<button id="catalog-consultar" type="submit" class="btn btn-primary">Buscar</button>
-			</div>
-			<div class="col">
-				<button id="descargar" formaction="/reports/export" type="submit" class="btn btn-primary">Exportar</button>
+				<button id="descargar" formaction="/reports/export" type="submit" class="btn btn-link">Exportar</button>
 			</div>
 		</div>
 	</form>
 
-	<table>
-		<tr>
-			@foreach($headings as $heading)
-				<th>{{ $heading }}</th>
-			@endforeach
-		</tr>
-		@forelse($results as $result)
-		<tr>
-			@foreach($result as $value)
-				<td>{{ $value }}</td>
-			@endforeach
-		</tr>
-		@empty
-			@if(empty($filters))
-				<td class="empty">Seleccione un reporte.</tr>
-			@else
-				<td class="empty" colspan="{{sizeof($headings)}}">No hay resultados.</tr>
-			@endif
-		@endforelse
-	</table>
+	<div class="table-container">
+		<table>
+			<tr>
+				@foreach($headings as $heading)
+					<th>{{ $heading }}</th>
+				@endforeach
+			</tr>
+			@forelse($results as $result)
+			<tr>
+				@foreach($result as $value)
+					<td>{{ $value }}</td>
+				@endforeach
+			</tr>
+			@empty
+				@if(empty($filters))
+					<td class="empty">Seleccione un reporte.</tr>
+				@else
+					<td class="empty" colspan="{{sizeof($headings)}}">No hay resultados.</tr>
+				@endif
+			@endforelse
+		</table>
+	</div>
 	@endcomponent
 @endsection
 
