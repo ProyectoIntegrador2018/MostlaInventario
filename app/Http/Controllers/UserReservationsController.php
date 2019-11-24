@@ -48,7 +48,7 @@ class UserReservationsController extends Controller
         );
 
         foreach ($input['reservation'] as $res) {
-            $validator = Validator::make($input, $rules, $messages);
+            $validator = Validator::make($res, $rules, $messages);
 
             if ($validator->fails()) {
                 return response()->json($validator->messages(), 400);
