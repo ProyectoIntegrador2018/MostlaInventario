@@ -162,6 +162,8 @@ section {
     box-shadow: 3px 3px 3px #dddddd;
     margin-bottom: 30px;
     background-color: white;
+    overflow-x: hidden;
+    overflow-y: visible;
 }
 
 .inline-form {
@@ -202,7 +204,7 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
     border: 1px solid #ced4da;
 }
 
-.inline-form button {
+.btn-slim, .inline-form button {
     padding: .375rem .75rem;
 }
 
@@ -214,10 +216,6 @@ tr.clickable_t:hover > td, td.clickable_t:hover {
 .table-container {
     overflow: auto;
     width: 100%;
-}
-
-section {
-    overflow-x: hidden;
 }
 
 section > .title-bar {
@@ -234,4 +232,26 @@ section > .title-bar > .link-list > * {
 section > .title-bar > h1 {
     margin-left: initial;
     margin-right: auto;
+}
+
+.long-card {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    background-color: #fafafa;
+    margin-bottom: 10px;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.long-card.empty {
+    justify-content: center;
+}
+
+.cancel-btn {
+    float: right;
+    margin-top: 5px;
 }
