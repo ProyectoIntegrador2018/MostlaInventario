@@ -47,7 +47,7 @@
 				localStorage.clear();
 			},
 			error: function(error) {
-				console.log(error);
+				alert(error.responseJSON[1]);
 			}
 		});
 	}
