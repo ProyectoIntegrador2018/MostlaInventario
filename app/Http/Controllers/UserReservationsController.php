@@ -75,7 +75,6 @@ class UserReservationsController extends Controller
         }
         
         return response()->json(['message', 'Reservación con éxito.'], 200);
-        ;
     }
 
     public function history()
