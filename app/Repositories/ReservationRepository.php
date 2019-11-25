@@ -33,7 +33,7 @@ class ReservationRepository
             ->get();
     }
 
-    public static function sameDatetime($reservation, $user)
+    public function sameDatetime($reservation, $user)
     {
         return Reservation::where('product_id', $reservation['product_id'])
             ->where('campus_id', $user->campus->id)
