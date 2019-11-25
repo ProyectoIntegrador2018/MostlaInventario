@@ -58,21 +58,26 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/products">Inventario</a>
+                            <a class="nav-link" href="/products">
+                            <img class ="icon" src="/img/inventario_hover.png" alt="Inventario"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                            <a class="nav-link" href="/dashboard">
+                            <img class ="icon" src="/img/dashboard_hover.png" alt="Dashboard"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/reports">Reportes</a>
+                            <a class="nav-link" href="/reports">
+                            <img class ="icon" src="/img/report_hover.png" alt="Report">
+                            </a>
                         </li>
 
                         @endif
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/catalogo">Reservar</a>
+                            <a class="nav-link" href="/catalogo">
+                            <img class ="icon" src="/img/reservar_hover.png" alt="Catalogo"></a>
                         </li>
 
                         @if(auth()->user() && auth()->user()->type_id > 1)
@@ -97,7 +102,7 @@
                             </div>
                         </li>
                         @endif
-                        
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>

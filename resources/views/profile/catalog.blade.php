@@ -3,7 +3,7 @@
 @section('content')
 <section>
     <div class="title-bar">
-		<h1>Catálogo de Productos</h1>
+		<h1>Catalogo de Reservaciones</h1>
 		<a href="/canasta">Canasta <span id="product-count"></span></a>
     </div>
 
@@ -35,7 +35,7 @@
 		</div>
 	</form>
 
-	<div class= "container">
+	<div class= "box container">
 		<div class = "row">
 			@forelse($products as $product)
 				<div class= "col">
@@ -50,7 +50,7 @@
 							</p>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
-							<button class="add-to-cart btn-sm btn-primary float-right" product="{{$product}}">Agregar a canasta</button>
+							<button class="btn btn-secondary btn-sm add-to-cart float-right" product="{{$product}}">Agregar a canasta</button>
 						</div>
 					</div>
 				</div>
