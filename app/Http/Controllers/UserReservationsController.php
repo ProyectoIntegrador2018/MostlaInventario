@@ -37,22 +37,21 @@ class UserReservationsController extends Controller
 
         $rules = array(
             'product_id'                      => 'required|exists:products,id',
-            'start_date'                      => 'required',
-            'end_date'                        => 'required'
+            'start_datetime'                  => 'required',
+            'end_datetime'                    => 'required'
         );
 
         $messages = array(
             'product_id.required'              => 'El producto es requerido',
-            'product_id.exists'                 => 'El producto debe existir',
-            'start_date.required'              => 'La fecha de inicio es requerida',
-            'end_date.required'                => 'La fecha de fin es requerida'
+            'product_id.exists'                => 'El producto debe existir',
+            'start_datetime.required'          => 'La fecha de inicio es requerida',
+            'end_datetime.required'            => 'La fecha de fin es requerida'
         );
 
         foreach ($input['reservation'] as $res) {
             $validator = Validator::make($res, $rules, $messages);
 
             if ($validator->fails()) {
-                dd($res);
                 return response()->json($validator->messages(), 400);
             }
 
@@ -61,13 +60,8 @@ class UserReservationsController extends Controller
             $unitsCount = $product->units()->where('campus_id', $user->campus->id)->count();
 
             //Validate reservation dates
-            $start = new \DateTime($res['start_date']);
-            $end = new \DateTime($res['end_date']);
-
-            for ($day = $start; $day <= $end; $day->modify('+1 day')) {
-                if ($this->reservations->sameDay($day, $product->id, $user)->count() >= $unitsCount) {
-                    return response()->json(['message', 'El dia '.$day->format('Y-m-d').' no esta disponible'], 400);
-                }
+            if ($this->reservations->sameDatetime($res, $user)->count() >= $unitsCount) {
+                return response()->json(['message', 'El horario no está disponible.'], 400);
             }
         }
 
