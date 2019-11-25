@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
           <label for="category">Categoría</label>
-          <select id="category" name="category_id" class="form-control">
+          <select id="category" name="category_id" class="selectpicker form-control">
               <option selected hidden disabled>Seleccione una categoría</option>
               @foreach($categories as $category)
                   <option value={{ $category->id }}>{{ $category->name }}</option>

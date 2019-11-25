@@ -8,7 +8,7 @@ class ReservationsPerUserReport extends Report
 {
     protected function query()
     {
-        return Reservation::selectRaw('users.name, count(reservations.id) as reservations_count')
+        return Reservation::withTrashed()->selectRaw('users.name, count(reservations.id) as reservations_count')
             ->join('users', 'users.id', '=', 'reservations.user_id')
             ->groupBy('users.id');
     }

@@ -8,7 +8,7 @@ class ReservationsPerCategoryReport extends Report
 {
     protected function query()
     {
-        return Reservation::selectRaw('categories.name as category, count(reservations.id) as reservations_count')
+        return Reservation::withTrashed()->selectRaw('categories.name as category, count(reservations.id) as reservations_count')
             ->join('products', 'products.id', '=', 'reservations.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
             ->groupBy('categories.id');

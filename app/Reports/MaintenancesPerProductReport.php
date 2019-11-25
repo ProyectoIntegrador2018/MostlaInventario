@@ -8,7 +8,7 @@ class MaintenancesPerProductReport extends Report
 {
     protected function query()
     {
-        return Maintenance::selectRaw('products.brand, products.name, count(maintenances.id) as maintenance_count')
+        return Maintenance::withTrashed()->selectRaw('products.brand, products.name, count(maintenances.id) as maintenance_count')
             ->join('products', 'products.id', '=', 'maintenances.product_id')
             ->groupBy('products.id');
     }
