@@ -17,7 +17,7 @@
 		var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
 		var innerCarrito = ""
 		for(product of products) {
-			innerCarrito += `<div product_id='${product.id}' class='card card-product'><div class='card-title'>${product.name}<p><a href='#'>Eliminar</a></p></div><div class='card-body'><div> Inicio: <input id="start_date" type='date'> Fin: <input id="end_date" type='date'> </div> </div> </div>`
+			innerCarrito += `<div product_id='${product.id}' class='card card-product'><div class='card-title'>${product.name}<p><a href='#'>Eliminar</a></p></div><div class='card-body'><div> Día: <input id="reservation_day" type='date'> Inicio: <input id="start_hour" type="time"> Fin: <input id="end_hour" type="time"> </div> </div> </div>`
 		}
 		$("#carrito").append(innerCarrito)
 	}
@@ -33,7 +33,15 @@
 		$("#carrito").html("")
 		showCarrito()
 	});
-	function apiCallReserve(reservations){
+	function checkMinMax(start_hour, end_hour) {
+		return start_hour < "08:00" || end_hour < "08:00" || start_hour > "19:00" || end_hour > "19:00";
+	}
+
+	function oldDay(day) {
+		return new Date().toJSON().slice(0,10).replace(/-/g,'-') > day;
+	}
+
+	function apiCallReserve(reservations) {
 		$.ajax({
 			type: 'POST',
 			url: '/reservation',
@@ -59,13 +67,18 @@
 			console.log($(this))
 			var res = {};
 			res.product_id = $(this).attr('product_id');
-			res.start_date = $(this).find('#start_date')[0].value;
-			res.end_date = $(this).find('#end_date')[0].value;
+			//Dates
+			let res_day = $(this).find('#reservation_day')[0].value;
+			var start_hour = $(this).find('#start_hour')[0].value;
+			var end_hour = $(this).find('#end_hour')[0].value;
 
-			if (res.start_date == "" || res.end_date == "" || new Date(res.start_date) > new Date(res.end_date)) {
+			if (res_day == "" || oldDay(res_day) || start_hour == "" || end_hour == "" || start_hour > end_hour || checkMinMax(start_hour, end_hour)) {
 				alert("Fechas no válidas");
 				return;
 			}
+
+			res.start_datetime = res_day + ' ' + start_hour + ':00'
+			res.end_datetime = res_day + ' ' + end_hour + ':00'
 
 			reservations.push(res);
 		});
