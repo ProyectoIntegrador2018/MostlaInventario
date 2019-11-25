@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Campus;
 use App\Models\Reservation;
+use App\Models\Product;
 use App\Repositories\ReservationRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -35,14 +36,14 @@ class UserReservationsController extends Controller
         $user = auth()->user();
 
         $rules = array(
-            'product_id'                      => 'required|exits:products,id',
+            'product_id'                      => 'required|exists:products,id',
             'start_date'                      => 'required',
             'end_date'                        => 'required'
         );
 
         $messages = array(
             'product_id.required'              => 'El producto es requerido',
-            'product_id.exits'                 => 'El producto debe existir',
+            'product_id.exists'                 => 'El producto debe existir',
             'start_date.required'              => 'La fecha de inicio es requerida',
             'end_date.required'                => 'La fecha de fin es requerida'
         );
@@ -51,20 +52,21 @@ class UserReservationsController extends Controller
             $validator = Validator::make($res, $rules, $messages);
 
             if ($validator->fails()) {
+                dd($res);
                 return response()->json($validator->messages(), 400);
             }
 
             $product = Product::find($res['product_id']);
 
-            $unitsCount = $product->units()->where('campus_id',$user->campus->id)->count();
+            $unitsCount = $product->units()->where('campus_id', $user->campus->id)->count();
 
             //Validate reservation dates
-            $start = new DateTime($res['start_date']);
-            $end = new DateTime($res['end_date']);
+            $start = new \DateTime($res['start_date']);
+            $end = new \DateTime($res['end_date']);
 
-            for ($day = $start; $day <= $end; $day->modify('+1 day')){
-                if ($this->reservations->sameDay($day, $product->id)->count() >= $unitsCount) {
-                    return response()->json(['message', 'El dia '.$day.' no esta disponible'], 400);
+            for ($day = $start; $day <= $end; $day->modify('+1 day')) {
+                if ($this->reservations->sameDay($day, $product->id, $user)->count() >= $unitsCount) {
+                    return response()->json(['message', 'El dia '.$day->format('Y-m-d').' no esta disponible'], 400);
                 }
             }
         }
@@ -78,7 +80,8 @@ class UserReservationsController extends Controller
             $reservation->save();
         }
         
-        return response()->json(['message', 'Reservación con éxito.'], 200);;
+        return response()->json(['message', 'Reservación con éxito.'], 200);
+        ;
     }
 
     public function history()
