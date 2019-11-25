@@ -43,6 +43,10 @@ footer {
     color: #FFF;
 }
 
+footer a {
+    color: #fff;
+}
+
 .fa{
     padding: 15px;
     font-size: 25px;
