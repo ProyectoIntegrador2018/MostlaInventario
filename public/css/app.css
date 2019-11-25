@@ -83,10 +83,6 @@ footer {
     display: None;
 };
 
-.basket-icon img{
-    height:10%;
-    width: auto;
-}
 
 .card-deck{
     width: 100%;
@@ -96,10 +92,7 @@ footer {
     border: 1px solid #dddddd;
 }
 
-.card-deck:hover{
-    background: #d1d3e0;
 
-}
 
 .card-deck{
     left-right: 100px;
@@ -254,4 +247,13 @@ section > .title-bar > h1 {
 .cancel-btn {
     float: right;
     margin-top: 5px;
+}
+
+.icon {
+    height: 30px;
+    width: auto;
+}
+
+.icon:hover{
+    filter: contrast(0);
 }

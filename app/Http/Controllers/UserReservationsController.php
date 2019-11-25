@@ -52,7 +52,6 @@ class UserReservationsController extends Controller
             $validator = Validator::make($res, $rules, $messages);
 
             if ($validator->fails()) {
-                dd($res);
                 return response()->json($validator->messages(), 400);
             }
 
