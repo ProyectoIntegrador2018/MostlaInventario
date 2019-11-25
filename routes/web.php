@@ -31,6 +31,8 @@ Route::group(['middleware'=>['auth']], function () {
     Route::get('/profile/history', 'UserReservationsController@history');
     Route::get('/reservations/{reservation}/cancel', 'UserReservationsController@cancel');
     Route::post('/profile/campus', 'ProfileController@campus');
+
+    Route::post('/reservation', 'UserReservationsController@store');
 });
 
 

@@ -13,9 +13,9 @@ class Reservation extends Model
     protected $table = 'reservations';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'campus_id', 'start_date', 'end_date', 'status', 'product_id', 'quantity'
+        'user_id', 'campus_id', 'start_datetime', 'end_datetime', 'status', 'product_id'
     ];
-    protected $dates = ['start_date', 'end_date'];
+    protected $dates = ['start_datetime', 'end_datetime'];
 
     public function scopeForCampus($query, $campus_id)
     {
@@ -71,7 +71,7 @@ class Reservation extends Model
 
     public function getCanCancelAttribute()
     {
-        return $this->isPending() && $this->start_date > now()->addHours(3);
+        return $this->isPending() && $this->start_datetime > now()->addHours(3);
     }
 
     public function product()
@@ -113,9 +113,9 @@ class Reservation extends Model
             case 'returned':
                 return 'done';
             case 'in_progress':
-                return $this->end_date < now() ? 'late' : 'current';
+                return $this->end_datetime < now() ? 'late' : 'current';
             default:
-                return $this->start_date < now() ? 'ready' : 'waiting';
+                return $this->start_datetime < now() ? 'ready' : 'waiting';
         }
     }
 }
