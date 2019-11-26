@@ -3,8 +3,8 @@
 @section('content')
 <section>
     <div class="title-bar">
-		<h1>Catálogo de Productos</h1>
-		<a href="/carrito">Carrito</a>
+		<h1>Catalogo de Reservaciones</h1>
+		<a href="/canasta">Canasta <span id="product-count"></span></a>
     </div>
 
 	<form action="/catalogo" class="inline-form">
@@ -35,7 +35,7 @@
 		</div>
 	</form>
 
-	<div class= "container">
+	<div class= "box container">
 		<div class = "row">
 			@forelse($products as $product)
 				<div class= "col">
@@ -50,7 +50,7 @@
 							</p>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
-							<a href="#" class="btn-sm btn-primary float-right">agregar</a>
+							<button class="btn btn-secondary btn-sm add-to-cart float-right" product="{{$product}}">Agregar a canasta</button>
 						</div>
 					</div>
 				</div>
@@ -124,8 +124,25 @@
 </script>
 
 <script type="text/javascript">
-	// $(window).on('load',function(){
-	// 	$('#detalles').modal('show');
-	// });
+	$(document).ready(function(){
+		//Count of cart items to set span
+		var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
+		$("#product-count").html("(" + products.length + ")");
+
+		$(".add-to-cart").on("click", function() {
+			var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
+			var product = JSON.parse($(this).attr('product'));
+			for (p of products) {
+				if (p.id == product.id) {
+					alert('El producto ya está en el carrito');
+					return;
+				}
+			}
+			products.push(product);
+			localStorage.setItem('products', JSON.stringify(products));
+			$("#product-count").html("(" + products.length + ")");
+			alert("Producto agregado correctamente");
+		});
+	})
 </script>
 @endpush

@@ -8,13 +8,15 @@
 			<tr>
 				<th>Product</th>
 				<th>Unit</th>
+				<th>Comentario</th>
 				<th>Fecha</th>
-				<th></th>
+				<th>Status</th>
 			</tr>
 			@foreach($maintenances as $maintenance)
 			<tr>
 				<td>{{$maintenance->unit->product->name}}</td>
 				<td>{{$maintenance->unit->serial_number}}</td>
+				<td>{{$maintenance->comment}}</td>
 				<td>{{$maintenance->created_at}}<</td>
 				<td>
 					<form action="/maintenances/update/status/{{$maintenance->id}}" method="POST">

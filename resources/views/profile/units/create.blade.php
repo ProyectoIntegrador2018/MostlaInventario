@@ -28,15 +28,15 @@
 		<div>
 			<br>
 			Número serial:<br>
-			<input type="textarea" class="form-control" name="serial_number" /><br>
+			<input type="text" class="form-control" name="serial_number" /><br>
 			<span class="input-group-btn">
-				Status:<br>
-				<input type="textarea" class="form-control" name="status" /><br>
+			Status:<br>
+			<input type="text" class="form-control" name="status" /><br>
+			Comentario:<br>
+			<textarea class="form-control" name="comments"></textarea>
 				<br>
 				<input class="btn btn-primary" type="submit" value="Submit">
-			</div>
-
-
-		</form>
+		</div>
+	</form>
 	</section>
 	@endsection

@@ -24,19 +24,27 @@ Route::group(['middleware'=>['auth']], function () {
     //Catalog
     Route::get('/catalogo', 'CatalogController@index');
     Route::get('/catalogo/search', 'CatalogController@search');
-    Route::get('/carrito', 'CartController@index');
+    Route::get('/canasta', 'CartController@index');
 
     //Profile
     Route::get('/profile', 'UserReservationsController@index');
     Route::get('/profile/history', 'UserReservationsController@history');
     Route::get('/reservations/{reservation}/cancel', 'UserReservationsController@cancel');
     Route::post('/profile/campus', 'ProfileController@campus');
+
+    Route::post('/reservation', 'UserReservationsController@store');
 });
 
 
 Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrador General']], function () {
     //Tags
     Route::get('/tags', 'TagsController@index');
+    Route::get('/tag/create', 'TagsController@create');
+    Route::get('/tag/store', 'TagsController@store');
+    Route::get('/tag/edit/{id}', 'TagsController@edit');
+    Route::get('/tag/update/{id}', 'TagsController@update');
+    Route::get('/tag/delete/{id}', 'TagsController@delete');
+    Route::get('/tag/activate/{id}', 'TagsController@activate');
 
     //Units
     Route::get('/units', 'UnitsController@index');
@@ -68,6 +76,8 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
 
     //Maintenances
     Route::get('/maintenances', 'MaintenancesController@index');
+    Route::get('/maintenances/create/{unit}', 'MaintenancesController@create');
+    Route::post('/maintenances/store', 'MaintenancesController@store');
     Route::post('/maintenances/update/status/{unit}', 'MaintenancesController@updateStatus');
 
     //Dashboard

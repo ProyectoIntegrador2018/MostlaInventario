@@ -32,4 +32,43 @@ class ReservationRepository
             ->orderBy('created_at', 'desc')
             ->get();
     }
+
+    public function sameDatetime($reservation, $user)
+    {
+        return Reservation::where('product_id', $reservation['product_id'])
+            ->where('campus_id', $user->campus->id)
+            ->whereIn('status', ['pending','in_progress'])
+            ->where(function ($query) use ($reservation) {
+                $query->where(function ($query) use ($reservation) {
+                    /*Cases:
+                    Reservation request:
+                            |------------------|
+                    exist       |---------|
+                    exist       |--------------------|
+                    */
+                    $query
+                        ->where('start_datetime', '>=', $reservation['start_datetime'])
+                        ->whereBetween('start_datetime', [$reservation['start_datetime'],$reservation['end_datetime']]);
+                })->orWhere(function ($query) use ($reservation) {
+                    /*Cases:
+                    Reservation request:
+                                |------------------|
+                    exist   |---------------|
+                    */
+                    $query
+                        ->where('start_datetime', '<=', $reservation['start_datetime'])
+                        ->whereBetween('end_datetime', [$reservation['start_datetime'],$reservation['end_datetime']]);
+                })->orWhere(function ($query) use ($reservation) {
+                    /*Case:
+                    Reservation request:
+                                |------------------|
+                    exist   |--------------------------|
+                    */
+                    $query
+                        ->where('start_datetime', '<=', $reservation['start_datetime'])
+                        ->where('end_datetime', '>=', $reservation['end_datetime']);
+                });
+            })
+            ->get();
+    }
 }

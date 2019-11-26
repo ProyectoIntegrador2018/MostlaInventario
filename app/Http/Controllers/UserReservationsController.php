@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Campus;
 use App\Models\Reservation;
+use App\Models\Product;
 use App\Repositories\ReservationRepository;
 use Auth;
 use Illuminate\Http\Request;
+use Validator;
 
 class UserReservationsController extends Controller
 {
@@ -25,6 +27,54 @@ class UserReservationsController extends Controller
         $user_campus = auth()->user()->campus;
 
         return view('profile.my_reservations')->with(compact('reservations', 'campus', 'user_campus'));
+    }
+
+    public function store(Request $request)
+    {
+        $input = $request->all();
+
+        $user = auth()->user();
+
+        $rules = array(
+            'product_id'                      => 'required|exists:products,id',
+            'start_datetime'                  => 'required',
+            'end_datetime'                    => 'required'
+        );
+
+        $messages = array(
+            'product_id.required'              => 'El producto es requerido',
+            'product_id.exists'                => 'El producto debe existir',
+            'start_datetime.required'          => 'La fecha de inicio es requerida',
+            'end_datetime.required'            => 'La fecha de fin es requerida'
+        );
+
+        foreach ($input['reservation'] as $res) {
+            $validator = Validator::make($res, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json($validator->messages(), 400);
+            }
+
+            $product = Product::find($res['product_id']);
+
+            $unitsCount = $product->units()->where('campus_id', $user->campus->id)->count();
+
+            //Validate reservation dates
+            if ($this->reservations->sameDatetime($res, $user)->count() >= $unitsCount) {
+                return response()->json(['message', 'El horario no está disponible.'], 400);
+            }
+        }
+
+        foreach ($input['reservation'] as $res) {
+            $reservation = new Reservation;
+            $reservation->fill($res);
+            $reservation->user_id = $user->id;
+            $reservation->campus_id = $user->campus->id;
+            $reservation->status = 'pending';
+            $reservation->save();
+        }
+        
+        return response()->json(['message', 'Reservación con éxito.'], 200);
     }
 
     public function history()

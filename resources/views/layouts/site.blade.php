@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -58,21 +58,26 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/products">Inventario</a>
+                            <a class="nav-link" href="/products">
+                            <img class ="icon" src="/img/inventario_hover.png" alt="Inventario"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                            <a class="nav-link" href="/dashboard">
+                            <img class ="icon" src="/img/dashboard_hover.png" alt="Dashboard"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/reports">Reportes</a>
+                            <a class="nav-link" href="/reports">
+                            <img class ="icon" src="/img/report_hover.png" alt="Report">
+                            </a>
                         </li>
 
                         @endif
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/catalogo">Reservar</a>
+                            <a class="nav-link" href="/catalogo">
+                            <img class ="icon" src="/img/reservar_hover.png" alt="Catalogo"></a>
                         </li>
 
                         @if(auth()->user() && auth()->user()->type_id > 1)
@@ -97,7 +102,7 @@
                             </div>
                         </li>
                         @endif
-                        
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -152,7 +157,7 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
