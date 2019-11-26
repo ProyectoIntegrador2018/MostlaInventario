@@ -39,6 +39,8 @@ class UnitsController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $productId = $request->input('product_id');
+
 
         $rules = array(
             'product_id'       => $this::RULE_REQ.'|exists:products,id',
@@ -63,14 +65,13 @@ class UnitsController extends Controller
         $unitNew->campus_id = auth()->user()->campus->id;
         $unitNew->fillInfo($input);
 
-        return redirect($this::STR_UNITS);
+        return redirect('/product/edit/'.$productId);
     }
 
     public function edit($unitId)
     {
         $unitEdit = $this->unit->findId($unitId);
         $products = $this->product->allForUser(auth()->user());
-
         return view('profile.units.edit')->with(compact('unitEdit','products'));
     }
 
@@ -78,6 +79,7 @@ class UnitsController extends Controller
     {
         $input = $request->all();
         $unitUpdate = $this->unit->findId($unitId);
+        $productId = $request->input('product_id');
 
         $rules = array(
             'serial_number'    => $this::RULE_REQ,
@@ -97,15 +99,16 @@ class UnitsController extends Controller
 
         $unitUpdate->fillInfo($input);
 
-        return redirect($this::STR_UNITS);
+        return redirect('/product/edit/'.$unitUpdate->product_id);
     }
 
     public function delete($unitId)
     {
         $unitDel = $this->unit->findId($unitId);
+        $product_id = $unitDel->product_id;
         $unitDel->delete();
 
-        return back();
+        return redirect('/product/edit/'.$product_id);
     }
 
     public function activate($unitId)
