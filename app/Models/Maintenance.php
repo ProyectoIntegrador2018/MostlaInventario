@@ -12,8 +12,14 @@ class Maintenance extends Model
     protected $table = 'maintenances';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'unit_id', 'comment', 'status', 'campus_id', 'product_id'
+        'product_id', 'unit_id', 'comment'
     ];
+
+    public function fillInfo($data)
+    {
+        $this->fill($data);
+        $this->save();
+    }
 
     public function scopeForUser($query, $user)
     {

@@ -56,16 +56,15 @@
       <table>
           <tr>
               <th>Número serial</th>
-              <th>Comentarios</th>
               <th>Status</th>
               <th>Fecha de creación</th>
               <th>Edición</th>
               <th>Disponible</th>
+              <th>Mantenimiento</th>
           </tr>
           @foreach($units as $unit)
           <tr>
               <td>{{$unit->serial_number}}</td>
-              <td>{{$unit->comments}}</td>
               <td>{{$unit->status}}</td>
               <td>{{$unit->created_at}}</td>
               <td><a href="/unit/edit/{{ $unit->id }}">Editar</a></td>
@@ -74,6 +73,7 @@
               @else
                 <td><a href="/unit/delete/{{ $unit->id }}">Eliminar</a></td>
               @endif
+              <td><a href="/maintenances/create/{{ $unit->id }}">Agregar +</a></td>
           </tr>
           @endforeach
       </table>

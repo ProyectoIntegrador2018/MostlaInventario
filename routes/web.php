@@ -76,6 +76,8 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
 
     //Maintenances
     Route::get('/maintenances', 'MaintenancesController@index');
+    Route::get('/maintenances/create/{unit}', 'MaintenancesController@create');
+    Route::post('/maintenances/store', 'MaintenancesController@store');
     Route::post('/maintenances/update/status/{unit}', 'MaintenancesController@updateStatus');
 
     //Dashboard

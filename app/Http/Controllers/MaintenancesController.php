@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Unit;
 use App\Models\Maintenance;
 use App\Repositories\MaintenanceRepository;
+use App\Repositories\UnitRepository;
 use Illuminate\Http\Request;
+use Validator;
 
 class MaintenancesController extends Controller
 {
@@ -12,9 +14,10 @@ class MaintenancesController extends Controller
     const RULE_REQ = 'required';
     const STR_PRODS = 'maintenances';
 
-    public function __construct(MaintenanceRepository $maintenance)
+    public function __construct(MaintenanceRepository $maintenance, UnitRepository $unit)
     {
         $this->maintenance = $maintenance;
+        $this->unit = $unit;
     }
 
     /**
@@ -37,9 +40,10 @@ class MaintenancesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($unitId)
     {
-        //
+        $unitCreated = $this->unit->findId($unitId);
+        return view('profile.maintenances.create')->with(compact('unitCreated'));
     }
 
     /**
@@ -51,16 +55,17 @@ class MaintenancesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $productId = $request->input('product_id');
 
         $rules = array(
+            'product_id'           => $this::RULE_REQ,
             'unit_id'           => $this::RULE_REQ,
-            'status'            => $this::RULE_REQ,
             'comment'           => $this::RULE_REQ,
         );
 
         $messages = array(
+            'product_id.'.$this::RULE_REQ           => 'Id de producto es requerido',
             'unit_id.'.$this::RULE_REQ           => 'Id de unit es requerido',
-            'status.'.$this::RULE_REQ            => 'Estado es requerido',
             'comment.'.$this::RULE_REQ           => 'Comentario es requerido'
         );
 
@@ -73,7 +78,7 @@ class MaintenancesController extends Controller
         $maintenanceNew = new Maintenance;
         $maintenanceNew->fillInfo($input);
         
-        return redirect($this::STR_PRODS);
+        return redirect('/product/edit/'.$productId);
     }
 
     /**
