@@ -56,6 +56,8 @@ class MaintenancesController extends Controller
     {
         $input = $request->all();
         $productId = $request->input('product_id');
+        $unitId = $request->input('unit_id');
+        $unitChanged = $this->unit->findId($unitId);
 
         $rules = array(
             'product_id'           => $this::RULE_REQ,
@@ -75,6 +77,7 @@ class MaintenancesController extends Controller
             return back()->withErrors($validator);
         }
 
+        $unitId->setStatus('3');
         $maintenanceNew = new Maintenance;
         $maintenanceNew->fillInfo($input);
         
