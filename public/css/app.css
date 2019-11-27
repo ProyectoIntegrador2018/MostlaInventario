@@ -155,8 +155,6 @@ section {
     box-shadow: 3px 3px 3px #dddddd;
     margin-bottom: 30px;
     background-color: white;
-    overflow-x: hidden;
-    overflow-y: visible;
 }
 
 .inline-form {

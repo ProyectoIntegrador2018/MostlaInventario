@@ -170,7 +170,9 @@ class ProductsController extends Controller
     public function show(Product $product)
     {
         $categories = Category::all();
-        $product->load('units');
+        $product->load(['units' => function ($query) {
+            return $query->where('campus_id', auth()->user()->campus_id);
+        }]);
 
 
         return view('profile.products.show')->with(compact('product', 'categories'));

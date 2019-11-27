@@ -47,8 +47,8 @@ class ReservationRepository
                     exist       |--------------------|
                     */
                     $query
-                        ->where('start_datetime', '>=', $reservation['start_datetime'])
-                        ->whereBetween('start_datetime', [$reservation['start_datetime'],$reservation['end_datetime']]);
+                        ->where('start_date', '>=', $reservation['start_date'])
+                        ->whereBetween('start_date', [$reservation['start_date'],$reservation['end_date']]);
                 })->orWhere(function ($query) use ($reservation) {
                     /*Cases:
                     Reservation request:
@@ -56,8 +56,8 @@ class ReservationRepository
                     exist   |---------------|
                     */
                     $query
-                        ->where('start_datetime', '<=', $reservation['start_datetime'])
-                        ->whereBetween('end_datetime', [$reservation['start_datetime'],$reservation['end_datetime']]);
+                        ->where('start_date', '<=', $reservation['start_date'])
+                        ->whereBetween('end_date', [$reservation['start_date'],$reservation['end_date']]);
                 })->orWhere(function ($query) use ($reservation) {
                     /*Case:
                     Reservation request:
@@ -65,8 +65,8 @@ class ReservationRepository
                     exist   |--------------------------|
                     */
                     $query
-                        ->where('start_datetime', '<=', $reservation['start_datetime'])
-                        ->where('end_datetime', '>=', $reservation['end_datetime']);
+                        ->where('start_date', '<=', $reservation['start_date'])
+                        ->where('end_date', '>=', $reservation['end_date']);
                 });
             })
             ->get();

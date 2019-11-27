@@ -42,7 +42,7 @@
 			@break
 	
 			@case('late')
-				<i title="Entrega tardía" class="fas fa-exclamation-circle fa-2x"></i>
+				<i title="Tarde" class="fas fa-exclamation-circle fa-2x"></i>
 			@break
 	
 			@case('done')

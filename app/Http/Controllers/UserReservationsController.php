@@ -37,15 +37,15 @@ class UserReservationsController extends Controller
 
         $rules = array(
             'product_id'                      => 'required|exists:products,id',
-            'start_datetime'                  => 'required',
-            'end_datetime'                    => 'required'
+            'start_date'                  => 'required',
+            'end_date'                    => 'required'
         );
 
         $messages = array(
             'product_id.required'              => 'El producto es requerido',
             'product_id.exists'                => 'El producto debe existir',
-            'start_datetime.required'          => 'La fecha de inicio es requerida',
-            'end_datetime.required'            => 'La fecha de fin es requerida'
+            'start_date.required'          => 'La fecha de inicio es requerida',
+            'end_date.required'            => 'La fecha de fin es requerida'
         );
 
         foreach ($input['reservation'] as $res) {

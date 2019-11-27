@@ -113,12 +113,12 @@ class Reservation extends Model
             case 'returned':
                 return 'done';
             case 'in_progress':
-                return $this->end_datetime < now() ? 'late' : 'current';
+                return $this->end_date < now() ? 'late' : 'current';
             default:
-                if ($this->end_datetime < now()) {
+                if ($this->end_date < now()) {
                     return 'late';
                 }
-                return $this->start_datetime < now() ? 'ready' : 'waiting';
+                return $this->start_date < now() ? 'ready' : 'waiting';
         }
     }
 

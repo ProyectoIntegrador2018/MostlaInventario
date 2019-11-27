@@ -6,14 +6,18 @@ use Illuminate\Database\Seeder;
 class TagsSeeder extends Seeder
 {
     protected $tags = [
-        "Impresión 3D",
-        "Telepresencia",
-        "Drones",
-        "Realidad Virtual",
-        "Internet de las cosas",
-        "Inteligencia Artificial",
-        "Asistentes Virtuales",
-        "Blockchain"
+        "Móviles",
+        "Pantallas",
+        "Accesorios",
+        "Perifericos",
+        "Consolas",
+        "Baterías",
+        "Resistente al Agua",
+        "Windows",
+        "OSX",
+        "Linux",
+        "Android",
+        "iOS",
     ];
 
     /**
