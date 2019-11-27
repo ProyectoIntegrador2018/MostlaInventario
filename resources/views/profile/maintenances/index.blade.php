@@ -6,30 +6,38 @@
 	<div class="table-container">
 		<table>
 			<tr>
-				<th>Product</th>
-				<th>Unit</th>
+				<th>Producto</th>
+				<th>No. Serie</th>
 				<th>Comentario</th>
-				<th>Fecha</th>
-				<th>Status</th>
+				<th>Desde</th>
+				<th>Terminar</th>
+				<th>Eliminar</th>
 			</tr>
-			@foreach($maintenances as $maintenance)
+			@forelse($maintenances as $maintenance)
 			<tr>
-				<td>{{$maintenance->unit->product->name}}</td>
-				<td>{{$maintenance->unit->serial_number}}</td>
-				<td>{{$maintenance->comment}}</td>
-				<td>{{$maintenance->created_at}}<</td>
 				<td>
-					<form action="/maintenances/update/status/{{$maintenance->id}}" method="POST">
+					<span class="subtle">{{ $maintenance->unit->product->brand }}</span>
+					{{$maintenance->unit->product->name}}
+				</td>
+				<td>{{$maintenance->unit->serial_number}}</td>
+				<td><span class="subtle">{{$maintenance->comment}}</span></td>
+				<td>{{$maintenance->created_at->format('d/M/Y h:i A')}}</td>
+				<td>
+					<form action="/maintenances/finish/{{$maintenance->id}}" method="POST">
 						@csrf
-						<select name="status" title="Status" class="selectpicker form-control" onchange="this.form.submit()">
-							@foreach(json_decode($status) as $st)
-							<option value={{ $st->id }} {{ $st->name == $maintenance->unit->status ? 'selected' : '' }}>{{ $st->name }}</option>
-							@endforeach		
-						</select>
+						<input type="submit" value="Dar de alta" class="btn btn-link">
+					</form>
+				</td>
+				<td>
+					<form action="/maintenances/delete/{{$maintenance->id}}" method="POST">
+						@csrf
+						<input type="submit" value="Eliminar Unidad" class="btn btn-link">
 					</form>
 				</td>
 			</tr>
-			@endforeach
+			@empty
+				<td class="empty" colspan="6">Por el momento no hay unidades en mantenimiento.</td>
+			@endforelse
 		</table>
 	</div>
 </section>

@@ -261,3 +261,9 @@ section > .title-bar > h1 {
 footer a {
     color: #fff;
 }
+
+@media (max-width: 760px) {
+    main {
+        padding: 10px;
+    }
+}

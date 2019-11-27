@@ -10,10 +10,12 @@
 	<form class="inline-form" action="/maintenances/store" method="POST">
 		@csrf
 		Product:<br>
-        <select disabled class="selectpicker form-control" name="product_id">
+		<input type="hidden" name="product_id" value="{{$unitCreated->product->id}}">
+        <select disabled class="selectpicker form-control">
             <option value="{{$unitCreated->product->id}}" selected>{{$unitCreated->product->name}}</option>
         </select>
 		Unit:<br>
+		<input type="hidden" name="unit_id" value="{{$unitCreated->id}}">
         <select disabled class="selectpicker form-control" name="unit_id">
             <option value="{{$unitCreated->id}}" selected>{{$unitCreated->serial_number}}</option>
         </select>
@@ -23,6 +25,7 @@
 			<textarea class="form-control" name="comment"></textarea>
 			<br>
 		</div>
+		<input type="hidden" name="url" value="{{ url()->previous() }}">
 		<button type="submit" class="btn btn-primary">Crear</button>
 	</form>
 	</section>

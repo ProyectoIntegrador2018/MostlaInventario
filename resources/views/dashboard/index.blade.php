@@ -85,11 +85,13 @@
 				<form action="/reservations/{{ $reservation->id }}/loan" method="POST">
 					@csrf
 					<select class="selectpicker" title="Unidad" onchange="this.form.submit()" name="unit_id">
-						@foreach($reservation->product->units as $unit)
+						@forelse($reservation->product->units as $unit)
 							<option value="{{ $unit->id }}" {{ $unit->id == ($reservation->loan->unit_id ?? null) ? 'selected' : '' }} {{ $unit->loan ? 'disabled' : '' }}>
 								{{ $unit->serial_number }}
 							</option>
-						@endforeach
+						@empty
+							<option value="-1" disabled>No hay unidades disponibles</option>
+						@endforelse
 					</select>
 				</form>
 			@endif

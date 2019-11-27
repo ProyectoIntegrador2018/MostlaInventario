@@ -10,7 +10,7 @@
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
-        @foreach($tags as $tag)
+        @forelse($tags as $tag)
         <tr>
             <td>{{$tag->name}}</td>
             <td><a href="/tag/edit/{{ $tag->id }}">Editar</a></td>
@@ -20,7 +20,9 @@
               <td><a href="/tag/delete/{{ $tag->id }}">Eliminar</a></td>
             @endif
         </tr>
-        @endforeach
+        @empty
+            <td class="empty" colspan="3">Por el momento no hay tags.</td>
+        @endforelse
     </table>
 </section>
 @endsection

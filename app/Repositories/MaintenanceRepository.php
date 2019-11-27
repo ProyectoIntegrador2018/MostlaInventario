@@ -8,8 +8,7 @@ class MaintenanceRepository
 {
     public function allForUser($user)
     {
-        return Maintenance::withTrashed()
-            ->forUser($user)
+        return Maintenance::forUser($user)
             ->orderBy('created_at', 'desc')
             ->get();
     }

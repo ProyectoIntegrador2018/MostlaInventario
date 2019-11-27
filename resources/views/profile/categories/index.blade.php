@@ -11,7 +11,7 @@
             <th>Edición</th>
             <th>Disponible</th>
         </tr>
-        @foreach($categoriesIndex as $category)
+        @forelse($categoriesIndex as $category)
         <tr>
             <td>{{$category->name}}</td>
             <td><a href="/category/edit/{{ $category->id }}">Editar</a></td>
@@ -21,7 +21,9 @@
               <td><a href="/category/delete/{{ $category->id }}">Eliminar</a></td>
             @endif
         </tr>
-        @endforeach
+        @empty
+            <td class="empty" colspan="3">Por el momento no hay categorías.</td>
+        @endforelse
     </table>
 </section>
 @endsection
