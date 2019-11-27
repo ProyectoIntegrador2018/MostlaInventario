@@ -35,6 +35,7 @@
 				<br>
 				<input class="btn btn-primary" type="submit" value="Submit">
 		</div>
+		<input type="hidden" name="url" value="{{ url()->previous() }}">
 	</form>
 	</section>
 	@endsection

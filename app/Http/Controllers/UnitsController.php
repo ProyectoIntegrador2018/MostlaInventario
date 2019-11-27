@@ -63,7 +63,7 @@ class UnitsController extends Controller
         $unitNew->campus_id = auth()->user()->campus->id;
         $unitNew->fillInfo($input);
 
-        return redirect('/product/edit/'.$productId);
+        return redirect($request->url);
     }
 
     public function edit($unitId)

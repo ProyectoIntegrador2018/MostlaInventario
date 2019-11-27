@@ -17,6 +17,7 @@ class CreateMaintenancesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->integer('unit_id');
+            $table->integer('campus_id');
             $table->string('comment');
             $table->timestamps();
             $table->softDeletes();

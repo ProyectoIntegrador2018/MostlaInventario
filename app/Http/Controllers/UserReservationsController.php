@@ -95,7 +95,7 @@ class UserReservationsController extends Controller
 
         $reservation->cancel();
 
-        return back();
+        return back()->with('alert', 'Se ha cancelado la reservación exitosamente.');
     }
 
     public function status(Request $request, $reservation)

@@ -12,7 +12,7 @@ class Maintenance extends Model
     protected $table = 'maintenances';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'product_id', 'unit_id', 'comment'
+        'product_id', 'unit_id', 'comment', 'campus_id'
     ];
 
     public function fillInfo($data)

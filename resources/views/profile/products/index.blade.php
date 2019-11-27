@@ -39,7 +39,6 @@
                 <th>Descripción</th>
                 <th>Categoría</th>
                 <th>Información</th>
-                <th>Edición</th>
                 <th>Disponible</th>
             </tr>
             @forelse($productsIndex as $product)
@@ -51,7 +50,6 @@
                 <td>{{$product->description}}</td>
                 <td>{{$product->category->name}}</td>
                 <td><a href="/products/{{ $product->id }}">Detalle</a></td>
-                <td><a href="/product/edit/{{ $product->id }}">Editar</a></td>
                 @if($product->deleted_at == null)
                 <td><a href="/product/detach/{{ $product->id }}">Eliminar</a></td>
                 @endif

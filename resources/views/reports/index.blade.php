@@ -20,10 +20,6 @@
 			<div class="col">
 				<input class="form-control" type="date" name="end" value="{{ $filters['end'] ?? '' }}">
 			</div>
-
-			<div class="col">
-				<button id="catalog-consultar" type="submit" class="btn btn-primary btn-sm ">Buscar</button>
-			</div>
 			@superadmin
 			<div class="col">
 				<div class="form-check">
@@ -34,8 +30,12 @@
 				</div>
 			</div>
 			@endsuperadmin
+
 			<div class="col">
-				<button id="descargar" formaction="/reports/export" type="submit" class="btn btn-link">Exportar</button>
+				<button id="catalog-consultar" type="submit" class="btn btn-primary btn-sm ">Buscar</button>
+			</div>
+			<div class="col">
+				<button id="descargar" formaction="/reports/export" type="submit" class="btn btn-secondary btn-sm">Exportar</button>
 			</div>
 		</div>
 	</form>
