@@ -11,11 +11,11 @@
 		@csrf
 		Product:<br>
         <select disabled class="selectpicker form-control" name="product_id">
-            <option value="{{$unitCreated->product->id}}">{{$unitCreated->product->name}}</option>
+            <option value="{{$unitCreated->product->id}}" selected>{{$unitCreated->product->name}}</option>
         </select>
 		Unit:<br>
         <select disabled class="selectpicker form-control" name="unit_id">
-            <option value="{{$unitCreated->id}}">{{$unitCreated->serial_number}}</option>
+            <option value="{{$unitCreated->id}}" selected>{{$unitCreated->serial_number}}</option>
         </select>
         <br>
 		<div>

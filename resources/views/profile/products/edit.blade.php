@@ -32,8 +32,7 @@
         </div>
         <div class="form-group">
           <label for="category">Categoría</label>
-          <select id="category" name="category_id" class="selectpicker form-control">
-              <option selected hidden disabled>Seleccione una categoría</option>
+          <select id="category" title="Seleccione una categoría" name="category_id" class="selectpicker form-control">
               @foreach($categories as $category)
                   <option value={{ $category->id }} {{ $category->id == $productEdit->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
               @endforeach
@@ -41,8 +40,7 @@
         </div>
         <div class="form-group">
           <label for="tags">Tags</label>
-          <select id="tags" name="tags[]" class="selectpicker form-control" multiple>
-              <option selected hidden disabled>Seleccione tags</option>
+          <select id="tags" name="tags[]" title="Seleccione tags" class="selectpicker form-control" multiple>
               @foreach($tags as $tag)
                   <option value={{ $tag->id }} {{ in_array($tag->id, $ptags) ? 'selected' : '' }}>{{ $tag->name }}</option>
               @endforeach

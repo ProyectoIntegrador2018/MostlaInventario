@@ -7,25 +7,22 @@
 		<a href="/canasta">Canasta <span id="product-count"></span></a>
     </div>
 
-	<form action="/catalogo" class="inline-form">
-		@csrf
+	<form class="inline-form">
 		<div class="row">
 			<div class="col">
-				<input id="search" class="form-control" type="text" name="search" placeholder="Buscar">
+				<input id="search" class="form-control" type="text" name="search" placeholder="Buscar" value="{{ old('search') }}">
 			</div>
 			<div class="col">
-				<select name="categories" multiple title="Categorías" class="selectpicker form-control" data-selected-text-format="count > 1">
-					<option hidden disabled value="">Categorías</option>
+				<select name="categories[]" multiple title="Categorías" class="selectpicker form-control" data-selected-text-format="count > 1">
 					@foreach($categories as $category)
-					<option value={{$category->id}}>{{$category->name}}</option>
+					<option value={{$category->id}} {{ in_array($category->id, old('categories') ?? []) ? 'selected' : '' }}>{{$category->name}}</option>
 					@endforeach
 				</select>
 			</div>
 			<div class="col">
-				<select name="technology" multiple title="Tags" class="selectpicker form-control" data-selected-text-format="count > 1">
-					<option hidden disabled value="">Tags</option>
+				<select name="tags[]" title="Seleccione tags" multiple title="Tags" class="selectpicker form-control" data-selected-text-format="count > 1">
 					@foreach($tags as $tag)
-					<option value={{$tag->id}}>{{$tag->name}}</option>
+					<option value={{$tag->id}} {{ in_array($tag->id, old('tags') ?? []) ? 'selected' : '' }}>{{$tag->name}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -88,7 +85,7 @@
 
 
 @push('scripts')
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 	$("#consultar").on("click", function(event) {
 		event.preventDefault();
 		$.ajax({
@@ -119,7 +116,7 @@
 			});
 	});
 </script>
-
+ --}}
 <script type="text/javascript">
 	$(document).ready(function(){
 		//Count of cart items to set span
