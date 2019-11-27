@@ -84,10 +84,6 @@ class LoginController extends Controller
             $newUser->name            = $user->name;
             $newUser->email           = $user->email;
 
-            if ($givenRole = UserRole::where('email', $user->email)->first()) {
-                $newUser->type_id = $givenRole->type_id;
-            }
-
             $newUser->save();
             Auth::login($newUser, true);
         }
