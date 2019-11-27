@@ -33,6 +33,10 @@ class UserRoleController extends Controller
             'campus_id' => 'sometimes|integer|exists:campus,id',
         ]);
 
+        if (UserRole::where('email', $request->email)->where('campus_id', $request->campus_id)->first()) {
+            return bacK()->with('alert', 'No se puede crear más de un rol para un usuario en cada campus.');
+        }
+
         UserRole::create($data);
 
         return back();
@@ -55,6 +59,14 @@ class UserRoleController extends Controller
     {
         if ($role->email == auth()->user()->email) {
             return back()->with('alert', 'No puede editar su propio rol.');
+        }
+
+        if (UserRole::where('email', $role->email)
+            ->where('campus_id', $request->campus_id)
+            ->where('id', '!=', $role->id)
+            ->first()
+        ) {
+            return bacK()->with('alert', 'No se puede crear más de un rol para un usuario en cada campus.');
         }
         
         $request->validate(['campus_id' => 'required|integer|exists:campus,id']);

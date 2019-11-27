@@ -14,7 +14,7 @@ class AddCommentsToUnitsTable extends Migration
     public function up()
     {
         Schema::table('units', function (Blueprint $table) {
-            $table->text('comments');           
+            $table->text('comments')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddCommentsToUnitsTable extends Migration
     public function down()
     {
         Schema::table('units', function (Blueprint $table) {
-            $table->dropColumn('comments');                       
+            $table->dropColumn('comments');
         });
     }
 }

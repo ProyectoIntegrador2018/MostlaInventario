@@ -73,7 +73,7 @@
 				</td>
 			</tr>
 			@empty
-				<td class="empty" colspan="{{ $admin_general ? 4 : 3 }}"></td>
+				<td class="empty" colspan="{{ $admin_general ? 4 : 3 }}">Por el momento no hay roles.</td>
 			@endforelse
 		</table>
 	</div>
