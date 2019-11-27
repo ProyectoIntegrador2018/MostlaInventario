@@ -3,7 +3,7 @@
 @section('content')
 <section>
     <div class="title-bar">
-		<h1>Catalogo de Reservaciones</h1>
+		<h1>Catálogo de Reservaciones</h1>
 		<a href="/canasta">Canasta <span id="product-count"></span></a>
     </div>
 
@@ -45,9 +45,6 @@
 								<span class="subtle">{{ $product->brand }}</span>
 								{{ $product->name }}
 							</h5>
-							<p class="card-text">
-								<span class="subtle">{{ $product->units_count }} disponibles</span>
-							</p>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
 							<button class="btn btn-secondary btn-sm add-to-cart float-right" product="{{$product}}">Agregar a canasta</button>

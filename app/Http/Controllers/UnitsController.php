@@ -45,14 +45,12 @@ class UnitsController extends Controller
         $rules = array(
             'product_id'       => $this::RULE_REQ.'|exists:products,id',
             'serial_number'    => $this::RULE_REQ,
-            'status'           => $this::RULE_REQ
         );
 
         $messages = array(
             'product_id.'.$this::RULE_REQ       => 'El producto es requerido',
             'product_id.exists'                 => 'El producto debe existir',
             'serial_number.'.$this::RULE_REQ    => 'El numero serial es requerido',
-            'status.'.$this::RULE_REQ           => 'El estatus es requerido'
         );
 
         $validator = Validator::make($input, $rules, $messages);
@@ -72,7 +70,7 @@ class UnitsController extends Controller
     {
         $unitEdit = $this->unit->findId($unitId);
         $products = $this->product->allForUser(auth()->user());
-        return view('profile.units.edit')->with(compact('unitEdit','products'));
+        return view('profile.units.edit')->with(compact('unitEdit', 'products'));
     }
 
     public function update(Request $request, $unitId)
@@ -83,12 +81,10 @@ class UnitsController extends Controller
 
         $rules = array(
             'serial_number'    => $this::RULE_REQ,
-            'status'           => $this::RULE_REQ
         );
 
         $messages = array(
             'serial_number.'.$this::RULE_REQ    => 'El numero serial es requerido',
-            'status.'.$this::RULE_REQ           => 'El campus es requerido'
         );
 
         $validator = Validator::make($input, $rules, $messages);
@@ -122,10 +118,9 @@ class UnitsController extends Controller
 
     public function updateStatus($status)
     {
-        if($status == '4'){
+        if ($status == '4') {
             $this->delete();
-        }
-        else{
+        } else {
             $this->setStatus($status);
         }
         return back();

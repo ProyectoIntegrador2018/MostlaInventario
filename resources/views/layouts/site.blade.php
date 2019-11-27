@@ -58,25 +58,25 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/products">
+                            <a title="Inventario" class="nav-link" href="/products">
                             <img class ="icon" src="/img/inventario_hover.png" alt="Inventario"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">
+                            <a title="Dashboard" class="nav-link" href="/dashboard">
                             <img class ="icon" src="/img/dashboard_hover.png" alt="Dashboard"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/reports">
-                            <img class ="icon" src="/img/report_hover.png" alt="Report">
+                            <a title="Reportes" class="nav-link" href="/reports">
+                            <img class ="icon" src="/img/report_hover.png" alt="Reportes">
                             </a>
                         </li>
 
                         @endif
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/catalogo">
+                            <a title="Catálogo" class="nav-link" href="/catalogo">
                             <img class ="icon" src="/img/reservar_hover.png" alt="Catalogo"></a>
                         </li>
 

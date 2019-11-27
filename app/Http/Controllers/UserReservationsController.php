@@ -86,6 +86,11 @@ class UserReservationsController extends Controller
 
     public function cancel(Reservation $reservation)
     {
+        if ($reservation->start_date < now()->addHours(3)) {
+            return back()->with('alert', 'No se pueden cancelar reservaciones con menos de 3 horas de anticipación. 
+                Por favor comunícate con Mostla.');
+        }
+
         $this->authorize($reservation);
 
         $reservation->cancel();

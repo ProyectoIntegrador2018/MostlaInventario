@@ -63,11 +63,11 @@
 		<div>
 			<div>
 				<span class="subtle">Inicia</span>
-				{{ $reservation->start_date->format('d/M/Y - h:i') }}
+				{{ $reservation->start_date->format('d/M/Y - h:i A') }}
 			</div>
 			<div>
 				<span class="subtle">Termina</span>
-				{{ $reservation->end_date->format('d/M/Y - h:i') }}
+				{{ $reservation->end_date->format('d/M/Y - h:i A') }}
 			</div>
 		</div>
 		<div>

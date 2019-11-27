@@ -27,8 +27,6 @@
             Número serial:<br>
             <input type="text" class="form-control" name="serial_number" value="{{$unitEdit->serial_number}}"/><br>
             <span class="input-group-btn">
-            Status:<br>
-            <input type="text" class="form-control" name="status" value="{{$unitEdit->status}}" /><br>
             Comentario:<br>
             <textarea class="form-control" name="comments">{{$unitEdit->comments}}</textarea>
                 <br>

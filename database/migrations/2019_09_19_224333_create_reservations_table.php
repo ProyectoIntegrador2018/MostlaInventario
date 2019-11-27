@@ -19,8 +19,8 @@ class CreateReservationsTable extends Migration
             $table->integer('product_id');
             $table->integer('quantity');
             $table->integer('campus_id');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->enum('status', ['pending','in_progress','cancelled','returned'])->default('pending');
             $table->timestamps();
             $table->softDeletes();

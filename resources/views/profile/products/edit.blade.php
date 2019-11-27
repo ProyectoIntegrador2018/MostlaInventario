@@ -15,8 +15,12 @@
       <form action="/product/update/{{$productEdit->id}}" class="inline-form" method="POST">
         @csrf
         <div class="form-group">
-          <label for="name">Modelo</label>
-          <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Modelo" value="{{$productEdit->name}}">
+          <label for="name">Nombre</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto" value="{{$productEdit->name}}">
+        </div>
+        <div class="form-group">
+          <label for="model">Modelo</label>
+          <input type="text" name="model" class="form-control" id="model" placeholder="Modelo del Producto" value="{{$productEdit->model}}">
         </div>
         <div class="form-group">
           <label for="brand">Marca</label>
@@ -55,25 +59,39 @@
           <tr>
               <th>Número serial</th>
               <th>Status</th>
-              <th>Fecha de creación</th>
+              <th>Comentario</th>
               <th>Edición</th>
               <th>Disponible</th>
               <th>Mantenimiento</th>
           </tr>
-          @foreach($units as $unit)
+          @forelse($units as $unit)
           <tr>
               <td>{{$unit->serial_number}}</td>
-              <td>{{$unit->status}}</td>
-              <td>{{$unit->created_at}}</td>
+              <td>
+                @switch($unit->status)
+                @case('available')
+                  <i class="far fa-circle" title="Disponible"></i>
+                @break
+                @case('unavailable')
+                  <i title="Prestado" class="fas fa-hand-holding-heart"></i>
+                @break
+                @case('maintenance')
+                  <i title="En Mantenimiento" class="fas fa-hammer"></i>
+                @break
+                @endswitch
+              </td>
+              <td><span class="subtle">{{$unit->comments}}</span></td>
               <td><a href="/unit/edit/{{ $unit->id }}">Editar</a></td>
-              @if($unit->deleted_at != null)
-                <td><a href="/unit/activate/{{ $unit->id }}">Activar</a></td>
-              @else
-                <td><a href="/unit/delete/{{ $unit->id }}">Eliminar</a></td>
-              @endif
-              <td><a href="/maintenances/create/{{ $unit->id }}">Agregar +</a></td>
+              <td><a href="/unit/delete/{{ $unit->id }}">Eliminar</a></td>
+              <td>
+                @if($unit->status == 'available')
+                  <a href="/maintenances/create/{{ $unit->id }}">Iniciar</a>
+                @endif
+              </td>
           </tr>
-          @endforeach
+          @empty
+            <td class="empty" colspan="6">No hay unidades por el momento</td>
+          @endforelse
       </table>
     </section>
 @endsection

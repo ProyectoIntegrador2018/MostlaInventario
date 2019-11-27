@@ -6,26 +6,19 @@
 	<div class="table-container">
 		<table>
 			<tr>
-				<th>Marca</th>
-				<th>Modelo</th>
-				<th>Cant.</th>
+				<th>Producto</th>
 				<th>Inició</th>
 				<th>Terminó</th>
-				<th>Cancelar</th>
 			</tr>
 
 			@forelse($reservations as $reservation)
 			<tr>
-				<td>{{$reservation->product->brand}}</td>
-				<td>{{$reservation->product->name}}</td>
-				<td>{{$reservation->quantity}}</td>
-				<td>{{$reservation->start_date->format('d/M/Y - h:i')}}</td>
-				<td>{{$reservation->end_date->format('d/M/Y - h:i')}}</td>
 				<td>
-					@if($reservation->can_cancel)
-					<a href="/reservations/{{ $reservation->id }}/cancel">x</a>
-					@endif
-				</td>
+                    <span class="subtle">{{$reservation->product->brand}}</span>
+                    {{$reservation->product->name}}
+                </td>
+				<td>{{$reservation->start_date->format('d/M/Y - h:i A')}}</td>
+				<td>{{$reservation->end_date->format('d/M/Y - h:i A')}}</td>
 			</tr>
 			@empty
 			<td class="empty" colspan="6">No hay reservaciones para mostrar aquí.</td>

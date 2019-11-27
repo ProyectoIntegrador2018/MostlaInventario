@@ -54,6 +54,7 @@ class ProductsController extends Controller
 
         $rules = array(
             'name'             => $this::RULE_REQ,
+            'model'            => 'nullable',
             'brand'            => $this::RULE_REQ,
             'description'      => $this::RULE_REQ,
             'category_id'      => $this::RULE_REQ
@@ -101,6 +102,7 @@ class ProductsController extends Controller
 
         $rules = array(
             'name'             => $this::RULE_REQ,
+            'model'            => 'nullable',
             'brand'            => $this::RULE_REQ,
             'description'      => $this::RULE_REQ,
             'category_id'      => $this::RULE_REQ

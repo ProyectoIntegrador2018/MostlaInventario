@@ -60,7 +60,7 @@
                 @endif
             </tr>
             @empty
-            <td class="empty" colspan="6">No hay productos en inventario.</td>
+                <td class="empty" colspan="6">No hay productos en inventario.</td>
             @endforelse
         </table>
     </div>

@@ -257,3 +257,7 @@ section > .title-bar > h1 {
 .icon:hover{
     filter: contrast(0);
 }
+
+footer a {
+    color: #fff;
+}

@@ -30,8 +30,6 @@
 			Número serial:<br>
 			<input type="text" class="form-control" name="serial_number" /><br>
 			<span class="input-group-btn">
-			Status:<br>
-			<input type="text" class="form-control" name="status" /><br>
 			Comentario:<br>
 			<textarea class="form-control" name="comments"></textarea>
 				<br>
