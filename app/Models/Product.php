@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'brand', 'name', 'category_id','description'
+        'brand', 'name', 'category_id','description', 'model'
     ];
 
     public function scopeForUser($query, $user)

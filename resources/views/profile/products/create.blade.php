@@ -15,13 +15,17 @@
       <form action="/product/store" class="inline-form" method="POST">
         @csrf
         <div class="form-group">
-          <label for="name">Modelo</label>
-          <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Modelo">
+          <label for="name">Nombre</label>
+          <input type="text" name="name" class="filtering form-control" id="name" placeholder="Nombre del Producto">
           <small id="emailHelp" class="form-text text-muted">Puede buscar el producto en la sección inferior para evitar duplicados.</small>
         </div>
         <div class="form-group">
+          <label for="model">Modelo</label>
+          <input type="text" name="model" class="filtering form-control" id="model" placeholder="Modelo del Producto">
+        </div>
+        <div class="form-group">
           <label for="brand">Marca</label>
-          <input type="text" name="brand" class="form-control" id="brand" placeholder="Marca">
+          <input type="text" name="brand" class="filtering form-control" id="brand" placeholder="Marca">
         </div>
         <div class="form-group">
           <label for="description">Descripción del Producto</label>
@@ -29,8 +33,7 @@
         </div>
         <div class="form-group">
           <label for="category">Categoría</label>
-          <select id="category" name="category_id" class="form-control">
-              <option selected hidden disabled>Seleccione una categoría</option>
+          <select id="category" name="category_id" title="Seleccione una categoría" class="selectpicker form-control">
               @foreach($categories as $category)
                   <option value={{ $category->id }}>{{ $category->name }}</option>
               @endforeach
@@ -38,8 +41,7 @@
         </div>
         <div class="form-group">
           <label for="tags">Tags</label>
-          <select id="tags" name="tags[]" class="selectpicker form-control" multiple>
-              <option selected hidden disabled>Seleccione tags</option>
+          <select id="tags" name="tags[]" title="Seleccione tags" class="selectpicker form-control" multiple>
               @foreach($tags as $tag)
                   <option value={{ $tag->id }}>{{ $tag->name }}</option>
               @endforeach
@@ -57,6 +59,7 @@
             <td>
               <span class="subtle">{{$product->brand}}</span>
               {{$product->name}}
+              <span hidden>{{ $product->model }}</span>
             </td>
           </tr>
         @empty
@@ -71,8 +74,8 @@
 @push('scripts')
 <script type="text/javascript">
         // Filter list of existing products based on user's input
-        $('#name').on('change paste keyup', function(event){
-          let newValue = $('#name').val().toLowerCase();
+        $('.filtering').on('change paste keyup', function(event){
+          let newValue = $(event.target).val().toLowerCase();
           $('.filterable').each(function(index, item){
             let productName = $(item).text().toLowerCase();
             if (productName.indexOf(newValue) >= 0) {

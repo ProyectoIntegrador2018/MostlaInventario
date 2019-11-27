@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" rel="stylesheet">
     <!-- Font-Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/b15bbf55e4.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/81165c3ae7.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
@@ -58,25 +58,25 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/products">
+                            <a title="Inventario" class="nav-link" href="/products">
                             <img class ="icon" src="/img/inventario_hover.png" alt="Inventario"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">
+                            <a title="Dashboard" class="nav-link" href="/dashboard">
                             <img class ="icon" src="/img/dashboard_hover.png" alt="Dashboard"></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/reports">
-                            <img class ="icon" src="/img/report_hover.png" alt="Report">
+                            <a title="Reportes" class="nav-link" href="/reports">
+                            <img class ="icon" src="/img/report_hover.png" alt="Reportes">
                             </a>
                         </li>
 
                         @endif
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/catalogo">
+                            <a title="Catálogo" class="nav-link" href="/catalogo">
                             <img class ="icon" src="/img/reservar_hover.png" alt="Catalogo"></a>
                         </li>
 
@@ -143,9 +143,9 @@
             <div class = "col-sm-4">
                 <h3>Redes Sociales</h3>
                 <br>
-                <a href="https://www.facebook.com/mostlatec/" class="fa fa-facebook"></a>
-                <a href="https://twitter.com/mostlatec?lang=en" class="fa fa-twitter"></a>
-                <a href="https://www.youtube.com/channel/UC-LVFDiU8L5ymT5CyL7rRAg" class="fa fa-youtube"></a>
+                <a href="https://www.facebook.com/mostlatec/"><i class="fab fa-facebook-square fa-2x"></i></a>
+                <a href="https://twitter.com/mostlatec?lang=en"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.youtube.com/channel/UC-LVFDiU8L5ymT5CyL7rRAg"><i class="fab fa-youtube fa-2x"></i></a>
             </div>
             <div class = "col-sm-4">
                 <h3>Encuentranos</h3>

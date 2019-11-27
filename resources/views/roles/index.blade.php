@@ -11,7 +11,6 @@
 			</div>
 			<div class="col">
 				<select id="type" name="type_id" title="Tipo" class="selectpicker form-control" data-selected-text-format="count > 1">
-					<option hidden disabled value="">Tipo</option>
 					@foreach($types as $type)
 					<option value={{$type->id}}>{{$type->title}}</option>
 					@endforeach			
@@ -20,7 +19,6 @@
 			@if($admin_general)
 			<div class="col">
 				<select id="campus" name="campus_id" title="Campus" class="selectpicker form-control" data-selected-text-format="count > 1">
-					<option hidden disabled value="">Campus</option>
 					@foreach($campus as $c)
 					<option value={{$c->id}}>{{$c->name}}</option>
 					@endforeach			

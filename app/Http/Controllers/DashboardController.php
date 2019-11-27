@@ -21,7 +21,7 @@ class DashboardController extends Controller
             ->with('product', 'user')
             ->when($request->status, function ($query, $status) {
                 if ($status == 'returned' || $status == 'cancelled') {
-                    $query = $query->withTrashed();
+                    $query = $query->withTrashed()->where('updated_at', '>', now()->startOfDay());
                 }
                 return $query->where('status', $status);
             })

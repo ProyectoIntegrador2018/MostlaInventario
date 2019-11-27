@@ -28,13 +28,31 @@ class ProductsController extends Controller
         $this->unit = $unit;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $productsIndex = $this->product->allForUser(auth()->user());
+        $productsIndex = Product::forUser(auth()->user())
+            ->when($request->search, function ($query, $string) {
+                return $query->where('name', 'like', "%$string%")
+                    ->orWhere('model', 'like', "%$string%")
+                    ->orWhere('description', 'like', "%$string%")
+                    ->orWhere('brand', 'like', "%$string%");
+            })
+            ->when(!empty($request->categories), function ($query) use ($request) {
+                return $query->whereIn('category_id', $request->categories);
+            })
+            ->when(!empty($request->tags), function ($query) use ($request) {
+                return $query->whereHas('tags', function ($query) use ($request) {
+                    return $query->whereIn('tags.id', $request->tags);
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->with('category')
+            ->get();
 
         $categories = Category::all();
         $tags = Tag::all();
 
+        $request->session()->flashInput($request->input());
         return view('profile.products.index')->with(compact('productsIndex', 'categories', 'tags'));
     }
 
@@ -54,6 +72,7 @@ class ProductsController extends Controller
 
         $rules = array(
             'name'             => $this::RULE_REQ,
+            'model'            => 'nullable',
             'brand'            => $this::RULE_REQ,
             'description'      => $this::RULE_REQ,
             'category_id'      => $this::RULE_REQ
@@ -101,6 +120,7 @@ class ProductsController extends Controller
 
         $rules = array(
             'name'             => $this::RULE_REQ,
+            'model'            => 'nullable',
             'brand'            => $this::RULE_REQ,
             'description'      => $this::RULE_REQ,
             'category_id'      => $this::RULE_REQ

@@ -16,7 +16,7 @@ class CreateUnitsTable extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
             $table->string('serial_number');
-            $table->enum('status',['available','unavailable','maintenance']);
+            $table->enum('status', ['available','unavailable','maintenance'])->default('available');
             $table->integer('product_id');
             $table->integer('campus_id');
             $table->timestamps();

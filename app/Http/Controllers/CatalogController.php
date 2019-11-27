@@ -22,9 +22,23 @@ class CatalogController extends Controller
         $this->tags = $tags;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::forCampus(auth()->user()->campus_id)
+            ->when($request->search, function ($query, $string) {
+                return $query->where('name', 'like', "%$string%")
+                    ->orWhere('model', 'like', "%$string%")
+                    ->orWhere('description', 'like', "%$string%")
+                    ->orWhere('brand', 'like', "%$string%");
+            })
+            ->when(!empty($request->categories), function ($query) use ($request) {
+                return $query->whereIn('category_id', $request->categories);
+            })
+            ->when(!empty($request->tags), function ($query) use ($request) {
+                return $query->whereHas('tags', function ($query) use ($request) {
+                    return $query->whereIn('tags.id', $request->tags);
+                });
+            })
             ->orderBy('created_at', 'desc')
             ->with('category')
             ->withCount('units')
@@ -33,6 +47,7 @@ class CatalogController extends Controller
         $categories = $this->categories->all();
         $tags = $this->tags->all();
         
+        $request->session()->flashInput($request->input());
         return view('profile.catalog')->with(compact('products', 'categories', 'tags'));
     }
 
