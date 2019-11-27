@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-	<h1>Mis Tags</h1>
+	<h1>Tags</h1>
     <a class="float-right" href="/tag/create">Crear +</a>
     <table >
         <tr>

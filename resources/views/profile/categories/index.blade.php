@@ -3,7 +3,7 @@
 @section('content')
 
 <section>
-	<h1>Mis Categorías</h1>
+	<h1>Categorías</h1>
     <a class="float-right" href="/category/create">Crear +</a>
     <table >
         <tr>

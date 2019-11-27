@@ -3,7 +3,7 @@
 @section('content')
 	<section>
 		<h1>Carrito</h1>
-		<a href="/catalogo">Volver</a>
+		<a href="/catalogo"> < Regresar</a>
 		<div id="carrito"></div>
 		<div>
 			<button id="reserve" class="btn btn-primary">Consultar</button>

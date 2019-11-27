@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Unit;
 use App\Models\Maintenance;
 use App\Repositories\MaintenanceRepository;
@@ -55,7 +56,6 @@ class MaintenancesController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $productId = $request->input('product_id');
         $unitId = $request->input('unit_id');
         $unitChanged = $this->unit->findId($unitId);
 
@@ -77,8 +77,9 @@ class MaintenancesController extends Controller
             return back()->withErrors($validator);
         }
 
-        $unitId->setStatus('3');
+        $unitChanged->setStatus('3');
         $maintenanceNew = new Maintenance;
+        $maintenanceNew->campus_id = $unitChanged->campus_id;
         $maintenanceNew->fillInfo($input);
         
         return redirect('/product/edit/'.$productId);
@@ -111,5 +112,4 @@ class MaintenancesController extends Controller
 
         return back();
     }
-
 }

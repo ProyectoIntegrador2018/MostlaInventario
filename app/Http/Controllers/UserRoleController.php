@@ -40,6 +40,10 @@ class UserRoleController extends Controller
 
     public function updateType(Request $request, UserRole $role)
     {
+        if ($role->email == auth()->user()->email) {
+            return back()->with('alert', 'No puede editar su propio rol.');
+        }
+
         $request->validate(['type_id' => 'required|integer|exists:user_types,id']);
 
         $role->setType($request->type_id);
@@ -49,6 +53,10 @@ class UserRoleController extends Controller
 
     public function updateCampus(Request $request, UserRole $role)
     {
+        if ($role->email == auth()->user()->email) {
+            return back()->with('alert', 'No puede editar su propio rol.');
+        }
+        
         $request->validate(['campus_id' => 'required|integer|exists:campus,id']);
 
         $role->setCampus($request->campus_id);
@@ -58,6 +66,10 @@ class UserRoleController extends Controller
 
     public function delete(UserRole $role)
     {
+        if ($role->email == auth()->user()->email) {
+            return back()->with('alert', 'No puede eliminar su propio rol.');
+        }
+
         $role->delete();
 
         return back();
