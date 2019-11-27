@@ -83,6 +83,7 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
     //Dashboard
     Route::get('/dashboard', 'DashboardController@index');
     Route::post('/reservations/{reservation}/status', 'UserReservationsController@status');
+    Route::post('/reservations/{reservation}/loan', 'UserReservationsController@loan');
 
     //Notificaciones
     Route::get('/reminders/send', 'DashboardController@remind');

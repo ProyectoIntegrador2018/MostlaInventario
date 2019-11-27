@@ -105,4 +105,11 @@ class UserReservationsController extends Controller
 
         return back();
     }
+
+    public function loan(Request $request, Reservation $reservation)
+    {
+        $reservation->loanUnit($request->unit_id);
+
+        return back();
+    }
 }

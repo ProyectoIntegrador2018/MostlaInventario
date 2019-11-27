@@ -81,6 +81,18 @@
 					@endforeach
 				</select>
 			</form>
+			@if($reservation->status == 'in_progress')
+				<form action="/reservations/{{ $reservation->id }}/loan" method="POST">
+					@csrf
+					<select class="selectpicker" title="Unidad" onchange="this.form.submit()" name="unit_id">
+						@foreach($reservation->product->units as $unit)
+							<option value="{{ $unit->id }}" {{ $unit->id == ($reservation->loan->unit_id ?? null) ? 'selected' : '' }} {{ $unit->loan ? 'disabled' : '' }}>
+								{{ $unit->serial_number }}
+							</option>
+						@endforeach
+					</select>
+				</form>
+			@endif
 		</div>
 	</div>
 	@empty
