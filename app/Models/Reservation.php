@@ -47,9 +47,9 @@ class Reservation extends Model
         return $this->belongsTo('App\Models\Campus');
     }
 
-    public function loans()
+    public function loan()
     {
-        return $this->hasMany('App\Models\LoanDetail');
+        return $this->hasOne('App\Models\LoanDetail')->orderBy('created_at', 'desc');
     }
 
     public function cancel()
@@ -76,6 +76,11 @@ class Reservation extends Model
 
     public function setStatus($value)
     {
+        if ($this->loan) {
+            $this->loan->unit->setStatus('available');
+            $this->loan->delete();
+        }
+
         if ($value == 'cancelled') {
             return $this->cancel();
         }
@@ -108,12 +113,21 @@ class Reservation extends Model
             case 'returned':
                 return 'done';
             case 'in_progress':
-                return $this->end_datetime < now() ? 'late' : 'current';
+                return $this->end_date < now() ? 'late' : 'current';
             default:
-                if ($this->end_datetime < now()) {
+                if ($this->end_date < now()) {
                     return 'late';
                 }
-                return $this->start_datetime < now() ? 'ready' : 'waiting';
+                return $this->start_date < now() ? 'ready' : 'waiting';
         }
+    }
+
+    public function loanUnit($unit_id)
+    {
+        $unit = Unit::find($unit_id);
+        $this->loan()->create([
+            'unit_id' => $unit_id,
+        ]);
+        $unit->setStatus('unavailable');
     }
 }

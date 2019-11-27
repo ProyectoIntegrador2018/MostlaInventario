@@ -23,7 +23,7 @@
 			@superadmin
 			<div class="col">
 				<div class="form-check">
-				  <input class="form-check-input" type="checkbox" name="all_campus" id="allCheck">
+				  <input {{ ($filters['all_campus'] ?? false) ? 'checked' : '' }} class="form-check-input" type="checkbox" name="all_campus" id="allCheck">
 				  <label class="form-check-label" for="allCheck">
 				    Todos los campus
 				  </label>

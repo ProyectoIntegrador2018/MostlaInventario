@@ -101,6 +101,7 @@ class UnitsController extends Controller
     public function delete($unitId)
     {
         $unitDel = $this->unit->findId($unitId);
+        $unitDel->maintenances()->delete();
         $product_id = $unitDel->product_id;
         $unitDel->delete();
 

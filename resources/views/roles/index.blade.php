@@ -40,7 +40,7 @@
 				@endif
 				<th></th>
 			</tr>
-			@foreach($roles as $role)
+			@forelse($roles as $role)
 			<tr>
 				<td>{{$role->email}}</td>
 				<td>
@@ -72,7 +72,9 @@
 					</form>
 				</td>
 			</tr>
-			@endforeach
+			@empty
+				<td class="empty" colspan="{{ $admin_general ? 4 : 3 }}">Por el momento no hay roles.</td>
+			@endforelse
 		</table>
 	</div>
 </section>

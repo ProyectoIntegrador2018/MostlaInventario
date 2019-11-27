@@ -42,7 +42,7 @@
 			@break
 	
 			@case('late')
-				<i title="Entrega tardía" class="fas fa-exclamation-circle fa-2x"></i>
+				<i title="Tarde" class="fas fa-exclamation-circle fa-2x"></i>
 			@break
 	
 			@case('done')
@@ -81,6 +81,20 @@
 					@endforeach
 				</select>
 			</form>
+			@if($reservation->status == 'in_progress')
+				<form action="/reservations/{{ $reservation->id }}/loan" method="POST">
+					@csrf
+					<select class="selectpicker" title="Unidad" onchange="this.form.submit()" name="unit_id">
+						@forelse($reservation->product->units as $unit)
+							<option value="{{ $unit->id }}" {{ $unit->id == ($reservation->loan->unit_id ?? null) ? 'selected' : '' }} {{ $unit->loan ? 'disabled' : '' }}>
+								{{ $unit->serial_number }}
+							</option>
+						@empty
+							<option value="-1" disabled>No hay unidades disponibles</option>
+						@endforelse
+					</select>
+				</form>
+			@endif
 		</div>
 	</div>
 	@empty

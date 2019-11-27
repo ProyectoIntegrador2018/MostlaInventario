@@ -18,7 +18,7 @@ class CreateMaintenancesTable extends Migration
             $table->integer('product_id');
             $table->integer('unit_id');
             $table->integer('campus_id');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

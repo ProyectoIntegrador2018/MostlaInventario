@@ -62,7 +62,7 @@ class MaintenancesController extends Controller
         $rules = array(
             'product_id'           => $this::RULE_REQ,
             'unit_id'           => $this::RULE_REQ,
-            'comment'           => $this::RULE_REQ,
+            'comment'           => 'nullable',
         );
 
         $messages = array(
@@ -82,7 +82,7 @@ class MaintenancesController extends Controller
         $maintenanceNew->campus_id = $unitChanged->campus_id;
         $maintenanceNew->fillInfo($input);
         
-        return redirect('/product/edit/'.$productId);
+        return redirect($request->url);
     }
 
     /**
@@ -105,11 +105,19 @@ class MaintenancesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateStatus(Request $request, Unit $unit)
+    public function finish(Maintenance $maintenance)
     {
-        $status = $request->input('status');
-        $unit->setStatus($status);
+        $maintenance->unit->setStatus('available');
+        $maintenance->delete();
 
-        return back();
+        return back()->with('alert', 'Se ha dado a la unidad de alta.');
+    }
+
+    public function delete(Maintenance $maintenance)
+    {
+        $maintenance->unit->delete();
+        $maintenance->delete();
+
+        return back()->with('alert', 'Se ha eliminado la unidad.');
     }
 }

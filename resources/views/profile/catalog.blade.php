@@ -44,7 +44,7 @@
 							</h5>
 							<p class="card-text">{{ $product->description }}</p>
 							<h6 class="card-subtitle mb-2 text-muted">{{ $product->tags()->pluck('name')->join(', ') }}</h6>
-							<button class="btn btn-secondary btn-sm add-to-cart float-right" product="{{$product}}">Agregar a canasta</button>
+							<button class="btn btn-secondary btn-sm add-to-cart" product="{{$product}}">Agregar a canasta</button>
 						</div>
 					</div>
 				</div>

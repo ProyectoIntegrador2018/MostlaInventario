@@ -6,10 +6,32 @@ use Illuminate\Database\Seeder;
 class CampusSeeder extends Seeder
 {
     protected $campus = [
-        "Monterrey",
-        "Sonora Norte",
-        "Puebla",
-        "Aguascalientes",
+        'Aguascalientes',
+        'Central de Veracruz',
+        'Chiapas',
+        'Chihuahua',
+        'Ciudad de México',
+        'Ciudad Juarez',
+        'Ciudad Obregón',
+        'Cuernavaca',
+        'Estado de México',
+        'Guadalajara',
+        'Hidalgo',
+        'Irapuato',
+        'Laguna',
+        'León',
+        'Monterrey',
+        'Morelia',
+        'Puebla',
+        'Querétaro',
+        'Saltillo',
+        'San Luis Potosí',
+        'Santa Fe',
+        'Sinaloa',
+        'Sonora Norte',
+        'Tampico',
+        'Toluca',
+        'Zacatecas',
     ];
 
     /**

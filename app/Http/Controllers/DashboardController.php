@@ -18,7 +18,9 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $reservations = Reservation::forCampus(auth()->user()->campus_id)
-            ->with('product', 'user')
+            ->with(['product.units' => function ($query) {
+                return $query->where('units.status', '!=', 'maintenance');
+            }, 'user', 'loan'])
             ->when($request->status, function ($query, $status) {
                 if ($status == 'returned' || $status == 'cancelled') {
                     $query = $query->withTrashed()->where('updated_at', '>', now()->startOfDay());

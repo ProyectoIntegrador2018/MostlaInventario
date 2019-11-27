@@ -77,8 +77,8 @@
 				return;
 			}
 
-			res.start_datetime = res_day + ' ' + start_hour + ':00'
-			res.end_datetime = res_day + ' ' + end_hour + ':00'
+			res.start_date = res_day + ' ' + start_hour + ':00'
+			res.end_date = res_day + ' ' + end_hour + ':00'
 
 			reservations.push(res);
 		});

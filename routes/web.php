@@ -78,11 +78,13 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
     Route::get('/maintenances', 'MaintenancesController@index');
     Route::get('/maintenances/create/{unit}', 'MaintenancesController@create');
     Route::post('/maintenances/store', 'MaintenancesController@store');
-    Route::post('/maintenances/update/status/{unit}', 'MaintenancesController@updateStatus');
+    Route::post('/maintenances/finish/{maintenance}', 'MaintenancesController@finish');
+    Route::post('/maintenances/delete/{maintenance}', 'MaintenancesController@delete');
 
     //Dashboard
     Route::get('/dashboard', 'DashboardController@index');
     Route::post('/reservations/{reservation}/status', 'UserReservationsController@status');
+    Route::post('/reservations/{reservation}/loan', 'UserReservationsController@loan');
 
     //Notificaciones
     Route::get('/reminders/send', 'DashboardController@remind');

@@ -45,9 +45,9 @@ class Unit extends Model
         $this->save();
     }
 
-    public function loans()
+    public function loan()
     {
-        return $this->hasMany('App\Models\LoanDetail');
+        return $this->hasOne('App\Models\LoanDetail')->orderBy('created_at', 'desc');
     }
 
     public function product()

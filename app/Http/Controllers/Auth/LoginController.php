@@ -66,8 +66,10 @@ class LoginController extends Controller
 
         // only allow people with @itesm.mx or tec.mx to login
         $domain = explode("@", $user->email)[1];
-        if (!in_array($domain, ['itesm.mx', 'tec.mx'])) {
-            return redirect()->to('/');
+        if (!in_array($domain, ['itesm.mx', 'tec.mx'])
+            && !in_array($user->email, UserRole::pluck('email')->toArray())
+            ) {
+            return redirect()->to('/')->with('alert', 'Por favor use una dirección de correo del Tec.');
         }
 
         // check if they're an existing user
@@ -81,10 +83,6 @@ class LoginController extends Controller
             $newUser                  = new User;
             $newUser->name            = $user->name;
             $newUser->email           = $user->email;
-
-            if ($givenRole = UserRole::where('email', $user->email)->first()) {
-                $newUser->type_id = $givenRole->type_id;
-            }
 
             $newUser->save();
             Auth::login($newUser, true);

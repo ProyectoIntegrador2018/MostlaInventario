@@ -19,8 +19,6 @@ class CreateUserRolesTable extends Migration
             $table->integer('type_id');
             $table->integer('campus_id');
             $table->timestamps();
-
-            $table->unique('email', 'campus_id');
         });
     }
 
