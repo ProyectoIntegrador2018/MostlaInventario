@@ -41,8 +41,8 @@ class CatalogController extends Controller
             })
             ->orderBy('created_at', 'desc')
             ->with('category')
-            ->withCount('units')
-            ->having('units_count', '>', 0)
+            // ->withCount('units')
+            // ->having('units_count', '>', 0)
             ->get();
         $cart = auth()->user()->cart->pluck('id');
         $categories = $this->categories->all();

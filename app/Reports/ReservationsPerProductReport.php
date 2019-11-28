@@ -11,7 +11,7 @@ class ReservationsPerProductReport extends Report
         return Reservation::withTrashed()->selectRaw('products.brand, products.name, categories.name as category, count(reservations.id) as reservations_count')
             ->join('products', 'products.id', '=', 'reservations.product_id')
             ->join('categories', 'products.category_id', 'categories.id')
-            ->groupBy('products.id');
+            ->groupBy('products.id', 'categories.name');
     }
 
     public function forCampus($campus, $all = false, $permission_all = false)
