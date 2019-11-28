@@ -60,8 +60,12 @@
 			@endforelse
 		</div>
 		<div>
-			<form action="/cart/submit" method="POST">
+			<form action="/cart/submit" method="POST" class="form-group">
 				@csrf
+				<p>Las personas usuarias se comprometen a tratar bien los equipos que se llevan, ya que quedan bajo su custodia, y deben devolverlas en el mismo estado en el que se las llevaron y ser devueltas en el plazo señalado.</p>
+				<input id="compromiso" type="checkbox" name="compromiso" required>
+				<label for="compromiso">Acepto estos términos.</label>
+				<br>
 				<input type="submit" value="Reservar" class="btn btn-primary">
 			</form>
 		</div>
