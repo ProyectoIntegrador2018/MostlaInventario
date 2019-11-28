@@ -30,6 +30,16 @@ class Unit extends Model
         });
     }
 
+    public function scopeAlive($query)
+    {
+        return $query->where('status', '!=', 'maintenance');
+    }
+
+    public function scopeForCampus($query, $campus)
+    {
+        return $query->where('campus_id', $campus);
+    }
+
     public function scopeForProduct($query, $product)
     {
         if ($product === null) {

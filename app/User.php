@@ -74,4 +74,17 @@ class User extends Authenticatable
     {
         $this->update(['type_id'=>$this->role->type_id ?? UserRole::DEFAULT_ROLE]);
     }
+
+    public function cart()
+    {
+        return $this->belongsToMany('App\Models\Product', 'cart_items')->withPivot([
+            'id',
+            'campus_id',
+            'start_date',
+            'end_date',
+            'start_time',
+            'end_time',
+        ])->wherePivot('campus_id', $this->campus_id)
+        ->using('App\Models\CartItem');
+    }
 }

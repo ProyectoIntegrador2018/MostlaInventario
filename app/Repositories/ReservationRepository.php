@@ -39,7 +39,7 @@ class ReservationRepository
             ->where('campus_id', $user->campus->id)
             ->whereIn('status', ['pending','in_progress'])
             ->where(function ($query) use ($reservation) {
-                $query->where(function ($query) use ($reservation) {
+                return $query->where(function ($query) use ($reservation) {
                     /*Cases:
                     Reservation request:
                             |------------------|
