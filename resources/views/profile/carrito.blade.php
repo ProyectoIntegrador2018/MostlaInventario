@@ -41,7 +41,8 @@
 						</div>
 					</div>
 				</div>
-				@if(($available = $item->pivot->isAvailable()) === true))
+				<div hidden>{{ $available = $item->pivot->isAvailable() }}</div>
+				@if($available === true)
 					<i title="Disponible" class="fas fa-check-circle fa-2x"></i>
 				@elseif($available === false)
 					<i title="No Disponible" class="fas fa-times-circle fa-2x"></i>

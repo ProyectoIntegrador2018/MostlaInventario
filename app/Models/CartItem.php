@@ -65,10 +65,11 @@ class CartItem extends Pivot
 
     public function isAvailable()
     {
-        if ($this->start_date < now()->toDateString()
-            || $this->start_date
-            && $this->end_date
-            && $this->start_date > $this->end_date) {
+        if (($this->start_date && $this->start_date < now()->toDateString())
+            || ($this->end_date && $this->end_date < now()->toDateString())
+            || ($this->start_date && $this->end_date
+            &&  $this->start_date > $this->end_date)
+        ) {
             return 'invalid';
         }
 
