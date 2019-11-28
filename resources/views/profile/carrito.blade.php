@@ -41,11 +41,11 @@
 						</div>
 					</div>
 				</div>
-				@if($item->pivot->isAvailable() === true)
+				@if(($available = $item->pivot->isAvailable()) === true))
 					<i title="Disponible" class="fas fa-check-circle fa-2x"></i>
-				@elseif($item->pivot->isAvailable() === false)
+				@elseif($available === false)
 					<i title="No Disponible" class="fas fa-times-circle fa-2x"></i>
-				@elseif($item->pivot->isAvailable() === 'invalid')
+				@elseif($available === 'invalid')
 					<i title="Fechas Inválidas" class="fas fa-exclamation-circle fa-2x"></i>
 				@endif
 				<div>

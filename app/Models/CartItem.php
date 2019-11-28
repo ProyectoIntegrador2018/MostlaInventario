@@ -53,7 +53,8 @@ class CartItem extends Pivot
             return true;
         }
 
-        if ($this->start_time < "08:00" || $this->start_time > "19:00"
+        if ($this->start_datetime < now()
+            || $this->start_time < "08:00" || $this->start_time > "19:00"
             || $this->end_time < "08:00" || $this->end_time > "19:00"
         ) {
             return false;
@@ -64,6 +65,13 @@ class CartItem extends Pivot
 
     public function isAvailable()
     {
+        if ($this->start_date < now()->toDateString()
+            || $this->start_date
+            && $this->end_date
+            && $this->start_date > $this->end_date) {
+            return 'invalid';
+        }
+
         if (!$this->start_datetime || !$this->end_datetime) {
             return null;
         }
