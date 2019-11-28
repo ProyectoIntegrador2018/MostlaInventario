@@ -4,87 +4,65 @@
 	<section>
 		<h1>Carrito</h1>
 		<a href="/catalogo"> < Regresar</a>
-		<div id="carrito"></div>
+		<div id="carrito">
+			@forelse($cart as $item)
+			<div class="long-card filterable">
+				<div>
+					<h5>
+						<span class="subtle">{{ $item->brand }}</span>
+						{{ $item->name }}
+					</h5>
+				</div>
+				<div>
+					<div class="row" class="form-row">
+						<div class="col-2">
+							<button disabled class="btn btn-light">Inicio</button>
+							<button disabled class="btn btn-light">Fin</button>
+						</div>
+						<div class="col">
+							<form action="/cart/update/{{$item->pivot->id}}" method="POST">
+								@csrf
+								<input value="{{$item->pivot->start_date}}" onchange="this.form.submit()" id="" type="date" name="start_date" class="form-control">
+							</form>
+							<form action="/cart/update/{{$item->pivot->id}}" method="POST">
+								@csrf
+								<input value="{{$item->pivot->end_date}}" onchange="this.form.submit()" type="date" name="end_date" class="form-control">
+							</form>
+						</div>
+						<div class="col">
+							<form action="/cart/update/{{$item->pivot->id}}" method="POST">
+								@csrf
+								<input value="{{$item->pivot->start_time}}" onchange="this.form.submit()" type="time" name="start_time" class="form-control">
+							</form>
+							<form action="/cart/update/{{$item->pivot->id}}" method="POST">
+								@csrf
+								<input value="{{$item->pivot->end_time}}" onchange="this.form.submit()" type="time" name="end_time" class="form-control">
+							</form>
+						</div>
+					</div>
+				</div>
+				@if($item->pivot->isAvailable() === true)
+					<i title="Disponible" class="fas fa-check-circle fa-2x"></i>
+				@elseif($item->pivot->isAvailable() === false)
+					<i title="No Disponible" class="fas fa-times-circle fa-2x"></i>
+				@elseif($item->pivot->isAvailable() === 'invalid')
+					<i title="Fechas Inválidas" class="fas fa-exclamation-circle fa-2x"></i>
+				@endif
+				<div>
+					<a href="/cart/remove/{{ $item->id }}"><i class="fas fa-trash-alt fa-lg"></i></a>
+				</div>
+			</div>
+			@empty
+			<div class="long-card empty">
+				<div>No hay reservaciones por el momento.</div>
+			</div>
+			@endforelse
+		</div>
 		<div>
-			<button id="reserve" class="btn btn-primary">Consultar</button>
+			<form action="/cart/submit" method="POST">
+				@csrf
+				<input type="submit" value="Reservar" class="btn btn-primary">
+			</form>
 		</div>
 	</section>
 @endsection
-
-@push('scripts')
-<script type="text/javascript">
-	function showCarrito(){
-		var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
-		var innerCarrito = ""
-		for(product of products) {
-			innerCarrito += `<div product_id='${product.id}' class='card card-product'><div class='card-title'>${product.name}<p><a href='#'>Eliminar</a></p></div><div class='card-body'><div> Día: <input id="reservation_day" type='date'> Inicio: <input id="start_hour" type="time"> Fin: <input id="end_hour" type="time"> </div> </div> </div>`
-		}
-		$("#carrito").append(innerCarrito)
-	}
-	showCarrito()
-	$("#carrito").on("click", 'a', function(e) {
-		e.preventDefault()
-		let productId = $(e.currentTarget).closest('[product_id]').attr('product_id')
-		var products = localStorage.getItem('products') != null ? JSON.parse(localStorage.getItem('products')) : [];
-		products = products.filter(function(p) {
-			return p.id !== parseInt(productId)
-		});
-		localStorage.setItem('products', JSON.stringify(products));
-		$("#carrito").html("")
-		showCarrito()
-	});
-	function checkMinMax(start_hour, end_hour) {
-		return start_hour < "08:00" || end_hour < "08:00" || start_hour > "19:00" || end_hour > "19:00";
-	}
-
-	function oldDay(day) {
-		return new Date().toJSON().slice(0,10).replace(/-/g,'-') > day;
-	}
-
-	function apiCallReserve(reservations) {
-		$.ajax({
-			type: 'POST',
-			url: '/reservation',
-			data: {
-				reservation: reservations,
-				_token: $('meta[name="csrf-token"]').attr('content')
-			},
-			dataType : 'json',
-			success: function(data) {
-				alert("Reservacion con éxito");
-				localStorage.clear();
-			},
-			error: function(error) {
-				alert(error.responseJSON[1]);
-			}
-		});
-	}
-</script>
-<script type="text/javascript">
-	$("#reserve").on("click", function() {
-		var reservations = [];
-		$('.card-product').each(function(){
-			console.log($(this))
-			var res = {};
-			res.product_id = $(this).attr('product_id');
-			//Dates
-			let res_day = $(this).find('#reservation_day')[0].value;
-			var start_hour = $(this).find('#start_hour')[0].value;
-			var end_hour = $(this).find('#end_hour')[0].value;
-
-			if (res_day == "" || oldDay(res_day) || start_hour == "" || end_hour == "" || start_hour > end_hour || checkMinMax(start_hour, end_hour)) {
-				alert("Fechas no válidas");
-				return;
-			}
-
-			res.start_date = res_day + ' ' + start_hour + ':00'
-			res.end_date = res_day + ' ' + end_hour + ':00'
-
-			reservations.push(res);
-		});
-
-		if (reservations.length > 0)
-			apiCallReserve(reservations);
-	});
-</script>
-@endpush

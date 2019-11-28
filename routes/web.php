@@ -25,14 +25,16 @@ Route::group(['middleware'=>['auth']], function () {
     Route::get('/catalogo', 'CatalogController@index');
     Route::get('/catalogo/search', 'CatalogController@search');
     Route::get('/canasta', 'CartController@index');
+    Route::get('/cart/add/{product}', 'CartController@add');
+    Route::get('/cart/remove/{product}', 'CartController@remove');
+    Route::post('/cart/update/{item}', 'CartController@update');
+    Route::post('/cart/submit', 'CartController@submit');
 
     //Profile
     Route::get('/profile', 'UserReservationsController@index');
     Route::get('/profile/history', 'UserReservationsController@history');
     Route::get('/reservations/{reservation}/cancel', 'UserReservationsController@cancel');
     Route::post('/profile/campus', 'ProfileController@campus');
-
-    Route::post('/reservation', 'UserReservationsController@store');
 });
 
 

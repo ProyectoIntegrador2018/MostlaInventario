@@ -44,11 +44,12 @@ class CatalogController extends Controller
             ->withCount('units')
             ->having('units_count', '>', 0)
             ->get();
+        $cart = auth()->user()->cart->pluck('id');
         $categories = $this->categories->all();
         $tags = $this->tags->all();
         
         $request->session()->flashInput($request->input());
-        return view('profile.catalog')->with(compact('products', 'categories', 'tags'));
+        return view('profile.catalog')->with(compact('products', 'categories', 'tags', 'cart'));
     }
 
     // $pCategory $pTag
