@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-	<h1>Detalle de producto: <b>{{$product->name}}</b></h1>
+	<h1>Detalle de equipo: <b>{{$product->name}}</b></h1>
 
 	<a href="/products"> < Regresar</a>
 	<a class="float-right" href="/product/edit/{{ $product->id }}">Editar</a>
@@ -38,7 +38,7 @@
 		<br>
 		<div class="row">
 			<div class="col">
-				<h5>Descripcion del producto</h5>
+				<h5>Descripcion del equipo</h5>
 			</div>
 			<div class="col">
 				<body>{{$product->description}}</body>

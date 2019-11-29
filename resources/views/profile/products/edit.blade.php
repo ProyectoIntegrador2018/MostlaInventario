@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-  <h1>Editar Producto</h1>
+  <h1>Editar Equipo</h1>
   @if ($errors->any())
   <ul>
     @foreach($errors->all() as $error)
@@ -16,18 +16,18 @@
         @csrf
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Producto" value="{{$productEdit->name}}">
+          <input type="text" name="name" class="form-control" id="name" placeholder="Nombre del Equipo" value="{{$productEdit->name}}">
         </div>
         <div class="form-group">
           <label for="model">Modelo</label>
-          <input type="text" name="model" class="form-control" id="model" placeholder="Modelo del Producto" value="{{$productEdit->model}}">
+          <input type="text" name="model" class="form-control" id="model" placeholder="Modelo del Equipo" value="{{$productEdit->model}}">
         </div>
         <div class="form-group">
           <label for="brand">Marca</label>
           <input type="text" name="brand" class="form-control" id="brand" placeholder="Marca" value="{{$productEdit->brand}}">
         </div>
         <div class="form-group">
-          <label for="description">Descripción del Producto</label>
+          <label for="description">Descripción del Equipo</label>
           <input type="textarea" name="description" class="form-control" id="description" placeholder="Descripción..." value="{{$productEdit->description}}">
         </div>
         <div class="form-group">

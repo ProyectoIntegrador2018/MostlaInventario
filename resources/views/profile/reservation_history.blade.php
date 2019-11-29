@@ -6,7 +6,7 @@
 	<div class="table-container">
 		<table>
 			<tr>
-				<th>Producto</th>
+				<th>Equipo</th>
 				<th>Inició</th>
 				<th>Terminó</th>
 			</tr>
