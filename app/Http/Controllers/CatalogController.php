@@ -41,8 +41,7 @@ class CatalogController extends Controller
             })
             ->orderBy('created_at', 'desc')
             ->with('category')
-            // ->withCount('units')
-            // ->having('units_count', '>', 0)
+            ->havingRaw('(select count(*) from `units` where `products`.`id` = `units`.`product_id` and `units`.`campus_id` = ? and `units`.`deleted_at` is null) > ?', [auth()->user()->campus_id, 0])
             ->get();
         $cart = auth()->user()->cart->pluck('id');
         $categories = $this->categories->all();
