@@ -8,8 +8,9 @@ class CategoryRepository
 {
     public function all()
     {
-        return Category::orderBy('name')->get();
+        return Category::all();
     }
+    
     public function findId($categoryId)
     {
         return Category::find($categoryId);

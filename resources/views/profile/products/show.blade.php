@@ -66,21 +66,7 @@
 			</ul>
 			</div>
 		</div>
-
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 </section>
 
 <section>
@@ -100,13 +86,13 @@
               <td>{{$unit->serial_number}}</td>
               <td>
                 @switch($unit->status)
-                @case('available')
+                @case(App\Models\Unit::AVAILABLE)
                   <i class="far fa-circle" title="Disponible"></i>
                 @break
-                @case('unavailable')
+                @case(App\Models\Unit::UNAVAILABLE)
                   <i title="Prestado" class="fas fa-hand-holding-heart"></i>
                 @break
-                @case('maintenance')
+                @case(App\Models\Unit::MAINTENANCE)
                   <i title="En Mantenimiento" class="fas fa-hammer"></i>
                 @break
                 @endswitch
@@ -115,7 +101,7 @@
               <td><a href="/unit/edit/{{ $unit->id }}">Editar</a></td>
               <td><a href="/unit/delete/{{ $unit->id }}">Eliminar</a></td>
               <td>
-                @if($unit->status == 'available')
+                @if($unit->status == App\Models\Unit::AVAILABLE)
                   <a href="/maintenances/create/{{ $unit->id }}">Iniciar</a>
                 @endif
               </td>

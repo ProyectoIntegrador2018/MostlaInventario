@@ -16,7 +16,7 @@ class ReservationPolicy
             return true;
         }
 
-        if ($reservation->status != 1) {
+        if ($reservation->status != 'pending') {
             $this->deny("Solo se pueden cancelar reservaciones pendientes.");
         }
 

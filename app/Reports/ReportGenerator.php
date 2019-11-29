@@ -10,7 +10,7 @@ class ReportGenerator
 {
     protected $types = [
         'Reservaciones por Producto',
-        'Reservaciones por Tendencia',
+        'Reservaciones por Categoría',
         'Reservaciones por Usuario',
         'Mantenimientos por Producto',
     ];

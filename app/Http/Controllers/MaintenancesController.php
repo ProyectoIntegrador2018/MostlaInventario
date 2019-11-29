@@ -107,7 +107,7 @@ class MaintenancesController extends Controller
      */
     public function finish(Maintenance $maintenance)
     {
-        $maintenance->unit->setStatus('available');
+        $maintenance->unit->setStatus(Unit::AVAILABLE);
         $maintenance->delete();
 
         return back()->with('alert', 'Se ha dado a la unidad de alta.');

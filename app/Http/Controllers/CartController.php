@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewReservation;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ class CartController extends Controller
     {
         $items = auth()->user()->cart;
 
+        if ($items->isEmpty()) {
+            return back()->with('alert', 'Su canasta está vacía.');
+        }
+
         if (!$items->every(function ($item) {
             return $item->pivot->isAvailable() === true;
         })) {
@@ -51,6 +56,7 @@ class CartController extends Controller
             $item->pivot->submit();
         });
 
+        event(new NewReservation(auth()->user(), $items));
         return back()->with('alert', 'Productos reservados exitosamente.');
     }
 }

@@ -86,7 +86,7 @@
 					@csrf
 					<select class="selectpicker" title="Unidad" onchange="this.form.submit()" name="unit_id">
 						@forelse($reservation->product->units as $unit)
-							<option value="{{ $unit->id }}" {{ $unit->id == ($reservation->loan->unit_id ?? null) ? 'selected' : '' }} {{ $unit->loan ? 'disabled' : '' }}>
+							<option value="{{ $unit->id }}" {{ $unit->id == ($reservation->loan->unit_id ?? null) ? 'selected' : '' }} {{ $unit->status != App\Models\Unit::AVAILABLE ? 'disabled' : '' }}>
 								{{ $unit->serial_number }}
 							</option>
 						@empty
@@ -94,6 +94,12 @@
 						@endforelse
 					</select>
 				</form>
+			@elseif($reservation->status == 'returned' && $reservation->loan)
+				<select disabled class="selectpicker" title="Unidad" name="unit_id">
+					<option value="{{ $reservation->loan->unit_id }}" selected>
+						{{ $reservation->loan->unit->serial_number }}
+					</option>
+				</select>
 			@endif
 		</div>
 	</div>

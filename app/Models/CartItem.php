@@ -18,6 +18,11 @@ class CartItem extends Pivot
         return null;
     }
 
+    public function campus()
+    {
+        return $this->belongsTo('App\Models\Campus');
+    }
+
     public function getEndTimeAttribute($value)
     {
         if ($value) {
