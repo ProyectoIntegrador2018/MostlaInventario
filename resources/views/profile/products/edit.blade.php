@@ -49,47 +49,4 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
     </section>
-
-    <section>
-      <h1>Unidades</h1>
-      <a class="float-right" href="/unit/create">Agregar Unidad +</a>
-      <table>
-          <tr>
-              <th>Número serial</th>
-              <th>Status</th>
-              <th>Comentario</th>
-              <th>Edición</th>
-              <th>Disponible</th>
-              <th>Mantenimiento</th>
-          </tr>
-          @forelse($units as $unit)
-          <tr>
-              <td>{{$unit->serial_number}}</td>
-              <td>
-                @switch($unit->status)
-                @case(App\Models\Unit::AVAILABLE)
-                  <i class="far fa-circle" title="Disponible"></i>
-                @break
-                @case(App\Models\Unit::UNAVAILABLE)
-                  <i title="Prestado" class="fas fa-hand-holding-heart"></i>
-                @break
-                @case(App\Models\Unit::MAINTENANCE)
-                  <i title="En Mantenimiento" class="fas fa-hammer"></i>
-                @break
-                @endswitch
-              </td>
-              <td><span class="subtle">{{$unit->comments}}</span></td>
-              <td><a href="/unit/edit/{{ $unit->id }}">Editar</a></td>
-              <td><a href="/unit/delete/{{ $unit->id }}">Eliminar</a></td>
-              <td>
-                @if($unit->status == App\Models\Unit::AVAILABLE)
-                  <a href="/maintenances/create/{{ $unit->id }}">Iniciar</a>
-                @endif
-              </td>
-          </tr>
-          @empty
-            <td class="empty" colspan="6">No hay unidades por el momento</td>
-          @endforelse
-      </table>
-    </section>
 @endsection

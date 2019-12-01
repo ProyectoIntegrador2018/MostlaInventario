@@ -10,6 +10,11 @@ class CartItem extends Pivot
     protected $guarded = ['id'];
     protected $table = 'cart_items';
 
+    const PENDING = 1;
+    const AVAILABLE = 2;
+    const UNAVAILABLE = 3;
+    const INVALID = 4;
+
     public function getStartTimeAttribute($value)
     {
         if ($value) {
@@ -54,13 +59,13 @@ class CartItem extends Pivot
 
     public function validDates()
     {
-        if (!$this->start_datetime || !$this->end_datetime) {
-            return true;
-        }
-
-        if ($this->start_datetime < now()
+        if (!$this->start_datetime
+            || !$this->end_datetime
+            || $this->start_datetime < now()
             || $this->start_time < "08:00" || $this->start_time > "19:00"
             || $this->end_time < "08:00" || $this->end_time > "19:00"
+            || !$this->start_datetime->isWeekday()
+            || !$this->end_datetime->isWeekday()
         ) {
             return false;
         }
@@ -68,22 +73,16 @@ class CartItem extends Pivot
         return $this->start_datetime < $this->end_datetime;
     }
 
+    public function setStatus($value)
+    {
+        $this->update(['status' => $value]);
+        return $value;
+    }
+
     public function isAvailable()
     {
-        if (($this->start_date && $this->start_date < now()->toDateString())
-            || ($this->end_date && $this->end_date < now()->toDateString())
-            || ($this->start_date && $this->end_date
-            &&  $this->start_date > $this->end_date)
-        ) {
-            return 'invalid';
-        }
-
-        if (!$this->start_datetime || !$this->end_datetime) {
-            return null;
-        }
-
         if (!$this->validDates()) {
-            return 'invalid';
+            return $this->setStatus(self::INVALID);
         }
 
         $reservations = $this->product->reservations()->forCampus($this->campus_id)->get();
@@ -100,16 +99,16 @@ class CartItem extends Pivot
         while ($change = $changes->shift()) {
             $count += $change['add'] ? 1 : -1;
 
-            if ($change > $this->start_datetime && $count >= $units) {
-                return false;
+            if ($change['date'] > $this->start_datetime && $count >= $units) {
+                return $this->setStatus(self::UNAVAILABLE);
             }
 
-            if ($change > $this->end_datetime) {
-                return true;
+            if ($change['date'] > $this->end_datetime) {
+                return $this->setStatus(self::AVAILABLE);
             }
         }
 
-        return true;
+        return $this->setStatus(self::AVAILABLE);
     }
 
     public function submit()

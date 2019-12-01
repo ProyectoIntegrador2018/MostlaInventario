@@ -11,7 +11,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart = auth()->user()->cart;
+        $cart = auth()->user()->cart()->orderBy('created_at')->get();
         return view('profile.carrito')->with(compact('cart'));
     }
 
@@ -47,7 +47,7 @@ class CartController extends Controller
         }
 
         if (!$items->every(function ($item) {
-            return $item->pivot->isAvailable() === true;
+            return $item->pivot->isAvailable() == CartItem::AVAILABLE;
         })) {
             return back()->with('alert', 'Hay productos en su canasta con fechas faltantes, inválidas o no disponibles.');
         }

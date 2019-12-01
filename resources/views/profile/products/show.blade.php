@@ -71,7 +71,7 @@
 
 <section>
       <h1>Unidades</h1>
-      <a class="float-right" href="/unit/create">Agregar Unidad +</a>
+      <a class="float-right" href="/unit/create/{{$product->id}}">Agregar Unidad +</a>
       <table>
           <tr>
               <th>Número serial</th>

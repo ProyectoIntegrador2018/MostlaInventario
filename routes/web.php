@@ -11,6 +11,9 @@
 |
 */
 
+
+// Nota: cambiar todo lo que modifique la base de datos a POST...
+
 Route::get('/', function () {
     return view('copiaWelcome');
 })->name('home');;
@@ -50,8 +53,8 @@ Route::group(['middleware'=>['auth', 'role:Coordinador|Administrador|Administrad
 
     //Units
     Route::get('/units', 'UnitsController@index');
-    Route::get('/unit/create', 'UnitsController@create');
-    Route::get('/unit/store', 'UnitsController@store');
+    Route::get('/unit/create/{product}', 'UnitsController@create');
+    Route::get('/unit/store/{product}', 'UnitsController@store');
     Route::get('/unit/edit/{id}', 'UnitsController@edit');
     Route::get('/unit/update/{id}', 'UnitsController@update');
     Route::get('/unit/delete/{id}', 'UnitsController@delete');

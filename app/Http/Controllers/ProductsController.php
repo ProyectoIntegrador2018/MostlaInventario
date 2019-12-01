@@ -102,14 +102,16 @@ class ProductsController extends Controller
     public function edit($productId)
     {
         $productEdit = $this->product->findId($productId);
+        $productEdit->load(['units' => function ($query) {
+            return $query->forCampus(auth()->user()->campus_id);
+        }]);
         $categories = Category::all();
         $tags = Tag::all();
-        $units = $this->unit->allForProductInCampus($productEdit, auth()->user());
         $ptags = $productEdit->tags->map(function ($t) {
             return $t->id;
         })->toArray();
 
-        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags', 'units'));
+        return view('profile.products.edit')->with(compact('productEdit', 'categories', 'ptags', 'tags'));
     }
 
     public function update(Request $request, $productId)
@@ -171,10 +173,8 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $product->load(['units' => function ($query) {
-            return $query->where('campus_id', auth()->user()->campus_id);
+            return $query->forCampus(auth()->user()->campus_id);
         }]);
-
-
         return view('profile.products.show')->with(compact('product', 'categories'));
     }
 

@@ -15,13 +15,11 @@
 	@endif
 	<a href="{{ url()->previous() }}">< Regresar</a>
 	<br>
-	<form class="inline-form" action="/unit/store">
+	<form class="inline-form" action="/unit/store/{{$product->id}}">
 		Producto:<br>
 
-		<select class="selectpicker form-control" name="product_id">
-			@foreach($products as $product)
-			<option value="{{$product->id}}">{{$product->name}}</option>
-			@endforeach
+		<select class="selectpicker form-control" name="product_id" disabled>
+			<option value="{{$product->id}}" selected>{{$product->name}}</option>
 		</select>
 
 		<br>

@@ -89,6 +89,7 @@ class User extends Authenticatable
             'end_date',
             'start_time',
             'end_time',
+            'status'
         ])->wherePivot('campus_id', $this->campus_id)
         ->using('App\Models\CartItem');
     }
