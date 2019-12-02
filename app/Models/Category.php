@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,6 +15,16 @@ class Category extends Model
     protected $fillable = [
         'name'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Global Scope para que salgan en orden alfabetico siempre.
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
 
     public function fillInfo($data)
     {

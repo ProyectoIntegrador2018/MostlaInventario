@@ -3,7 +3,7 @@
 @section('content')
 <section>
     <div class="title-bar">
-        <h1>Productos</h1>
+        <h1>Equipo</h1>
 
     </div>
     <form class="inline-form">
@@ -55,7 +55,7 @@
                 @endif
             </tr>
             @empty
-                <td class="empty" colspan="6">No hay productos en inventario.</td>
+                <td class="empty" colspan="6">No hay equipo en inventario.</td>
             @endforelse
         </table>
     </div>

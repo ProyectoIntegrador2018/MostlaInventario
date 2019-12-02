@@ -39,6 +39,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeAdmins($query)
+    {
+        return $query->where('type_id', '>', 3);
+    }
+
     public function type()
     {
         return $this->belongsTo('App\Models\UserType', 'type_id');
@@ -84,6 +89,7 @@ class User extends Authenticatable
             'end_date',
             'start_time',
             'end_time',
+            'status'
         ])->wherePivot('campus_id', $this->campus_id)
         ->using('App\Models\CartItem');
     }

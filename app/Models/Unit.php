@@ -15,6 +15,10 @@ class Unit extends Model
         'serial_number','comments','status','product_id','campus_id'
     ];
 
+    const AVAILABLE = 1;
+    const UNAVAILABLE = 2;
+    const MAINTENANCE = 3;
+
     public function scopeForUser($query, $user)
     {
         if ($user === null) {
@@ -32,7 +36,7 @@ class Unit extends Model
 
     public function scopeAlive($query)
     {
-        return $query->where('status', '!=', 'maintenance');
+        return $query->where('status', '!=', self::MAINTENANCE);
     }
 
     public function scopeForCampus($query, $campus)

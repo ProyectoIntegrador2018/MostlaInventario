@@ -30,26 +30,20 @@ class UnitsController extends Controller
         return view('profile.units.index')->with(compact('unitsIndex'));
     }
 
-    public function create()
+    public function create(Product $product)
     {
-        $products = $this->product->allForUser(auth()->user());
-        return view('profile.units.create')->with(compact('products'));
+        return view('profile.units.create')->with(compact('product'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
         $input = $request->all();
-        $productId = $request->input('product_id');
-
 
         $rules = array(
-            'product_id'       => $this::RULE_REQ.'|exists:products,id',
             'serial_number'    => $this::RULE_REQ,
         );
 
         $messages = array(
-            'product_id.'.$this::RULE_REQ       => 'El producto es requerido',
-            'product_id.exists'                 => 'El producto debe existir',
             'serial_number.'.$this::RULE_REQ    => 'El numero serial es requerido',
         );
 
@@ -59,9 +53,10 @@ class UnitsController extends Controller
             return back()->withErrors($validator);
         }
 
-        $unitNew = new Unit;
-        $unitNew->campus_id = auth()->user()->campus->id;
-        $unitNew->fillInfo($input);
+        $unitNew = $product->units()->make($input);
+        $unitNew->campus_id = auth()->user()->campus_id;
+        // $unitNew->fillInfo($input);
+        $unitNew->save();
 
         return redirect($request->url);
     }
@@ -95,7 +90,7 @@ class UnitsController extends Controller
 
         $unitUpdate->fillInfo($input);
 
-        return redirect('/product/edit/'.$unitUpdate->product_id);
+        return redirect('/products/'.$unitUpdate->product_id);
     }
 
     public function delete($unitId)

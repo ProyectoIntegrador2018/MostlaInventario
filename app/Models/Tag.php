@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,6 +16,16 @@ class Tag extends Model
         'name'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Global Scope para que salgan en orden alfabetico siempre.
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
+
     public function fillInfo($data)
     {
         $this->fill($data);
@@ -23,6 +34,6 @@ class Tag extends Model
 
     public function products()
     {
-    	return $this->belongsToMany('App\Models\Product');
+        return $this->belongsToMany('App\Models\Product');
     }
 }

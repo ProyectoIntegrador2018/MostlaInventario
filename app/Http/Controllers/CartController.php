@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewReservation;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart = auth()->user()->cart;
+        $cart = auth()->user()->cart()->orderBy('created_at')->get();
         return view('profile.carrito')->with(compact('cart'));
     }
 
@@ -41,8 +42,12 @@ class CartController extends Controller
     {
         $items = auth()->user()->cart;
 
+        if ($items->isEmpty()) {
+            return back()->with('alert', 'Su canasta está vacía.');
+        }
+
         if (!$items->every(function ($item) {
-            return $item->pivot->isAvailable() === true;
+            return $item->pivot->isAvailable() == CartItem::AVAILABLE;
         })) {
             return back()->with('alert', 'Hay productos en su canasta con fechas faltantes, inválidas o no disponibles.');
         }
@@ -51,6 +56,7 @@ class CartController extends Controller
             $item->pivot->submit();
         });
 
+        event(new NewReservation(auth()->user(), $items));
         return back()->with('alert', 'Productos reservados exitosamente.');
     }
 }

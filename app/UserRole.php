@@ -38,6 +38,11 @@ class UserRole extends Model
         return $query->where('type_id', '<', $role);
     }
 
+    public function scopeAdmins($query)
+    {
+        return $query->where('type_id', '>=', 3);
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User', 'email', 'email');

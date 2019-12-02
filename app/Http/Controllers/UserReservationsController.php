@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReservationCancelled;
 use App\Models\Campus;
-use App\Models\Reservation;
 use App\Models\Product;
+use App\Models\Reservation;
 use App\Repositories\ReservationRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -47,6 +48,7 @@ class UserReservationsController extends Controller
 
         $reservation->cancel();
 
+        event(new ReservationCancelled($reservation));
         return back()->with('alert', 'Se ha cancelado la reservación exitosamente.');
     }
 

@@ -14,7 +14,12 @@ class Campus extends Model
 
     public function users()
     {
-    	return $this->hasMany('App\User');
+        return $this->hasMany('App\User');
+    }
+
+    public function roles()
+    {
+        return $this->hasMany('App\Models\UserRole');
     }
 
     public function reservations()

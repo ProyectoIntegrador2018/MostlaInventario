@@ -49,7 +49,7 @@ class ReservationsPerProductReport extends Report
 
     protected function filename()
     {
-        return 'reservaciones_por_producto_'.now()->format('Y_m_d').'.xlsx';
+        return 'reservaciones_por_equipo_'.now()->format('Y_m_d').'.xlsx';
     }
 
     public function getHeadings()

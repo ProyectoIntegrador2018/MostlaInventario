@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -49,7 +50,7 @@ class Reservation extends Model
 
     public function loan()
     {
-        return $this->hasOne('App\Models\LoanDetail')->orderBy('created_at', 'desc');
+        return $this->hasOne('App\Models\LoanDetail');
     }
 
     public function cancel()
@@ -77,8 +78,7 @@ class Reservation extends Model
     public function setStatus($value)
     {
         if ($this->loan) {
-            $this->loan->unit->setStatus('available');
-            $this->loan->delete();
+            $this->loan->unit->setStatus(Unit::AVAILABLE);
         }
 
         if ($value == 'cancelled') {
@@ -90,6 +90,9 @@ class Reservation extends Model
         }
 
         if ($value == 'pending' || $value == 'in_progress') {
+            if ($this->loan) {
+                $this->loan()->delete();
+            }
             $this->update(['status'=>$value]);
             $this->restore();
         }
@@ -128,6 +131,6 @@ class Reservation extends Model
         $this->loan()->create([
             'unit_id' => $unit_id,
         ]);
-        $unit->setStatus('unavailable');
+        $unit->setStatus(Unit::UNAVAILABLE);
     }
 }

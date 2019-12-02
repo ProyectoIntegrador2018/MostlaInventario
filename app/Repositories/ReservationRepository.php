@@ -28,7 +28,7 @@ class ReservationRepository
         return Reservation::withTrashed()
             ->forUser($user)
             ->inactive()
-            ->with('product', 'loans')
+            ->with('product', 'loan')
             ->orderBy('created_at', 'desc')
             ->get();
     }

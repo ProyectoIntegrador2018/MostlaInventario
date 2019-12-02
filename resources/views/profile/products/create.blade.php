@@ -2,7 +2,7 @@
 
 @section('content')
 <section>
-  <h1>Crear Producto</h1>
+  <h1>Crear Equipo</h1>
   <a href="/products">< Regresar</a>
   @if ($errors->any())
   <ul>
@@ -16,19 +16,19 @@
         @csrf
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input type="text" name="name" class="filtering form-control" id="name" placeholder="Nombre del Producto">
-          <small id="emailHelp" class="form-text text-muted">Puede buscar el producto en la sección inferior para evitar duplicados.</small>
+          <input type="text" name="name" class="filtering form-control" id="name" placeholder="Nombre del Equipo">
+          <small id="emailHelp" class="form-text text-muted">Puede buscar el equipo en la sección inferior para evitar duplicados.</small>
         </div>
         <div class="form-group">
           <label for="model">Modelo</label>
-          <input type="text" name="model" class="filtering form-control" id="model" placeholder="Modelo del Producto">
+          <input type="text" name="model" class="filtering form-control" id="model" placeholder="Modelo del Equipo">
         </div>
         <div class="form-group">
           <label for="brand">Marca</label>
           <input type="text" name="brand" class="filtering form-control" id="brand" placeholder="Marca">
         </div>
         <div class="form-group">
-          <label for="description">Descripción del Producto</label>
+          <label for="description">Descripción del Equipo</label>
           <input type="textarea" name="description" class="form-control" id="description" placeholder="Descripción...">
         </div>
         <div class="form-group">
@@ -52,7 +52,7 @@
     </section>
 
     <section>
-      <h3>¿Ya existe el producto?</h3>
+      <h3>¿Ya existe el equipo?</h3>
       <table>
         @forelse($products as $product)
           <tr class="clickable_t filterable" data-href="/product/attach/{{$product->id}}">
@@ -64,7 +64,7 @@
           </tr>
         @empty
           <tr>
-            <td class="empty">No hay productos registrados actualmente.</td>
+            <td class="empty">No hay equipos registrados actualmente.</td>
           </tr>
         @endforelse
       </table>

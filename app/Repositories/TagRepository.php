@@ -7,7 +7,7 @@ class TagRepository
 {
     public function all()
     {
-        return Tag::orderBy('created_at', 'desc')->get();
+        return Tag::all();
     }
     public function findId($tagId)
     {

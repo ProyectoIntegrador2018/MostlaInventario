@@ -23,7 +23,7 @@
 	<div class="table-container">
 		<table>
 			<tr>
-				<th>Producto</th>
+				<th>Equipo</th>
 				<th>Inicia</th>
 				<th>Termina</th>
 				<th>Cancelar</th>
