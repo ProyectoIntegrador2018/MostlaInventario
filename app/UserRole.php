@@ -11,7 +11,7 @@ class UserRole extends Model
 {
     public $fillable = ['email', 'type_id', 'campus_id'];
     const DEFAULT_ROLE = 1;
-    const ADMIN_GENERAL = 4;
+    const ADMIN_GENERAL = 31;
 
     protected static function boot()
     {
