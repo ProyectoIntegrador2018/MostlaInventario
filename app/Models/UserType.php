@@ -12,9 +12,9 @@ class UserType extends Model
         'title'
     ];
 
-    const COORDINATOR = 2;
-    const ADMIN = 3;
-    const SUPER_ADMIN = 4;
+    const COORDINATOR = 11;
+    const ADMIN = 21;
+    const SUPER_ADMIN = 31;
 
     public function scopeLesserThan($query, $type)
     {
