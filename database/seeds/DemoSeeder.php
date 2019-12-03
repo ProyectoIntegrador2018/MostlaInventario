@@ -16,58 +16,58 @@ class DemoSeeder extends Seeder
     {
         UserRole::create([
             'email' => 'happybits19@gmail.com',
-            'type_id' => 4,
-            'campus_id' => 15,
+            'type_id' => 31,
+            'campus_id' => 141,
         ]);
         UserRole::create([
             'email' => 'happybits19@gmail.com',
-            'type_id' => 3,
-            'campus_id' => 23,
+            'type_id' => 21,
+            'campus_id' => 221,
         ]);
 
         $product = Product::create([
             'brand' => 'Apple',
             'model' => '',
             'name' => 'iPhone X',
-            'category_id' => 2,
+            'category_id' => 11,
             'description' => 'Teléfono celular nuevo de Apple.',
         ]);
-        $product->campus()->sync([15,23]);
-        $product->tags()->sync([1,7,12]);
+        $product->campus()->sync([141,221]);
+        $product->tags()->sync([1,21,41]);
         $product->units()->createMany([
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => 'Tiene Flappy Bird instalado.',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => 'No tiene Flappy Bird instalado.',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => '',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => '',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 23,
+                'campus_id' => 141,
                 'comments' => 'No tiene Flappy Bird instalado.',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 23,
+                'campus_id' => 221,
                 'comments' => '',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 23,
+                'campus_id' => 221,
                 'comments' => '',
             ],
         ]);
@@ -76,35 +76,35 @@ class DemoSeeder extends Seeder
             'brand' => 'LG',
             'model' => 'LGH870',
             'name' => 'G6',
-            'category_id' => 2,
+            'category_id' => 11,
             'description' => 'Teléfono celular marca LG.',
         ]);
-        $product->campus()->sync([15, 23]);
-        $product->tags()->sync([1,11,12]);
+        $product->campus()->sync([141, 221]);
+        $product->tags()->sync([1,21,41]);
         $product->units()->createMany([
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => 'Tiene Flappy Bird instalado.',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => 'No tiene Flappy Bird instalado.',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => '',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 23,
+                'campus_id' => 221,
                 'comments' => 'No tiene Flappy Bird instalado.',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 23,
+                'campus_id' => 221,
                 'comments' => '',
             ],
         ]);
@@ -113,20 +113,20 @@ class DemoSeeder extends Seeder
             'brand' => 'Occulus',
             'model' => '',
             'name' => 'Rift',
-            'category_id' => 3,
+            'category_id' => 31,
             'description' => 'Set de realidad virtual que incluye un visor de VR y dos controles.',
         ]);
-        $product->campus()->sync([15]);
-        $product->tags()->sync([3,2]);
+        $product->campus()->sync([141]);
+        $product->tags()->sync([1,21]);
         $product->units()->createMany([
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => '',
             ],
             [
                 'serial_number' => '12-345-67890',
-                'campus_id' => 15,
+                'campus_id' => 141,
                 'comments' => '',
             ],
         ]);
@@ -134,7 +134,7 @@ class DemoSeeder extends Seeder
         Reservation::create([
             'user_id'=>1,
             'product_id'=>1,
-            'campus_id'=>15,
+            'campus_id'=>141,
             'start_date'=>now()->addHours(4),
             'end_date'=>now()->addDays(5)
         ]);
@@ -142,7 +142,7 @@ class DemoSeeder extends Seeder
         Reservation::create([
             'user_id'=>1,
             'product_id'=>11,
-            'campus_id'=>15,
+            'campus_id'=>141,
             'start_date'=>now()->addHours(2),
             'end_date'=>now()->addDays(4)
         ]);
@@ -150,7 +150,7 @@ class DemoSeeder extends Seeder
         Reservation::create([
             'user_id'=>1,
             'product_id'=>21,
-            'campus_id'=>15,
+            'campus_id'=>141,
             'start_date'=>now()->addHours(24),
             'end_date'=>now()->addDays(3)
         ]);
