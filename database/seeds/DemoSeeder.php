@@ -141,7 +141,7 @@ class DemoSeeder extends Seeder
 
         Reservation::create([
             'user_id'=>1,
-            'product_id'=>2,
+            'product_id'=>11,
             'campus_id'=>15,
             'start_date'=>now()->addHours(2),
             'end_date'=>now()->addDays(4)
@@ -149,7 +149,7 @@ class DemoSeeder extends Seeder
 
         Reservation::create([
             'user_id'=>1,
-            'product_id'=>3,
+            'product_id'=>21,
             'campus_id'=>15,
             'start_date'=>now()->addHours(24),
             'end_date'=>now()->addDays(3)
