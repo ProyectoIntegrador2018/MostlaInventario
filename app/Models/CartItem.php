@@ -70,8 +70,7 @@ class CartItem extends Pivot
             return false;
         }
 
-        
-        if (date('Y-m-d', strtotime($this->start_datetime. ' + 7 days')) > $this->end_datetime) {
+        if (date('Y-m-d', strtotime($this->start_datetime. ' + 7 days')) < date('Y-m-d', strtotime($this->end_datetime))) {
             return false;
         }
 
